@@ -7,7 +7,8 @@
     "start": "node src/app.js --mode prod",
     "start-dev": "nodemon src/app.js --mode dev",
     "start-prod": "nodemon src/app.js --mode prod",
-    "format": "prettier --write \"**/*.{js,json,md,css,scss}\""
+    "format": "prettier --write \"**/*.{js,json,md,css,scss,hbs}\"",
+    "tailwind": "tailwindcss -i ./public/css/tailwind.css -o ./public/css/styles.css --watch"
   },
   "author": "Confaa",
   "license": "MIT",
@@ -18,8 +19,15 @@
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
     "jsonwebtoken": "^9.0.2",
-    "winston": "^3.11.0"
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.0.4",
+    "mongoose-paginate-v2": "^1.8.0",
+    "multer": "^1.4.5-lts.1",
+    "tailwindcss": "^3.4.1",
+    "winston": "^3.11.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "eslint": "^8.56.0",

@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "node",
     "baseUrl": ".",
-    "checkJs": true,
+    "checkJs": true
   },
   "include": ["src/**/*"]
 }

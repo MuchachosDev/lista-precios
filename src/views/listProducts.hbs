@@ -1,0 +1,64 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-semibold text-gray-800 mb-6">Lista de Productos</h1>
+<div class="sticky top-0 z-50 bg-white ">
+  <div class="flex flex-row items-center gap-4 bg-gray-100 py-2 px-4 rounded-lg">
+      <a href="/"
+        class="bg-green-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300 ease-in-out">Inicio</a>
+    <form onsubmit="searchProduct(event)" class="flex items-center w-full m-0">
+      <input type="text" name="filter" value="{{filter}}" placeholder="Buscar producto..."
+        class="flex-grow px-4 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+      <button type="submit"
+        class="px-4 py-2 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600">Buscar</button>
+    </form>
+  </div></div>
+  <p class="text-lg font-semibold text-gray-700 my-4">
+    Total de productos: <span class="text-blue-600">{{totalDocs}}</span> productos
+  </p>
+  <div class="overflow-x-auto mb-4">
+    <table class="min-w-full border-collapse bg-white shadow-lg">
+      <thead class="bg-blue-600 text-white">
+        <tr>
+          <th class="py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-center">Código</th>
+          <th class="py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200">Descripción</th>
+          <th class="py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-center">Marca</th>
+          <th class="py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-center">Precio de Lista
+          </th>
+          <th class="py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-center">IVA</th>
+          <th class="py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-center">Precio Final</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-700">
+        {{#each products}}
+        <tr class="hover:bg-gray-100">
+          <td class="py-3 px-4 border-b border-gray-200 text-center">{{this.code}}</td>
+          <td class="py-3 px-4 border-b border-gray-200">{{this.description}}</td>
+          <td class="py-3 px-4 border-b border-gray-200 text-center">{{this.brand}}</td>
+          <td class="py-3 px-4 border-b border-gray-200 text-center">${{this.list_price}}</td>
+          <td class="py-3 px-4 border-b border-gray-200 text-center">{{this.iva}}%</td>
+          <td class="py-3 px-4 border-b border-gray-200 text-center">${{this.final_price}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="flex justify-between items-center mt-4">
+    <div class="flex-grow text-center">
+      {{#if hasPrevPage}}
+      <a href="{{prevPage}}" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg mr-2">Anterior</a>{{/if}}
+      {{#if hasNextPage}}
+      <a href="{{nextPage}}" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg">Siguiente</a>{{/if}}
+    </div>
+
+    <div class="ml-4">
+      <label for="pageSize" class="text-sm">Productos por página:</label>
+      <select class="border border-gray-300 rounded-lg ml-2 p-2" onchange="limitChange(event)">
+  <option value="12" {{#if (eq limit "12")}}selected{{/if}}>12</option>
+  <option value="24" {{#if (eq limit "24")}}selected{{/if}}>24</option>
+  <option value="36" {{#if (eq limit "36")}}selected{{/if}}>36</option>
+</select>
+
+    </div>
+  </div>
+</div>
+<script src="/js/listProducts.js"></script>

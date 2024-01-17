@@ -1,0 +1,40 @@
+<div class="flex justify-center items-center h-screen bg-gray-100">
+  <div class="px-10 py-16 bg-white rounded-lg shadow-xl max-w-md">
+    <h1 class="text-2xl font-semibold text-gray-800 mb-8 text-center">Crear
+      Proveedor</h1>
+    <form
+      onsubmit="createSupplier(event)"
+      class="bg-white rounded px-8 pt-6 pb-8 mb-4"
+    >
+      <div class="mb-6">
+        <label
+          for="supplier"
+          class="block text-gray-700 text-sm font-bold mb-2"
+        >
+          Nombre del Proveedor
+        </label>
+        <input
+          type="text"
+          name="supplier"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="Ingrese el nombre del proveedor"
+        />
+      </div>
+      <div class="flex items-center justify-between">
+        <button
+          type="submit"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Crear
+        </button>
+        <a
+          href="/"
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Inicio
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="/js/createSupplier.js"></script>

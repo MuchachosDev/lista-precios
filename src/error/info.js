@@ -8,11 +8,3 @@ export const generateUserErrorInfo = (user) => {
     * age        : needs to be a Number, received ${user.age}
     `;
 };
-
-export const generateProductIdErrorInfo = (id) => {
-  return `The ID ${id} of product is not valid`;
-};
-
-export const generateCartIdErrorInfo = (id) => {
-  return `The ID ${id} of cart is not valid`;
-};
