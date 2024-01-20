@@ -22,4 +22,21 @@ export default class Factor {
       return error;
     }
   };
+  put = async (fid, factor) => {
+    try {
+      return await factorModel.updateOne(
+        { _id: fid },
+        { ...factor, updated_at: Date.now() },
+      );
+    } catch (error) {
+      return error;
+    }
+  };
+  delete = async (fid) => {
+    try {
+      return await factorModel.deleteOne({ _id: fid });
+    } catch (error) {
+      return error;
+    }
+  };
 }

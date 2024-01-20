@@ -31,4 +31,18 @@ export default class SupplierRepository {
       return { error };
     }
   };
+  updateSupplier = async (supplier, sid) => {
+    try {
+      return await this.dao.put(supplier, sid);
+    } catch (error) {
+      return { error };
+    }
+  };
+  deleteSupplier = async (sid) => {
+    try {
+      return await this.dao.delete(sid);
+    } catch (error) {
+      return { error };
+    }
+  };
 }

@@ -30,4 +30,21 @@ export default class Supplier {
       return { error };
     }
   };
+  put = async (supplier, sid) => {
+    try {
+      return await supplierModel.updateOne(
+        { _id: sid },
+        { ...supplier, updated_at: Date.now() },
+      );
+    } catch (error) {
+      return { error };
+    }
+  };
+  delete = async (sid) => {
+    try {
+      return await supplierModel.deleteOne({ _id: sid });
+    } catch (error) {
+      return { error };
+    }
+  };
 }

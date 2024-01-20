@@ -17,23 +17,44 @@ export default class ProductRepository {
       return error;
     }
   };
-  getProductsWithParams = async (filter, page, limit) => {
+  getProductByFactorId = async (fid) => {
     try {
-      return await this.dao.getWithParams(filter, page, limit);
+      return await this.dao.getByFactorId(fid);
     } catch (error) {
       return error;
     }
   };
-  getProductByCode = async (code) => {
+  getProductsWithParams = async (filter, page, limit, sort, brand) => {
     try {
-      return await this.dao.getByCode(code);
+      return await this.dao.getWithParams(filter, page, limit, sort, brand);
     } catch (error) {
       return error;
     }
   };
-  updatePriceToProduct = async (code, price) => {
+  getExactProduct = async (code, brand, factor) => {
     try {
-      return await this.dao.updatePrice(code, price);
+      return await this.dao.getProduct(code, brand, factor);
+    } catch (error) {
+      return error;
+    }
+  };
+  updateProduct = async (pid, product) => {
+    try {
+      return await this.dao.update(pid, product);
+    } catch (error) {
+      return error;
+    }
+  };
+  getDistinticBrands = async () => {
+    try {
+      return await this.dao.getBrands();
+    } catch (error) {
+      return error;
+    }
+  };
+  downPricesToProduct = async (pid) => {
+    try {
+      return await this.dao.downPrices(pid);
     } catch (error) {
       return error;
     }

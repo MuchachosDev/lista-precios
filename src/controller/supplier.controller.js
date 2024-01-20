@@ -18,3 +18,35 @@ export const addSupplier = async (req, res) => {
     return res.sendClientError(error);
   }
 };
+
+export const editSupplier = async (req, res) => {
+  const { name } = req.body;
+  const { sid } = req.params;
+  try {
+    const exist = await supplierService.getSupplierByName(name);
+
+    if (exist) return res.sendClientError("Supplier already exists");
+
+    const response = await supplierService.updateSupplier(
+      new SupplierDTO(name),
+      sid,
+    );
+
+    if (!response) return res.sendClientError("Supplier not updated");
+    return res.sendSuccessCreated({ message: "Supplier updated successfully" });
+  } catch (error) {
+    return res.sendClientError(error);
+  }
+};
+
+export const deleteSupplier = async (req, res) => {
+  const { sid } = req.params;
+  try {
+    const response = await supplierService.deleteSupplier(sid);
+
+    if (!response) return res.sendClientError("Supplier not deleted");
+    return res.sendSuccessCreated({ message: "Supplier deleted successfully" });
+  } catch (error) {
+    return res.sendClientError(error);
+  }
+};

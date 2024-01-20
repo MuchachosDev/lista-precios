@@ -23,4 +23,18 @@ export default class FactorRepository {
       return error;
     }
   };
+  updateFactor = async (fid, factor) => {
+    try {
+      return await this.dao.put(fid, factor);
+    } catch (error) {
+      return error;
+    }
+  };
+  deleteFactor = async (fid) => {
+    try {
+      return await this.dao.delete(fid);
+    } catch (error) {
+      return error;
+    }
+  };
 }

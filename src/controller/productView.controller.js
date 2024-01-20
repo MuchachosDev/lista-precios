@@ -2,6 +2,7 @@ import envConfig from "../config/env.config.js";
 import FactorDTO from "../dto/factor.dto.js";
 import ProductDTO from "../dto/product.dto.js";
 import {
+  dollarService,
   factorService,
   productService,
 } from "../repositories/index.repository.js";
@@ -35,7 +36,7 @@ export const getUploadDocumentPage = async (req, res) => {
 
 export const getListProductsPage = async (req, res) => {
   try {
-    let { filter, page, limit } = req.query;
+    let { filter, page, limit, sort, brand } = req.query;
 
     if (!filter) {
       filter = "";
@@ -45,15 +46,35 @@ export const getListProductsPage = async (req, res) => {
     }
 
     if (!limit) {
-      limit = 16;
+      limit = 12;
+    }
+    if (sort === "1") {
+      sort = 1;
+    } else if (sort === "-1") {
+      sort = -1;
+    }
+    if (brand) {
+      brand = brand.trim().toUpperCase();
+    } else {
+      brand = "";
     }
 
     const { docs, hasNextPage, hasPrevPage, prevPage, nextPage, totalDocs } =
-      await productService.getProductsWithParams(filter || "", page, limit);
+      await productService.getProductsWithParams(
+        filter,
+        page,
+        limit,
+        sort,
+        brand,
+      );
 
     const productsDTO = docs.map((product) => {
       return ProductDTO.getProductToListView(product);
     });
+
+    const brands = await productService.getDistinticBrands();
+
+    const { value } = await dollarService.getDollar();
     return res.render("listProducts", {
       title: "List Products",
       styles: "styles",
@@ -72,6 +93,10 @@ export const getListProductsPage = async (req, res) => {
         `${envConfig.API}/list-products?page=${nextPage}` +
         `${limit ? `&limit=${limit}` : ""}` +
         `${filter ? `&filter=${filter}` : ""}`,
+      dollar: value,
+      brands,
+      sort,
+      brandSelected: brand,
     });
   } catch (error) {
     return res.sendClientError(error);

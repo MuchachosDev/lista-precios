@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2";
 
 const productCollection = "products";
 
@@ -19,11 +18,24 @@ const list_price_item = new Schema({
   },
 });
 
+const currencyItem = new Schema({
+  code: {
+    type: String,
+    required: true,
+    enum: ["ARS", "USD"],
+    default: "ARS",
+  },
+  cotization: {
+    type: Schema.Types.ObjectId || null,
+    ref: "dollars",
+    default: null,
+  },
+});
+
 const productSchema = new Schema({
   code: {
     type: String,
     required: true,
-    unique: true,
   },
   description: {
     type: String,
@@ -44,7 +56,7 @@ const productSchema = new Schema({
   },
 
   currency: {
-    type: String,
+    type: currencyItem,
     required: true,
   },
   iva: {
@@ -67,9 +79,6 @@ const productSchema = new Schema({
   },
 });
 
-productSchema.pre("findOne", function () {
-  this.populate("factor");
-});
 productSchema.pre("find", function () {
   this.populate("factor");
 });
@@ -83,7 +92,5 @@ productSchema.pre("aggregate", function () {
   });
   this.unwind("factor");
 });
-
-productSchema.plugin(mongoosePaginate);
 
 export const productModel = model(productCollection, productSchema);

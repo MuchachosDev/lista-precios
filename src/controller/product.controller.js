@@ -1,3 +1,4 @@
+import ProductDTO from "../dto/product.dto.js";
 import {
   factorService,
   productService,
@@ -14,25 +15,52 @@ export const addFile = async (req, res) => {
     }
 
     for (const product of products) {
-      const exist = await productService.getProductByCode(product.code);
+      const exist = await productService.getExactProduct(
+        product.code,
+        product.brand,
+        existFactor._id,
+      );
 
-      if (
-        exist &&
-        exist.list_price[exist.list_price.length - 1].price !==
-          product.list_price[0].price
-      ) {
-        let update = await productService.updatePriceToProduct(
-          exist.code,
-          product.list_price[0],
-        );
+      if (exist) {
+        const comparation = new ProductDTO(product).equals(exist);
 
-        if (!update) {
-          return res.sendClientError({
-            message: `Error to update price to product ${exist.code}`,
-          });
+        if (
+          comparation.code &&
+          comparation.description &&
+          comparation.iva &&
+          comparation.currency &&
+          comparation.list_price
+        ) {
+          req.logger.debug(`Product ${exist.code} is actualized`);
+        } else {
+          const keys = Object.keys(comparation);
+
+          const productUpdate = keys.reduce((store, key) => {
+            if (!comparation[key]) {
+              if (key === "list_price") {
+                exist.list_price.map((price) => (price.status = false));
+                exist.list_price.push(product.list_price[0]);
+                store[key] = exist.list_price;
+              } else {
+                store[key] = product[key];
+              }
+            }
+            return store;
+          }, {});
+
+          const response = await productService.updateProduct(
+            exist._id,
+            productUpdate,
+          );
+
+          if (!response) {
+            return res.sendClientError({
+              message: `Error to update price to product ${exist.code}`,
+            });
+          }
+          req.logger.debug(`Product ${exist.code} updated successfully`);
         }
-        req.logger.debug(`Product ${exist.code} updated successfully`);
-      } else if (!exist) {
+      } else {
         const response = await productService.addProduct({
           ...product,
           factor: factor,
@@ -43,8 +71,6 @@ export const addFile = async (req, res) => {
         } else {
           req.logger.debug(`Product ${response.code} added successfully`);
         }
-      } else {
-        return;
       }
     }
     return res.sendSuccessCreated({ message: "Products added/modified" });

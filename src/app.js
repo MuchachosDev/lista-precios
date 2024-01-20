@@ -12,6 +12,9 @@ import FactorViewRouter from "./router/factorView.router.js";
 import SupplierRouter from "./router/supplier.router.js";
 import SupplierViewRouter from "./router/supplierView.router.js";
 import ErrorViewRouter from "./router/errors.router.js";
+import DollarRouter from "./router/dollar.router.js";
+import DollarViewRouter from "./router/dollarView.router.js";
+import { defaultDollar } from "./util/initServer.util.js";
 
 // Express app
 const app = express();
@@ -30,6 +33,9 @@ app.engine(
     helpers: {
       eq: function (v1, v2) {
         return v1 == v2;
+      },
+      formatDate: function (date) {
+        return date.toLocaleString();
       },
     },
   }),
@@ -60,6 +66,10 @@ const supplierViewRouter = new SupplierViewRouter();
 app.use("/", supplierViewRouter.getRouter());
 const errorViewRouter = new ErrorViewRouter();
 app.use("/", errorViewRouter.getRouter());
+const dollarRouter = new DollarRouter();
+app.use("/api/dollar", dollarRouter.getRouter());
+const dollarViewRouter = new DollarViewRouter();
+app.use("/", dollarViewRouter.getRouter());
 
 // Connect to database
 try {
@@ -69,6 +79,9 @@ try {
 } catch (error) {
   console.log(error);
 }
+
+// Init default dollar
+defaultDollar();
 
 // Init Server
 app.listen(envConfig.PORT, () => {
