@@ -3,7 +3,7 @@ import { Command } from "commander";
 
 const program = new Command();
 
-program.requiredOption("--mode <mode>", "Mode App", "development");
+program.requiredOption("--mode <mode>", "Mode App", "prod");
 program.parse();
 
 const env = program.opts().mode;
