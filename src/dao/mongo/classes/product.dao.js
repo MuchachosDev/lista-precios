@@ -75,6 +75,20 @@ export default class Product {
           },
         },
         {
+          $lookup: {
+            from: "dollars",
+            localField: "currency.cotization",
+            foreignField: "_id",
+            as: "dollarData",
+          },
+        },
+        {
+          $unwind: {
+            path: "$dollarData",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+        {
           $addFields: {
             filtered_price: {
               $let: {
@@ -100,7 +114,18 @@ export default class Product {
             description: 1,
             brand: 1,
             factor: 1,
-            list_price: "$filtered_price",
+            list_price: {
+              $cond: {
+                if: { $eq: ["$currency.code", "USD"] },
+                then: {
+                  $multiply: [
+                    { $ifNull: ["$filtered_price", 0] },
+                    { $ifNull: ["$dollarData.value", 1] },
+                  ],
+                },
+                else: { $ifNull: ["$filtered_price", 0] },
+              },
+            },
             final_price: {
               $cond: {
                 if: { $eq: ["$currency.code", "USD"] },
@@ -108,7 +133,7 @@ export default class Product {
                   $multiply: [
                     { $ifNull: ["$filtered_price", 0] },
                     { $ifNull: ["$factorData.value", 1] },
-                    { $ifNull: ["$currency.cotization", 1] },
+                    { $ifNull: ["$dollarData.value", 1] },
                     { $add: [1, { $divide: ["$iva", 100] }] },
                   ],
                 },

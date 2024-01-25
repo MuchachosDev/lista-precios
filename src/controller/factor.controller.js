@@ -4,6 +4,7 @@ import {
   productService,
   supplierService,
 } from "../repositories/index.repository.js";
+import { parseTextToNumber } from "../util/parser.util.js";
 
 export const addFactor = async (req, res) => {
   try {
@@ -14,7 +15,11 @@ export const addFactor = async (req, res) => {
     if (!sup) return res.sendNotFound("Supplier not found");
 
     const response = await factorService.addFactor(
-      new FactorDTO(parseFloat(value), sup._id, name),
+      new FactorDTO(
+        parseTextToNumber(value.trim()),
+        sup._id,
+        name.trim().toUpperCase(),
+      ),
     );
 
     if (!response) return res.sendClientError("Factor not added");
@@ -29,7 +34,11 @@ export const editFactor = async (req, res) => {
     const { fid } = req.params;
     const { value, sid, name } = req.body;
 
-    const factorDTO = new FactorDTO(value, sid, name);
+    const factorDTO = new FactorDTO(
+      parseTextToNumber(value.trim()),
+      sid,
+      name.trim().toUpperCase(),
+    );
 
     const response = await factorService.updateFactor(fid, factorDTO);
 

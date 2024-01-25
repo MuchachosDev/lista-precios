@@ -7,7 +7,9 @@ const storage = multer.diskStorage({
     const uploadPath = path.join("./public/uploads/pending/");
 
     fs.mkdirSync(uploadPath, { recursive: true });
-
+    fs.mkdirSync(uploadPath.replace("pending", "completed"), {
+      recursive: true,
+    });
     callback(null, uploadPath);
   },
   filename: (req, file, callback) => {

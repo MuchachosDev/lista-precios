@@ -3,6 +3,6 @@ import RouterBase from "./index.js";
 
 export default class DollarViewRouter extends RouterBase {
   init() {
-    this.get("/edit-dollar", ["PUBLIC"], getDollarPage);
+    this.get("/edit-dollar", ["USER"], getDollarPage);
   }
 }

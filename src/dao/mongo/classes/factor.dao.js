@@ -17,7 +17,7 @@ export default class Factor {
   };
   get = async () => {
     try {
-      return await factorModel.find();
+      return await factorModel.find().sort({ updated_at: -1 });
     } catch (error) {
       return error;
     }

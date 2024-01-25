@@ -3,6 +3,6 @@ import { changeDollar } from "../controller/dollar.controller.js";
 
 export default class DollarRouter extends RouterBase {
   init() {
-    this.post("/", ["PUBLIC"], changeDollar);
+    this.post("/", ["USER"], changeDollar);
   }
 }

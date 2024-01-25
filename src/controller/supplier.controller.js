@@ -9,7 +9,7 @@ export const addSupplier = async (req, res) => {
     if (exist) return res.sendClientError("Supplier already exists");
 
     const response = await supplierService.addSupplier(
-      new SupplierDTO(supplier),
+      new SupplierDTO(supplier.trim().toUpperCase()),
     );
 
     if (!response) return res.sendClientError("Supplier not created");
@@ -28,7 +28,7 @@ export const editSupplier = async (req, res) => {
     if (exist) return res.sendClientError("Supplier already exists");
 
     const response = await supplierService.updateSupplier(
-      new SupplierDTO(name),
+      new SupplierDTO(name.trim().toUpperCase()),
       sid,
     );
 

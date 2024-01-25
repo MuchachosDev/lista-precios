@@ -43,10 +43,14 @@ export const getListProductsPage = async (req, res) => {
     }
     if (!page) {
       page = 1;
+    } else {
+      page = parseInt(page);
     }
 
     if (!limit) {
       limit = 12;
+    } else {
+      limit = parseInt(limit);
     }
     if (sort === "1") {
       sort = 1;
@@ -88,11 +92,15 @@ export const getListProductsPage = async (req, res) => {
       prevPage:
         `${envConfig.API}/list-products?page=${prevPage}` +
         `${limit ? `&limit=${limit}` : ""}` +
-        `${filter ? `&filter=${filter}` : ""}`,
+        `${filter ? `&filter=${filter}` : ""}` +
+        `${brand ? `&brand=${brand}` : ""}` +
+        `${sort ? `&sort=${sort}` : ""}`,
       nextPage:
         `${envConfig.API}/list-products?page=${nextPage}` +
         `${limit ? `&limit=${limit}` : ""}` +
-        `${filter ? `&filter=${filter}` : ""}`,
+        `${filter ? `&filter=${filter}` : ""}` +
+        `${brand ? `&brand=${brand}` : ""}` +
+        `${sort ? `&sort=${sort}` : ""}`,
       dollar: value,
       brands,
       sort,

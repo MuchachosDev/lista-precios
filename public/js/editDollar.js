@@ -3,7 +3,7 @@ const editDollar = async (e) => {
 
   const value = e.target.value.value;
   try {
-    const response = await fetch("/api/dollar", {
+    const response = await fetch("/api/dollars", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

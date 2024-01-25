@@ -15,6 +15,7 @@ import ErrorViewRouter from "./router/errors.router.js";
 import DollarRouter from "./router/dollar.router.js";
 import DollarViewRouter from "./router/dollarView.router.js";
 import { defaultDollar } from "./util/initServer.util.js";
+import UserViewRouter from "./router/userView.router.js";
 
 // Express app
 const app = express();
@@ -50,8 +51,6 @@ app.use(addLogger);
 app.use(cookieParser());
 
 // Routers
-const userRouter = new UserRouter();
-app.use("/api/user", userRouter.getRouter());
 const productRouter = new ProductRouter();
 app.use("/api/files", productRouter.getRouter());
 const productViewRouter = new ProductViewRouter();
@@ -67,9 +66,13 @@ app.use("/", supplierViewRouter.getRouter());
 const errorViewRouter = new ErrorViewRouter();
 app.use("/", errorViewRouter.getRouter());
 const dollarRouter = new DollarRouter();
-app.use("/api/dollar", dollarRouter.getRouter());
+app.use("/api/dollars", dollarRouter.getRouter());
 const dollarViewRouter = new DollarViewRouter();
 app.use("/", dollarViewRouter.getRouter());
+const userRouter = new UserRouter();
+app.use("/api/users", userRouter.getRouter());
+const userViewRouter = new UserViewRouter();
+app.use("/", userViewRouter.getRouter());
 
 // Connect to database
 try {

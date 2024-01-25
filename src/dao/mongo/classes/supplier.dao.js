@@ -25,7 +25,7 @@ export default class Supplier {
 
   get = async () => {
     try {
-      return await supplierModel.find();
+      return await supplierModel.find().sort({updated_at: -1});
     } catch (error) {
       return { error };
     }

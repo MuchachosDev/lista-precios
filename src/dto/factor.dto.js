@@ -1,8 +1,8 @@
 export default class FactorDTO {
   constructor(value, supplier, name, status) {
     this.value = value;
-    this.supplier = supplier || null;
-    this.name = name.toUpperCase().trim() || "" || "General";
+    this.supplier = supplier;
+    this.name = name || "GENERAL";
     this.status = status || true;
   }
   static getFactorToPage = (factor) => {

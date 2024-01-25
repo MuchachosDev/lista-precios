@@ -7,8 +7,8 @@ import RouterBase from "./index.js";
 
 export default class SupplierRouter extends RouterBase {
   init() {
-    this.post("/", ["PUBLIC"], addSupplier);
-    this.put("/:sid", ["PUBLIC"], editSupplier);
-    this.delete("/:sid", ["PUBLIC"], deleteSupplier);
+    this.post("/", ["USER"], addSupplier);
+    this.put("/:sid", ["USER"], editSupplier);
+    this.delete("/:sid", ["USER"], deleteSupplier);
   }
 }

@@ -54,6 +54,7 @@ export const editFactorPage = async (req, res) => {
       title: "Editar Factor",
       factor: factorDTO,
       suppliers: suppliersDTO,
+      supplierToFactor: factor.supplier._id,
     });
   } catch (error) {
     return res.sendClientError(error);

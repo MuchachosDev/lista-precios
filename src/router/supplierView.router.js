@@ -7,8 +7,8 @@ import RouterBase from "./index.js";
 
 export default class SupplierViewRouter extends RouterBase {
   init() {
-    this.get("/add-supplier", ["PUBLIC"], addSupplierPage);
-    this.get("/manage-suppliers", ["PUBLIC"], manageSupplierPage);
-    this.get("/edit-supplier/:sid", ["PUBLIC"], editSupplierPage);
+    this.get("/add-supplier", ["USER"], addSupplierPage);
+    this.get("/manage-suppliers", ["USER"], manageSupplierPage);
+    this.get("/edit-supplier/:sid", ["USER"], editSupplierPage);
   }
 }

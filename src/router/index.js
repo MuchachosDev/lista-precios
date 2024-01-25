@@ -1,5 +1,6 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
+import envConfig from "../config/env.config.js";
 
 export default class RouterBase {
   constructor() {
@@ -90,13 +91,13 @@ export default class RouterBase {
     return (req, res, next) => {
       if (policies[0] === "PUBLIC") return next();
 
-      const authHeaders = req.headers.authorization;
-      if (!authHeaders)
-        return res.status(401).send({ status: "error", error: "Unauthorized" });
-
-      const token = authHeaders.split(" ")[1];
+      const token = req.cookies.token;
+      if (!token && policies[0] !== "NOAUTH")
+        return res.redirect("/login?failSession=true");
+      if (token && policies[0] === "NOAUTH") return res.redirect("/");
+      if (!token && policies[0] === "NOAUTH") return next();
       try {
-        const user = jwt.verify(token, "CoderSecret");
+        const user = jwt.verify(token, envConfig.JWT_SECRET);
 
         if (!policies.includes(user.role.toUpperCase()))
           return res.status(403).send({ status: "error", error: "Forbidden" });

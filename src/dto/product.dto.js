@@ -1,26 +1,26 @@
 export default class ProductDTO {
   constructor(product) {
-    this.code = product.code.trim() ?? "";
-    this.description = product.description.trim() || "";
-    this.brand = product.brand.toUpperCase().trim() || "";
+    this.code = product.code ?? "";
+    this.description = product.description || "";
+    this.brand = product.brand || "";
     this.factor = product.factor || null;
     this.list_price = Array.isArray(product.list_price)
       ? product.list_price
       : [this.generatePriceToProduct(product.list_price)];
     this.currency = product.currency.code
       ? product.currency
-      : this.structureCurrency(product.currency, product.currency);
-    this.iva = parseFloat(product.iva) || 21;
-    this.tag_file = product.tag_file.trim() || "";
+      : this.structureCurrency(product.currency, product.dollar);
+    this.iva = product.iva || 21;
+    this.tag_file = product.tag_file || "";
   }
   static getProductToListView = (product) => {
     return {
-      code: product.code || "",
-      description: product.description || "",
-      brand: product.brand || "",
+      code: product.code || "WITHOUT CODE",
+      description: product.description || "WITHOUT DESCRIPTION",
+      brand: product.brand || "WITHOUT BRAND",
       list_price: product.list_price.toFixed(2) || 0,
-      supplier: product.supplier || "",
-      currency: product.currency || "ARS",
+      supplier: product.supplier,
+      currency: product.currency,
       iva: product.iva || 21,
       final_price: product.final_price.toFixed(2) || 0,
     };

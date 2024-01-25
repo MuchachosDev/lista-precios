@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import { productModel } from "./product.model.js";
 
 const factorCollection = "factors";
 
@@ -8,7 +7,6 @@ const factorSchema = new Schema({
     type: Number,
     required: true,
   },
-
   name: {
     type: String,
     required: true,
