@@ -1,39 +1,21 @@
 import { Schema, model } from "mongoose";
+import envConfig from "../../../config/env.config.js";
 
 const productCollection = "products";
 
-const list_price_item = new Schema({
-  price: {
-    type: Number,
-    required: true,
+const productSchema = new Schema({
+  ingelec_id: {
+    type: String,
   },
-  created_at: {
-    type: Date,
-    required: true,
-  },
-  status: {
-    type: Boolean,
-    required: true,
-    default: true,
-  },
-});
-
-const currencyItem = new Schema({
-  code: {
+  bar_code: {
     type: String,
     required: true,
-    enum: ["ARS", "USD"],
-    default: "ARS",
   },
-  cotization: {
-    type: Schema.Types.ObjectId || null,
-    ref: "dollars",
-    default: null,
+  sku: {
+    type: String,
+    required: true,
   },
-});
-
-const productSchema = new Schema({
-  code: {
+  model: {
     type: String,
     required: true,
   },
@@ -45,26 +27,24 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  factor: {
-    type: Schema.Types.ObjectId,
-    ref: "factors",
+  item: {
+    type: String,
     required: true,
   },
-  list_price: {
-    type: [list_price_item],
+  sub_item: {
+    type: String,
     required: true,
   },
-
-  currency: {
-    type: currencyItem,
+  presentation: {
+    type: String,
     required: true,
   },
   iva: {
     type: Number,
     required: true,
   },
-  tag_file: {
-    type: String,
+  price_list: {
+    type: Number,
     required: true,
   },
   created_at: {
@@ -76,6 +56,16 @@ const productSchema = new Schema({
     type: Date,
     required: true,
     default: new Date(),
+  },
+  factor: {
+    type: Schema.Types.ObjectId,
+    ref: "factors",
+    required: true,
+  },
+  supplier: {
+    type: Schema.Types.ObjectId,
+    ref: "suppliers",
+    required: true,
   },
 });
 
@@ -93,4 +83,15 @@ productSchema.pre("aggregate", function () {
   this.unwind("factor");
 });
 
+productSchema.pre("save", async function (next) {
+  const doc = this;
+  const prefix = envConfig.PREFIX_DATABASE_ID;
+  try {
+    const counter = await productModel.countDocuments();
+    doc.ingelec_id = `${prefix}-${(counter + 1).toString().padStart(9, "0")}`;
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 export const productModel = model(productCollection, productSchema);

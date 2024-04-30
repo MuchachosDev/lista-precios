@@ -3,11 +3,11 @@ import DollarDTO from "../dto/dollar.dto.js";
 import { dollarService } from "../repositories/index.repository.js";
 
 export const defaultDollar = async () => {
-  const response = await dollarService.getDollar();
+  const response = await dollarService.getDollars();
 
-  if (!response) {
+  if (response.length === 0) {
     const newDollar = await dollarService.addDollar(
-      new DollarDTO({ value: envConfig.DEFAULT_DOLLAR }),
+      new DollarDTO({ name: "Dólar blue", value: envConfig.DEFAULT_DOLLAR }),
     );
 
     if (!newDollar) {

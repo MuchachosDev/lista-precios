@@ -17,7 +17,7 @@ export const addFactor = async (req, res) => {
     const response = await factorService.addFactor(
       new FactorDTO(
         parseTextToNumber(value.trim()),
-        sup._id,
+        sup[0]._id,
         name.trim().toUpperCase(),
       ),
     );

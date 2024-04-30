@@ -53,3 +53,46 @@ const deleteFilterBrand = (e) => {
   searchParams.delete("brand");
   window.location.href = `${pathname}?${searchParams.toString()}`;
 };
+
+const input = document.getElementById("inputSearch");
+
+document.addEventListener("keydown", function (e) {
+  let key = e.key;
+
+  if (['Backspace', 'Enter', 'Escape'].includes(key)) {
+    e.preventDefault();
+  }
+
+  if (e.ctrlKey) {
+    if (key === 'c' || key === 'C') {
+      return;
+    }
+    if (key === 'v' || key === 'V') {
+      return;
+    }
+  }
+
+  switch (key) {
+    case 'Backspace':
+      input.value = input.value.slice(0, -1);
+      break;
+    case 'Enter':
+      window.location.href = `/list-products?filter=${input.value}`;
+      break;
+    case 'Escape':
+      input.value = "";
+      break;
+    case 'Control':
+    case 'Alt':
+    case 'Shift':
+    case 'CapsLock':
+    case 'Tab':
+    case 'Meta':
+      break;
+    default:
+      if (key.length === 1 && !e.ctrlKey) {
+        input.value += key;
+      }
+      break;
+  }
+});

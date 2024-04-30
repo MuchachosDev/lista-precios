@@ -16,6 +16,13 @@ export default class FactorRepository {
       return error;
     }
   };
+  getFactorsBySupplier = async (sid) => {
+    try {
+      return await this.dao.getBySupplier(sid);
+    } catch (error) {
+      return error;
+    }
+  };
   getAllFactors = async () => {
     try {
       return await this.dao.get();

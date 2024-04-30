@@ -15,6 +15,13 @@ export default class Factor {
       return error;
     }
   };
+  getBySupplier = async (sid) => {
+    try {
+      return await factorModel.find({ supplier: sid });
+    } catch (error) {
+      return error;
+    }
+  };
   get = async () => {
     try {
       return await factorModel.find().sort({ updated_at: -1 });

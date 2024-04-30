@@ -18,12 +18,6 @@ const factorSchema = new Schema({
     required: true,
   },
 
-  status: {
-    type: Boolean,
-    required: true,
-    default: true,
-  },
-
   created_at: {
     type: Date,
     required: true,

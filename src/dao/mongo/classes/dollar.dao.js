@@ -17,14 +17,17 @@ export default class Dollar {
   };
   get = async () => {
     try {
-      return await dollarModel.findOne({ status: true });
+      return await dollarModel.find();
     } catch (error) {
       return error;
     }
   };
-  disable = async (did) => {
+  update = async (did, dollar) => {
     try {
-      return await dollarModel.findByIdAndUpdate(did, { status: false });
+      return await dollarModel.findByIdAndUpdate(did, {
+        ...dollar,
+        updated_at: Date.now(),
+      });
     } catch (error) {
       return error;
     }

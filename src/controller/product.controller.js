@@ -1,78 +1,78 @@
-import fs from "fs";
-import ProductDTO from "../dto/product.dto.js";
 import {
   factorService,
   productService,
+  supplierService,
 } from "../repositories/index.repository.js";
-import { productModel } from "../dao/mongo/models/product.model.js";
 
 export const addFile = async (req, res) => {
-  const { products, factor } = req.body;
-  await productModel.deleteMany({ brand: "AEA" });
+  const { products, factor, sid } = req.body;
   try {
     const existFactor = await factorService.getFactorById(factor);
 
     if (!existFactor) {
       return res.sendNotFound({ message: "Factor not found" });
     }
+
+    const existSupplier = await supplierService.getSupplierById(sid);
+
+    if (!existSupplier) {
+      return res.sendNotFound({ message: "Supplier not found" });
+    }
     for (const product of products) {
-      const exist = await productService.getExactProduct(
-        product.code,
-        product.brand,
-        existFactor._id,
-      );
-      if (exist) {
-        const comparation = new ProductDTO(product).equals(exist);
-        if (
-          comparation.code &&
-          comparation.description &&
-          comparation.iva &&
-          comparation.currency &&
-          comparation.list_price
-        ) {
-          req.logger.debug(`Product ${exist.code} is actualized`);
-        } else {
-          const keys = Object.keys(comparation);
-          const productUpdate = keys.reduce((store, key) => {
-            if (!comparation[key]) {
-              if (key === "list_price") {
-                exist.list_price.map((price) => (price.status = false));
-                exist.list_price.push(product.list_price[0]);
-                store[key] = exist.list_price;
-              } else {
-                store[key] = product[key];
-              }
-            }
-            return store;
-          }, {});
+      const productAdded = await productService.addProduct({
+        ...product,
+        factor: existFactor._id,
+        supplier: sid,
+      });
 
-          const response = await productService.updateProduct(
-            exist._id,
-            productUpdate,
-          );
-
-          if (!response) {
-            return res.sendClientError({
-              message: `Error to update price to product ${exist.code}`,
-            });
-          }
-          req.logger.debug(`Product ${exist.code} updated successfully`);
-        }
-      } else {
-        const response = await productService.addProduct({
-          ...product,
-          factor: factor,
+      if (!productAdded) {
+        return res.sendClientError({
+          message: "Error adding products",
         });
-
-        if (!response) {
-          return res.sendClientError(response);
-        } else {
-          req.logger.debug(`Product ${response.code} added successfully`);
-        }
       }
     }
-    fs.renameSync(req.file.path, req.file.path.replace("pending", "completed"));
-    return res.sendSuccessCreated({ message: "Products added/modified" });
+    return res.sendSuccessCreated({ message: "Products added" });
+  } catch (error) {
+    return res.sendClientError(error);
+  }
+};
+
+export const updatePricePerItem = async (req, res) => {
+  let { sid, item, sub_item } = req.query;
+  const { percentage, adjustment_type } = req.body;
+
+  if (percentage == 0) {
+    return res.sendClientError({ message: "Percentage can't be 0" });
+  } else if (percentage < 0) {
+    return res.sendClientError({ message: "Percentage can't be negative" });
+  }
+
+  if (!sid) {
+    sid = "all-suppliers";
+  }
+  if (!item) {
+    item = "all-items";
+  }
+  if (!sub_item) {
+    sub_item = "all-sub-items";
+  }
+
+  try {
+    const updated = await productService.updatePriceList(
+      sid,
+      item,
+      sub_item,
+      parseFloat(percentage),
+      adjustment_type
+    );
+
+    if (!updated) {
+      return res.sendClientError({
+        message: "Error updating price",
+      });
+    }
+
+    return res.sendSuccess({ message: "Price/s updated" });
   } catch (error) {
     return res.sendClientError(error);
   }

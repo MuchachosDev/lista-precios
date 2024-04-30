@@ -22,3 +22,12 @@ export const login = async (req, res) => {
     return res.sendServerError({ message: "Internal server error" });
   }
 };
+
+export const logout = async (req, res) => {
+  try {
+    req.logger.info(`User ${req.user.username} logged out`);
+    return res.clearCookie("token").redirect("/login");
+  } catch (error) {
+    return res.sendServerError({ message: "Internal server error" });
+  }
+};

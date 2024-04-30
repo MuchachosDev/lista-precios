@@ -1,28 +1,28 @@
 export default class ProductDTO {
   constructor(product) {
-    this.code = product.code ?? "";
-    this.description = product.description || "";
-    this.brand = product.brand || "";
-    this.factor = product.factor || null;
-    this.list_price = Array.isArray(product.list_price)
-      ? product.list_price
-      : [this.generatePriceToProduct(product.list_price)];
-    this.currency = product.currency.code
-      ? product.currency
-      : this.structureCurrency(product.currency, product.dollar);
-    this.iva = product.iva || 21;
-    this.tag_file = product.tag_file || "";
+    this.bar_code = product.bar_code || "----";
+    this.sku = product.sku || "----";
+    this.model = product.model || "----";
+    this.description = product.description || "----";
+    this.brand = product.brand || "----";
+    this.item = product.item || "----";
+    this.sub_item = product.sub_item || "----";
+    this.presentation = product.presentation || "----";
+    this.iva = product.iva || 0.21;
+    this.price_list = product.price_list || 0;
   }
   static getProductToListView = (product) => {
     return {
-      code: product.code || "WITHOUT CODE",
-      description: product.description || "WITHOUT DESCRIPTION",
-      brand: product.brand || "WITHOUT BRAND",
-      list_price: product.list_price.toFixed(2) || 0,
+      ingelec_id: product.ingelec_id,
+      model: product.model,
+      description: product.description,
+      brand: product.brand,
       supplier: product.supplier,
-      currency: product.currency,
-      iva: product.iva || 21,
-      final_price: product.final_price.toFixed(2) || 0,
+      item: product.item,
+      sub_item: product.sub_item,
+      presentation: product.presentation,
+      iva: product.iva * 100 + "%",
+      final_price: product.final_price.toFixed(2),
     };
   };
   generatePriceToProduct = (list_price) => {
@@ -32,21 +32,15 @@ export default class ProductDTO {
       status: true,
     };
   };
-  structureCurrency = (currency, dollar) => {
+
+  static getItemToProduct = (item) => {
     return {
-      code: currency,
-      cotization: currency === "ARS" ? null : dollar._id,
+      item: item,
     };
   };
-  equals = (product) => {
+  static getSubItemToProduct = (sub_item) => {
     return {
-      code: this.code === product.code,
-      description: this.description === product.description,
-      iva: this.iva === product.iva,
-      currency: this.currency.code === product.currency.code,
-      list_price:
-        this.list_price[0].price ===
-        product.list_price.find((price) => price.status).price,
+      sub_item: sub_item,
     };
   };
 }

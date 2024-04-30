@@ -1,0 +1,71 @@
+<div class="flex flex-col justify-center items-center h-screen">
+<div class="max-w-lg mx-auto p-6 bg-white rounded-md shadow-md">
+  <h2 class="text-xl font-semibold mb-4">Seleccionar Proveedor, Rubro y Subrubro</h2>
+<form onsubmit="updatePrice(event)">
+  <div class="mb-6">
+    <label for="supplier" class="block text-gray-700 text-sm font-bold mb-2">
+      Proveedor
+    </label>
+    <select name="supplier"
+      class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+      autocomplete="off" onchange="selectSupplier(event)">
+      <option value="all-suppliers" {{#if (eq this.sid "all-suppliers")}}selected{{/if}}>Todos los proveedores</option>
+      {{#each suppliers}}
+      <option value="{{this._id}}" {{#if (eq this._id ../sid)}}selected{{/if}}>{{this.name}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="mb-6">
+    <label for="item" class="block text-gray-700 text-sm font-bold mb-2">
+      Rubro
+    </label>
+    <select name="item"
+      class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+      autocomplete="off" {{#if (eq sid "all-suppliers")}} disabled {{/if}} onchange="selectItem(event)">
+      <option value="all-items" {{#if (eq item "all-items")}}selected{{/if}}>Todos los Rubros</option>
+      {{#each items}}
+      <option value="{{this.item}}" {{#if (eq this.item ../item)}}selected{{/if}}>{{this.item}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="mb-6">
+    <label for="sub_item" class="block text-gray-700 text-sm font-bold mb-2">
+      Sub Rubros
+    </label>
+    <select name="sub_item"
+      class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+      autocomplete="off" {{#if (eq item "all-items")}} disabled {{/if}} onchange="selectSubItem(event)">
+           <option value="all-items" {{#if (eq this.sid "all-items")}}selected{{/if}}>Todos los Sub Rubros</option>
+      {{#each sub_items}}
+      <option value="{{this.sub_item}}" {{#if (eq this.sub_item ../sub_item)}}selected{{/if}}>{{this.sub_item}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="mb-6">
+    <label for="porcentaje" class="block text-sm font-medium text-gray-700">Porcentaje de Aumento o Descuento %</label>
+    <div class="flex items-center mb-4">
+        <div class="flex items-center mr-4">
+            <input type="radio" id="increase" name="adjustment_type" value="increase" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300" checked>
+            <label for="increase" class="ml-2 block text-sm text-gray-700">Aumento</label>
+        </div>
+        <div class="flex items-center">
+            <input type="radio" id="discount" name="adjustment_type" value="discount" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+            <label for="discount" class="ml-2 block text-sm text-gray-700">Descuento</label>
+        </div>
+    </div>
+    <input type="number" id="porcentaje" name="percentage" step="0.01" value="0"
+      class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+      required />
+</div>
+<div class="text-center">
+    <button type="submit"
+      class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Aplicar</button>
+    <a href="/"
+      class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+      Cancelar
+    </a>
+</div>
+  </form>
+</div>
+</div>
+<script src="/js/updatePriceList.js"></script>

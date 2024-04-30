@@ -2,6 +2,8 @@ const editSupplier = async (e) => {
   e.preventDefault();
   const name = e.target.name.value;
   const sid = e.target.getAttribute("data-supplier-id");
+  const dollar = e.target.dollar.value;
+  const enableCurrencySelect = e.target.enableCurrencySelect.checked;
 
   console.log(name, sid);
   try {
@@ -12,6 +14,8 @@ const editSupplier = async (e) => {
       },
       body: JSON.stringify({
         name,
+        dollar,
+        enableCurrencySelect,
       }),
     });
 

@@ -1,26 +1,16 @@
-import DollarDTO from "../dto/dollar.dto.js";
 import { dollarService } from "../repositories/index.repository.js";
 
 export const changeDollar = async (req, res) => {
   try {
-    const { value } = req.body;
+    const { did } = req.params;
+    const { value, name } = req.body;
 
-    const actualDollar = await dollarService.getDollar();
+    const dollar = await dollarService.updateDollar(did, { value, name });
 
-    if (!actualDollar) {
-      return res.sendClientError({ message: "Dollar not found" });
+    if (!dollar) {
+      return res.sendClientError({ message: "Dollar cannot be edited" });
     }
-    const disable = await dollarService.disableDollar(actualDollar._id);
-
-    if (!disable)
-      return res.sendClientError({ message: "Dollar cannot be disabled" });
-
-    const newDollar = await dollarService.addDollar(new DollarDTO({ value }));
-
-    if (!newDollar)
-      return res.sendClientError({ message: "Dollar cannot be added" });
-
-    return res.sendSuccessCreated({ message: "Dollar edited" });
+    return res.sendSuccess({ message: "Dollar edited" });
   } catch (error) {
     return res.sendClientError({ message: error.message });
   }

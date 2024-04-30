@@ -1,10 +1,11 @@
 import envConfig from "../config/env.config.js";
 import FactorDTO from "../dto/factor.dto.js";
 import ProductDTO from "../dto/product.dto.js";
+import SupplierDTO from "../dto/supplier.dto.js";
 import {
-  dollarService,
   factorService,
   productService,
+  supplierService,
 } from "../repositories/index.repository.js";
 
 export const getHomePage = async (req, res) => {
@@ -78,7 +79,8 @@ export const getListProductsPage = async (req, res) => {
 
     const brands = await productService.getDistinticBrands();
 
-    const { value } = await dollarService.getDollar();
+    console.log(brands);
+
     return res.render("listProducts", {
       title: "List Products",
       styles: "styles",
@@ -101,10 +103,57 @@ export const getListProductsPage = async (req, res) => {
         `${filter ? `&filter=${filter}` : ""}` +
         `${brand ? `&brand=${brand}` : ""}` +
         `${sort ? `&sort=${sort}` : ""}`,
-      dollar: value,
       brands,
       sort,
       brandSelected: brand,
+    });
+  } catch (error) {
+    return res.sendClientError(error);
+  }
+};
+
+export const getUpdatePricesListPage = async (req, res) => {
+  let { sid, item, sub_item } = req.query;
+
+  if (!sid) {
+    sid = "all-suppliers";
+  }
+  if (!item) {
+    item = "all-items";
+  }
+  if (!sub_item) {
+    sub_item = "all-sub-items";
+  }
+
+  try {
+    const suppliers = await supplierService.getAllSuppliers();
+    const items = await productService.getDistinctItems(
+      sid === "all-suppliers" ? null : sid,
+    );
+    const subItems = await productService.getDistinctSubItems(
+      item === "all-items" ? null : item,
+    );
+
+    const suppliersDTO = suppliers.map((supplier) => {
+      return SupplierDTO.getSuppliersToPage(supplier);
+    });
+
+    const itemsDTO = items.map((item) => {
+      return ProductDTO.getItemToProduct(item);
+    });
+
+    const subItemsDTO = subItems.map((subItem) => {
+      return ProductDTO.getSubItemToProduct(subItem);
+    });
+    console.log(item);
+    return res.render("updatePricesList", {
+      title: "Update Prices",
+      suppliers: suppliersDTO,
+      items: itemsDTO,
+      item: item,
+      sub_items: subItemsDTO,
+      sub_item: sub_item,
+      sid,
     });
   } catch (error) {
     return res.sendClientError(error);

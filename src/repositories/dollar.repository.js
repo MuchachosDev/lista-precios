@@ -17,16 +17,16 @@ export default class DollarRepository {
       return error;
     }
   };
-  getDollar = async () => {
+  getDollars = async () => {
     try {
       return await this.dao.get();
     } catch (error) {
       return error;
     }
   };
-  disableDollar = async (did) => {
+  updateDollar = async (did, dollar) => {
     try {
-      return await this.dao.disable(did);
+      return await this.dao.update(did, dollar);
     } catch (error) {
       return error;
     }

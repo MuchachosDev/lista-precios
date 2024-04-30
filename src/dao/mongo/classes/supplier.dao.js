@@ -17,7 +17,7 @@ export default class Supplier {
   };
   getById = async (sid) => {
     try {
-      return await supplierModel.findById(sid);
+      return await supplierModel.find({ _id: sid });
     } catch (error) {
       return { error };
     }
@@ -25,7 +25,7 @@ export default class Supplier {
 
   get = async () => {
     try {
-      return await supplierModel.find().sort({updated_at: -1});
+      return await supplierModel.find().sort({ updated_at: -1 });
     } catch (error) {
       return { error };
     }

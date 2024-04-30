@@ -18,6 +18,14 @@ const supplierSchema = new Schema({
     required: true,
     default: new Date(),
   },
+  dollar: {
+    type: Schema.Types.ObjectId || null,
+    ref: "dollars",
+  },
+});
+
+supplierSchema.pre("find", function () {
+  this.populate("dollar");
 });
 
 export const supplierModel = model(supplierCollection, supplierSchema);

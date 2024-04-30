@@ -52,7 +52,7 @@ app.use(cookieParser());
 
 // Routers
 const productRouter = new ProductRouter();
-app.use("/api/files", productRouter.getRouter());
+app.use("/api/products", productRouter.getRouter());
 const productViewRouter = new ProductViewRouter();
 app.use("/", productViewRouter.getRouter());
 const factorRouter = new FactorRouter();
