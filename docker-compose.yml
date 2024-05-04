@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   lista-precios:
-    container_name: lista-precios
+    container_name: ${LISTA_PRECIOS_CONTAINER_NAME}
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,17 +13,20 @@ services:
       API: ${API}
       MONGODB_HOST: ${MONGODB_HOST}
       MONGODB_USER: ${MONGODB_USER}
-      MONGODB_PASS: ${MONGODB_PASS}
+      MONGODB_PASSWORD: ${MONGODB_PASSWORD}
+      MONGODB_DATABASE: ${MONGODB_DATABASE}
       MODE: ${MODE}
       DEFAULT_DOLLAR: ${DEFAULT_DOLLAR}
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN}
       PREFIX_DATABASE_ID: ${PREFIX_DATABASE_ID}
     depends_on:
-      - ${ME_CONFIG_MONGODB_SERVER}
+      - mongo
+    networks:
+      - lista-precios-network
   mongo:
-    container_name: ${ME_CONFIG_MONGODB_SERVER}
     image: mongo:5.0.26
+    container_name: ${MONGO_CONTAINER_NAME}
     ports:
       - '27017:27017'
     volumes:
@@ -32,13 +35,39 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-  mongo-express:
-    container_name: mongo-express
-    image: mongo-express:latest
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - lista-precios-network
+  https-portal:
+    image: steveltn/https-portal
+    container_name: https-portal-ingelec
     ports:
-      - '8081:8081'
-    restart: unless-stopped
+      - '80:80'
+      - '443:443'
+    links:
+      - lista-precios
+    restart: always
+    volumes:
+      - https-portal-data:/var/lib/https-portal
+    healthcheck:
+      test: ['CMD', 'service', 'nginx', 'status']
+      interval: 30s
+      timeout: 20s
+      retries: 3
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${ME_CONFIG_MONGODB_ADMINUSERNAME}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${ME_CONFIG_MONGODB_ADMINPASSWORD}
-      ME_CONFIG_MONGODB_SERVER: ${ME_CONFIG_MONGODB_SERVER}
+      DOMAINS: '${HOST} -> http://lista-precios:3000'
+      STAGE: 'production'
+      WEBSOCKET: 'true'
+      CLIENT_MAX_BODY_SIZE: '0'
+    networks:
+      - lista-precios-network
+volumes:
+  https-portal-data:
+  data:
+networks:
+  lista-precios-network:
+    driver: bridge

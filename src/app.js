@@ -77,7 +77,7 @@ app.use('/', userViewRouter.getRouter());
 
 // Connect to database
 try {
-  const db = `mongodb://${envConfig.MONGODB_USER}:${envConfig.MONGODB_PASSWORD}@${envConfig.MONGODB_HOST}`;
+  const db = `mongodb://${envConfig.MONGODB_USER}:${envConfig.MONGODB_PASSWORD}@${envConfig.MONGODB_HOST}/${envConfig.MONGODB_DATABASE}?authSource=admin`;
   await mongoose.connect(db);
   console.log('Database connected');
 } catch (error) {
