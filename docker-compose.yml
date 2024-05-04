@@ -1,34 +1,33 @@
-version: "3.8"
+version: '3.8'
 services:
-  lista-precios-ingelec:
-    container_name: lista-precios-ingelec
+  lista-precios:
+    container_name: lista-precios
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "80:3000"
+      - '3000:3000'
     command: npm start
     restart: unless-stopped
     environment:
-      API: 'http://localhost:3000'
-      MONGODB_HOST: 'http://mongo:27017'
-      MONGODB_USER: 'juanconfa02111997'
-      MONGODB_PASS: 'WE8ZuHbKjlM2ApC1'
-      PORT: 3000
-      MODE: 'prod'
-      DEFAULT_DOLLAR: 1050
-      JWT_SECRET: 'cuf9eQBR8ar8Lzxp'
-      JWT_EXPIRES_IN: '1d'
-      PREFIX_DATABASE_ID: 'ingelec'
+      API: ${API}
+      MONGODB_HOST: ${MONGODB_HOST}
+      MONGODB_USER: ${MONGODB_USER}
+      MONGODB_PASS: ${MONGODB_PASS}
+      MODE: ${MODE}
+      DEFAULT_DOLLAR: ${DEFAULT_DOLLAR}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN}
+      PREFIX_DATABASE_ID: ${PREFIX_DATABASE_ID}
     depends_on:
-      - mongo-ingelec
+      - ${ME_CONFIG_MONGODB_SERVER}
   mongo:
-    container_name: mongo-ingelec
+    container_name: ${ME_CONFIG_MONGODB_SERVER}
     image: mongo:5.0.26
     ports:
-      - "27017:27017"
-    # volumes:
-    #   - ./data:/data/db
+      - '27017:27017'
+    volumes:
+      - ./data:/data/db
     restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
@@ -37,9 +36,9 @@ services:
     container_name: mongo-express
     image: mongo-express:latest
     ports:
-      - "8081:8081"
+      - '8081:8081'
     restart: unless-stopped
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${ME_CONFIG_MONGODB_ADMINUSERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${ME_CONFIG_MONGODB_ADMINPASSWORD}
+      ME_CONFIG_MONGODB_SERVER: ${ME_CONFIG_MONGODB_SERVER}
