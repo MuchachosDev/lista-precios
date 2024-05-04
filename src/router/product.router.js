@@ -8,7 +8,7 @@ import { convertToBody } from '../middlewares/convertToBody.middleware.js';
 
 export default class ProductRouter extends RouterBase {
   init() {
-    this.post('/', ['GERENTE'], uploadFile, convertToBody, addFile);
-    this.put('/', ['GERENTE'], updatePricePerItem);
+    this.post('/', ['MANAGER'], uploadFile, convertToBody, addFile);
+    this.put('/', ['MANAGER'], updatePricePerItem);
   }
 }

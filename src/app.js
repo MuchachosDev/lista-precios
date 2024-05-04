@@ -14,9 +14,12 @@ import SupplierViewRouter from './router/supplierView.router.js';
 import ErrorViewRouter from './router/errors.router.js';
 import DollarRouter from './router/dollar.router.js';
 import DollarViewRouter from './router/dollarView.router.js';
-import { defaultDollar } from './util/initServer.util.js';
+import {
+  createIndexes,
+  createUsers,
+  defaultDollar,
+} from './util/initServer.util.js';
 import UserViewRouter from './router/userView.router.js';
-import { userModel } from './dao/mongo/models/user.model.js';
 
 // Express app
 const app = express();
@@ -84,8 +87,11 @@ try {
   console.log(error);
 }
 
+// Create users
+createUsers();
+
 // Create index
-userModel.createIndexes();
+createIndexes;
 
 // Init default dollar
 defaultDollar();

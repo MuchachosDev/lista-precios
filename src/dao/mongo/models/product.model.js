@@ -89,9 +89,13 @@ productSchema.pre('save', async function (next) {
   const doc = this;
   const prefix = envConfig.PREFIX_DATABASE_ID;
   try {
-    if(this.isNew){
-      const counter = await counterModel.findOneAndUpdate({}, { $inc: { seq: 1 } }, { new: true });
-      doc.ingelec_id = `${prefix}-${(counter.seq).toString().padStart(9, '0')}`;
+    if (this.isNew) {
+      const counter = await counterModel.findOneAndUpdate(
+        {},
+        { $inc: { seq: 1 } },
+        { new: true }
+      );
+      doc.ingelec_id = `${prefix}-${counter.seq.toString().padStart(9, '0')}`;
     }
     const counter = await counterModel.findByIdAndUpdate();
     next();

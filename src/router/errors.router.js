@@ -3,6 +3,6 @@ import RouterBase from './index.js';
 
 export default class ErrorViewRouter extends RouterBase {
   init() {
-    this.get('/incomplete', ['GERENTE'], getIncompletePage);
+    this.get('/incomplete', ['MANAGER'], getIncompletePage);
   }
 }

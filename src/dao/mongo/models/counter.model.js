@@ -15,7 +15,7 @@ const counterSchema = new Schema({
 });
 
 counterSchema.pre('save', async function (next) {
-  this._id = `${envConfig.PREFIX_DATABASE_ID}-${(this.seq).toString().padStart(9, '0')}`;
+  this._id = `${envConfig.PREFIX_DATABASE_ID}-${this.seq.toString().padStart(9, '0')}`;
   next();
 });
 export const counterModel = model(counterCollection, counterSchema);

@@ -6,7 +6,7 @@ import RouterBase from './index.js';
 
 export default class DollarViewRouter extends RouterBase {
   init() {
-    this.get('/manage-dollars', ['GERENTE'], manageDollarsPage);
-    this.get('/edit-dollar/:did', ['GERENTE'], editDollarPage);
+    this.get('/manage-dollars', ['MANAGER'], manageDollarsPage);
+    this.get('/edit-dollar/:did', ['MANAGER'], editDollarPage);
   }
 }

@@ -7,8 +7,8 @@ import RouterBase from './index.js';
 
 export default class FactorRouter extends RouterBase {
   init() {
-    this.post('/', ['GERENTE'], addFactor);
-    this.put('/:fid', ['GERENTE'], editFactor);
-    this.delete('/:fid', ['GERENTE'], deleteFactor);
+    this.post('/', ['MANAGER'], addFactor);
+    this.put('/:fid', ['MANAGER'], editFactor);
+    this.delete('/:fid', ['MANAGER'], deleteFactor);
   }
 }
