@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-const userCollection = "users";
+const userCollection = 'users';
 
 const userSchema = new Schema({
   username: {
@@ -10,8 +10,8 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ["admin", "user"],
-    default: "user",
+    enum: ['admin', 'user'],
+    default: 'user',
   },
   password: {
     type: String,

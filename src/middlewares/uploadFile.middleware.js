@@ -1,5 +1,5 @@
-import multer from "multer";
-import { upload } from "../config/multer.config.js";
+import multer from 'multer';
+import { upload } from '../config/multer.config.js';
 
 export const uploadFile = (req, res, next) => {
   upload(req, res, (err) => {
@@ -7,7 +7,7 @@ export const uploadFile = (req, res, next) => {
       return res.status(400).json({ message: err.message });
     }
     if (!req.file) {
-      return res.status(400).json({ message: "Please upload files." });
+      return res.status(400).json({ message: 'Please upload files.' });
     }
     next();
   });

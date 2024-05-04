@@ -4,18 +4,18 @@ const createFactor = async (e) => {
   const supplier = e.target.supplier.value;
   const name = e.target.name.value;
   try {
-    const response = await fetch("/api/factors/", {
-      method: "POST",
+    const response = await fetch('/api/factors/', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ value, supplier, name }),
     });
     if (response.ok) {
-      alert("Factor created successfully");
-      window.location.href = "/manage-factors";
+      alert('Factor created successfully');
+      window.location.href = '/manage-factors';
     } else {
-      alert("Factor creation failed");
+      alert('Factor creation failed');
     }
   } catch (error) {
     alert(error);

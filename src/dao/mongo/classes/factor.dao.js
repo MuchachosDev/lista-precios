@@ -1,4 +1,4 @@
-import { factorModel } from "../models/factor.model.js";
+import { factorModel } from '../models/factor.model.js';
 
 export default class Factor {
   add = async (factor) => {
@@ -33,7 +33,7 @@ export default class Factor {
     try {
       return await factorModel.updateOne(
         { _id: fid },
-        { ...factor, updated_at: Date.now() },
+        { ...factor, updated_at: Date.now() }
       );
     } catch (error) {
       return error;

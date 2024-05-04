@@ -1,6 +1,6 @@
-import { Router } from "express";
-import jwt from "jsonwebtoken";
-import envConfig from "../config/env.config.js";
+import { Router } from 'express';
+import jwt from 'jsonwebtoken';
+import envConfig from '../config/env.config.js';
 
 export default class RouterBase {
   constructor() {
@@ -19,7 +19,7 @@ export default class RouterBase {
       path,
       this.handlePolicies(policies),
       this.generateCustomResponses,
-      this.applyCallbacks(callbacks),
+      this.applyCallbacks(callbacks)
     );
   }
 
@@ -28,7 +28,7 @@ export default class RouterBase {
       path,
       this.handlePolicies(policies),
       this.generateCustomResponses,
-      this.applyCallbacks(callbacks),
+      this.applyCallbacks(callbacks)
     );
   }
 
@@ -37,7 +37,7 @@ export default class RouterBase {
       path,
       this.handlePolicies(policies),
       this.generateCustomResponses,
-      this.applyCallbacks(callbacks),
+      this.applyCallbacks(callbacks)
     );
   }
   put(path, policies, ...callbacks) {
@@ -45,7 +45,7 @@ export default class RouterBase {
       path,
       this.handlePolicies(policies),
       this.generateCustomResponses,
-      this.applyCallbacks(callbacks),
+      this.applyCallbacks(callbacks)
     );
   }
 
@@ -62,51 +62,51 @@ export default class RouterBase {
 
   generateCustomResponses(req, res, next) {
     res.sendSuccess = (payload) =>
-      res.status(200).json({ status: "success", payload });
+      res.status(200).json({ status: 'success', payload });
     res.sendSuccessWithCookie = (token, payload) => {
       res
         .status(200)
-        .cookie("token", token, {
+        .cookie('token', token, {
           httpOnly: true,
           maxAge: 3600000,
-          sameSite: "lax",
+          sameSite: 'lax',
         })
 
-        .json({ status: "success", payload });
+        .json({ status: 'success', payload });
     };
     res.sendSuccessCreated = (payload) =>
-      res.status(201).json({ status: "success", payload });
+      res.status(201).json({ status: 'success', payload });
     res.sendClientError = (error) =>
-      res.status(400).json({ status: "error", error });
+      res.status(400).json({ status: 'error', error });
     res.sendUnauthorized = (error) =>
-      res.status(403).json({ status: "error", error });
+      res.status(403).json({ status: 'error', error });
     res.sendNotFound = (error) =>
-      res.status(404).json({ status: "error", error });
+      res.status(404).json({ status: 'error', error });
     res.sendServerError = (error) =>
-      res.status(500).json({ status: "error", error });
+      res.status(500).json({ status: 'error', error });
     next();
   }
 
   handlePolicies(policies) {
     return (req, res, next) => {
-      if (policies[0] === "PUBLIC") return next();
+      if (policies[0] === 'PUBLIC') return next();
 
       const token = req.cookies.token;
-      if (!token && policies[0] !== "NOAUTH")
-        return res.redirect("/login?failSession=true");
-      if (token && policies[0] === "NOAUTH") return res.redirect("/");
-      if (!token && policies[0] === "NOAUTH") return next();
+      if (!token && policies[0] !== 'NOAUTH')
+        return res.redirect('/login?failSession=true');
+      if (token && policies[0] === 'NOAUTH') return res.redirect('/');
+      if (!token && policies[0] === 'NOAUTH') return next();
       try {
         const user = jwt.verify(token, envConfig.JWT_SECRET);
 
         if (!policies.includes(user.role.toUpperCase()))
-          return res.redirect("/list-products");
+          return res.redirect('/list-products');
 
         req.user = user;
         next();
       } catch (error) {
         res.status(500).send({
-          status: "error",
+          status: 'error',
           error: error.message,
         });
       }

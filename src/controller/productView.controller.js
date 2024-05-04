@@ -1,16 +1,16 @@
-import envConfig from "../config/env.config.js";
-import FactorDTO from "../dto/factor.dto.js";
-import ProductDTO from "../dto/product.dto.js";
-import SupplierDTO from "../dto/supplier.dto.js";
+import envConfig from '../config/env.config.js';
+import FactorDTO from '../dto/factor.dto.js';
+import ProductDTO from '../dto/product.dto.js';
+import SupplierDTO from '../dto/supplier.dto.js';
 import {
   factorService,
   productService,
   supplierService,
-} from "../repositories/index.repository.js";
+} from '../repositories/index.repository.js';
 
 export const getHomePage = async (req, res) => {
-  res.render("home", {
-    title: "Home",
+  res.render('home', {
+    title: 'Home',
   });
 };
 
@@ -19,15 +19,15 @@ export const getUploadDocumentPage = async (req, res) => {
     const factors = await factorService.getAllFactors();
 
     if (factors.length === 0) {
-      return res.redirect("/incomplete?incomplete=Factores y/o Proveedores");
+      return res.redirect('/incomplete?incomplete=Factores y/o Proveedores');
     }
 
     const factorsDTO = factors.map((factor) => {
       return FactorDTO.getFactorToPage(factor);
     });
 
-    return res.render("uploadDocument", {
-      title: "Upload Documents",
+    return res.render('uploadDocument', {
+      title: 'Upload Documents',
       factors: factorsDTO,
     });
   } catch (error) {
@@ -40,7 +40,7 @@ export const getListProductsPage = async (req, res) => {
     let { filter, page, limit, sort, brand } = req.query;
 
     if (!filter) {
-      filter = "";
+      filter = '';
     }
     if (!page) {
       page = 1;
@@ -53,15 +53,15 @@ export const getListProductsPage = async (req, res) => {
     } else {
       limit = parseInt(limit);
     }
-    if (sort === "1") {
+    if (sort === '1') {
       sort = 1;
-    } else if (sort === "-1") {
+    } else if (sort === '-1') {
       sort = -1;
     }
     if (brand) {
       brand = brand.trim().toUpperCase();
     } else {
-      brand = "";
+      brand = '';
     }
 
     const { docs, hasNextPage, hasPrevPage, prevPage, nextPage, totalDocs } =
@@ -70,7 +70,7 @@ export const getListProductsPage = async (req, res) => {
         page,
         limit,
         sort,
-        brand,
+        brand
       );
 
     const productsDTO = docs.map((product) => {
@@ -79,11 +79,9 @@ export const getListProductsPage = async (req, res) => {
 
     const brands = await productService.getDistinticBrands();
 
-    console.log(brands);
-
-    return res.render("listProducts", {
-      title: "List Products",
-      styles: "styles",
+    return res.render('listProducts', {
+      title: 'List Products',
+      styles: 'styles',
       products: productsDTO,
       filter,
       page,
@@ -92,17 +90,17 @@ export const getListProductsPage = async (req, res) => {
       hasNextPage,
       hasPrevPage,
       prevPage:
-        `${envConfig.API}/list-products?page=${prevPage}` +
-        `${limit ? `&limit=${limit}` : ""}` +
-        `${filter ? `&filter=${filter}` : ""}` +
-        `${brand ? `&brand=${brand}` : ""}` +
-        `${sort ? `&sort=${sort}` : ""}`,
+        `${envConfig.URL}/list-products?page=${prevPage}` +
+        `${limit ? `&limit=${limit}` : ''}` +
+        `${filter ? `&filter=${filter}` : ''}` +
+        `${brand ? `&brand=${brand}` : ''}` +
+        `${sort ? `&sort=${sort}` : ''}`,
       nextPage:
-        `${envConfig.API}/list-products?page=${nextPage}` +
-        `${limit ? `&limit=${limit}` : ""}` +
-        `${filter ? `&filter=${filter}` : ""}` +
-        `${brand ? `&brand=${brand}` : ""}` +
-        `${sort ? `&sort=${sort}` : ""}`,
+        `${envConfig.URL}/list-products?page=${nextPage}` +
+        `${limit ? `&limit=${limit}` : ''}` +
+        `${filter ? `&filter=${filter}` : ''}` +
+        `${brand ? `&brand=${brand}` : ''}` +
+        `${sort ? `&sort=${sort}` : ''}`,
       brands,
       sort,
       brandSelected: brand,
@@ -116,22 +114,22 @@ export const getUpdatePricesListPage = async (req, res) => {
   let { sid, item, sub_item } = req.query;
 
   if (!sid) {
-    sid = "all-suppliers";
+    sid = 'all-suppliers';
   }
   if (!item) {
-    item = "all-items";
+    item = 'all-items';
   }
   if (!sub_item) {
-    sub_item = "all-sub-items";
+    sub_item = 'all-sub-items';
   }
 
   try {
     const suppliers = await supplierService.getAllSuppliers();
     const items = await productService.getDistinctItems(
-      sid === "all-suppliers" ? null : sid,
+      sid === 'all-suppliers' ? null : sid
     );
     const subItems = await productService.getDistinctSubItems(
-      item === "all-items" ? null : item,
+      item === 'all-items' ? null : item
     );
 
     const suppliersDTO = suppliers.map((supplier) => {
@@ -145,9 +143,8 @@ export const getUpdatePricesListPage = async (req, res) => {
     const subItemsDTO = subItems.map((subItem) => {
       return ProductDTO.getSubItemToProduct(subItem);
     });
-    console.log(item);
-    return res.render("updatePricesList", {
-      title: "Update Prices",
+    return res.render('updatePricesList', {
+      title: 'Update Prices',
       suppliers: suppliersDTO,
       items: itemsDTO,
       item: item,

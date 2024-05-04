@@ -1,7 +1,6 @@
 const searchProduct = (e) => {
   e.preventDefault();
   const filter = e.target.filter.value;
-  console.log(filter);
   if (filter) {
     window.location.href = `/list-products?filter=${filter}`;
   } else {
@@ -15,7 +14,7 @@ const limitChange = (e) => {
   const limit = e.target.value;
 
   const searchParams = new URLSearchParams(search);
-  searchParams.set("limit", limit);
+  searchParams.set('limit', limit);
   window.location.href = `${pathname}?${searchParams.toString()}`;
 };
 
@@ -27,11 +26,11 @@ const sortPrice = (e) => {
 
   const searchParams = new URLSearchParams(search);
   if (!sort) {
-    searchParams.delete("sort");
+    searchParams.delete('sort');
     window.location.href = `${pathname}?${searchParams.toString()}`;
     return;
   }
-  searchParams.set("sort", sort);
+  searchParams.set('sort', sort);
   window.location.href = `${pathname}?${searchParams.toString()}`;
 };
 
@@ -42,7 +41,7 @@ const filterBrand = (e) => {
   const brand = e.target.brand.value;
 
   const searchParams = new URLSearchParams(search);
-  searchParams.set("brand", brand);
+  searchParams.set('brand', brand);
   window.location.href = `${pathname}?${searchParams.toString()}`;
 };
 
@@ -50,13 +49,14 @@ const deleteFilterBrand = (e) => {
   e.preventDefault();
   const { search, pathname } = window.location;
   const searchParams = new URLSearchParams(search);
-  searchParams.delete("brand");
+  searchParams.delete('brand');
   window.location.href = `${pathname}?${searchParams.toString()}`;
 };
 
-const input = document.getElementById("inputSearch");
+const input = document.getElementById('inputSearch');
 
-document.addEventListener("keydown", function (e) {
+document.addEventListener('keydown', (e) => {
+  e.preventDefault();
   let key = e.key;
 
   if (['Backspace', 'Enter', 'Escape'].includes(key)) {
@@ -80,7 +80,7 @@ document.addEventListener("keydown", function (e) {
       window.location.href = `/list-products?filter=${input.value}`;
       break;
     case 'Escape':
-      input.value = "";
+      input.value = '';
       break;
     case 'Control':
     case 'Alt':

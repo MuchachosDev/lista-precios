@@ -1,13 +1,13 @@
 export default class ProductDTO {
   constructor(product) {
-    this.bar_code = product.bar_code || "----";
-    this.sku = product.sku || "----";
-    this.model = product.model || "----";
-    this.description = product.description || "----";
-    this.brand = product.brand || "----";
-    this.item = product.item || "----";
-    this.sub_item = product.sub_item || "----";
-    this.presentation = product.presentation || "----";
+    this.bar_code = product.bar_code || '----';
+    this.sku = product.sku || '----';
+    this.model = product.model || '----';
+    this.description = product.description || '----';
+    this.brand = product.brand || '----';
+    this.item = product.item || '----';
+    this.sub_item = product.sub_item || '----';
+    this.presentation = product.presentation || '----';
     this.iva = product.iva || 0.21;
     this.price_list = product.price_list || 0;
   }
@@ -21,7 +21,7 @@ export default class ProductDTO {
       item: product.item,
       sub_item: product.sub_item,
       presentation: product.presentation,
-      iva: product.iva * 100 + "%",
+      iva: product.iva * 100 + '%',
       final_price: product.final_price.toFixed(2),
     };
   };

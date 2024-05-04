@@ -1,4 +1,4 @@
-import { dollarService } from "../repositories/index.repository.js";
+import { dollarService } from '../repositories/index.repository.js';
 
 export const changeDollar = async (req, res) => {
   try {
@@ -8,9 +8,9 @@ export const changeDollar = async (req, res) => {
     const dollar = await dollarService.updateDollar(did, { value, name });
 
     if (!dollar) {
-      return res.sendClientError({ message: "Dollar cannot be edited" });
+      return res.sendClientError({ message: 'Dollar cannot be edited' });
     }
-    return res.sendSuccess({ message: "Dollar edited" });
+    return res.sendSuccess({ message: 'Dollar edited' });
   } catch (error) {
     return res.sendClientError({ message: error.message });
   }

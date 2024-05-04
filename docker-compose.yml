@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  lista-precios-ingelec:
+    container_name: lista-precios-ingelec
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:3000"
+    command: npm start
+    restart: unless-stopped
+    environment:
+      API: 'http://localhost:3000'
+      MONGODB_HOST: 'http://mongo:27017'
+      MONGODB_USER: 'juanconfa02111997'
+      MONGODB_PASS: 'WE8ZuHbKjlM2ApC1'
+      PORT: 3000
+      MODE: 'prod'
+      DEFAULT_DOLLAR: 1050
+      JWT_SECRET: 'cuf9eQBR8ar8Lzxp'
+      JWT_EXPIRES_IN: '1d'
+      PREFIX_DATABASE_ID: 'ingelec'
+    depends_on:
+      - mongo-ingelec
+  mongo:
+    container_name: mongo-ingelec
+    image: mongo:5.0.26
+    ports:
+      - "27017:27017"
+    # volumes:
+    #   - ./data:/data/db
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express:latest
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      ME_CONFIG_MONGODB_SERVER: mongo

@@ -69,9 +69,21 @@ export default class ProductRepository {
     }
   };
 
-  updatePriceList = async (sid, item, sub_item, percentage, adjustment_type) => {
+  updatePriceList = async (
+    sid,
+    item,
+    sub_item,
+    percentage,
+    adjustment_type
+  ) => {
     try {
-      return await this.dao.updatePrice(sid, item, sub_item, percentage,adjustment_type);
+      return await this.dao.updatePrice(
+        sid,
+        item,
+        sub_item,
+        percentage,
+        adjustment_type
+      );
     } catch (error) {
       return error;
     }

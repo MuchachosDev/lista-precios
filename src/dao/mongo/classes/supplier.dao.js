@@ -1,4 +1,4 @@
-import { supplierModel } from "../models/supplier.model.js";
+import { supplierModel } from '../models/supplier.model.js';
 
 export default class Supplier {
   add = async (supplier) => {
@@ -34,7 +34,7 @@ export default class Supplier {
     try {
       return await supplierModel.updateOne(
         { _id: sid },
-        { ...supplier, updated_at: Date.now() },
+        { ...supplier, updated_at: Date.now() }
       );
     } catch (error) {
       return { error };

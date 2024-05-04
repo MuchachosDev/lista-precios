@@ -1,68 +1,68 @@
-<div class="container mx-auto px-4 py-8">
-  <h1 class="text-2xl font-semibold text-gray-800 mb-6">Administración de
+<div class='container mx-auto px-4 py-8'>
+  <h1 class='text-2xl font-semibold text-gray-800 mb-6'>Administración de
     Proveedores</h1>
 
-  <div class="flex justify-between items-center mb-4">
+  <div class='flex justify-between items-center mb-4'>
     <a
-      href="/"
-      class="bg-green-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300 ease-in-out"
+      href='/'
+      class='bg-green-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300 ease-in-out'
     >Inicio</a>
     <a
-      href="/add-supplier"
-      class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700"
+      href='/add-supplier'
+      class='bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700'
     >
       Agregar Nuevo Proveedor
     </a>
   </div>
 
-  <div class="bg-white shadow-md rounded my-6">
-    <table class="min-w-full table-auto">
-      <thead class="bg-blue-600 text-white">
+  <div class='bg-white shadow-md rounded my-6'>
+    <table class='min-w-full table-auto'>
+      <thead class='bg-blue-600 text-white'>
         <tr>
           <th
-            class="py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left"
+            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
           >Nombre</th>
           <th
-            class="py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left"
+            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
           >Moneda</th>
           <th
-            class="py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left"
+            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
           >Creado</th>
           <th
-            class="py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left"
+            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
           >Modificado</th>
           <th
-            class="py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-right"
+            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-right'
           >Acciones</th>
         </tr>
       </thead>
-      <tbody class="bg-gray-200">
+      <tbody class='bg-gray-200'>
         {{#each suppliers}}
-          <tr class="hover:bg-gray-100">
+          <tr class='hover:bg-gray-100'>
             <td
-              class="py-3 px-4 border-b border-gray-200 text-left"
+              class='py-3 px-4 border-b border-gray-200 text-left'
             >{{this.name}}</td>
             <td
-              class="py-3 px-4 border-b border-gray-200 text-left"
+              class='py-3 px-4 border-b border-gray-200 text-left'
             >{{this.dollar}}</td>
             <td
-              class="py-3 px-4 border-b border-gray-200 text-left"
+              class='py-3 px-4 border-b border-gray-200 text-left'
             >{{formatDate this.created_at}}</td>
             <td
-              class="py-3 px-4 border-b border-gray-200 text-left"
+              class='py-3 px-4 border-b border-gray-200 text-left'
             >{{formatDate this.updated_at}}</td>
             <td
-              class="py-3 px-4 border-b border-gray-200 text-right"
-              data-supplier-id="{{this._id}}"
+              class='py-3 px-4 border-b border-gray-200 text-right'
+              data-supplier-id='{{this._id}}'
             >
               <a
-                href="/edit-supplier/{{this._id}}"
-                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+                href='/edit-supplier/{{this._id}}'
+                class='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700'
               >Editar</a>
               <button
-                class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
-                onclick="deleteSupplier(event)"
-                data-supplier-id="{{this._id}}"
+                class='bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700'
+                onclick='deleteSupplier(event)'
+                data-supplier-id='{{this._id}}'
               >Eliminar</button>
             </td>
           </tr>
@@ -71,4 +71,4 @@
     </table>
   </div>
 </div>
-<script src="/js/manageSuppliers.js"></script>
+<script src='/js/manageSuppliers.js'></script>

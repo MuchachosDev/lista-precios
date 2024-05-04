@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-const supplierCollection = "suppliers";
+const supplierCollection = 'suppliers';
 
 const supplierSchema = new Schema({
   name: {
@@ -20,12 +20,12 @@ const supplierSchema = new Schema({
   },
   dollar: {
     type: Schema.Types.ObjectId || null,
-    ref: "dollars",
+    ref: 'dollars',
   },
 });
 
-supplierSchema.pre("find", function () {
-  this.populate("dollar");
+supplierSchema.pre('find', function () {
+  this.populate('dollar');
 });
 
 export const supplierModel = model(supplierCollection, supplierSchema);

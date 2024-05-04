@@ -1,9 +1,9 @@
-import DollarDTO from "../dto/dollar.dto.js";
-import SupplierDTO from "../dto/supplier.dto.js";
+import DollarDTO from '../dto/dollar.dto.js';
+import SupplierDTO from '../dto/supplier.dto.js';
 import {
   dollarService,
   supplierService,
-} from "../repositories/index.repository.js";
+} from '../repositories/index.repository.js';
 
 export const manageSupplierPage = async (req, res) => {
   try {
@@ -11,10 +11,8 @@ export const manageSupplierPage = async (req, res) => {
     const suppliersDTO = suppliers.map((supplier) => {
       return SupplierDTO.getSuppliersToPage(supplier);
     });
-
-    console.log(suppliersDTO);
-    return res.render("manageSuppliers", {
-      title: "Administrar Proveedores",
+    return res.render('manageSuppliers', {
+      title: 'Administrar Proveedores',
       suppliers: suppliersDTO,
     });
   } catch (error) {
@@ -27,8 +25,8 @@ export const addSupplierPage = async (req, res) => {
     const dollars = await dollarService.getDollars();
     const dollarsDTO = DollarDTO.getDollarsToPage(dollars);
 
-    return res.render("addSupplier", {
-      title: "Agregar Proveedor",
+    return res.render('addSupplier', {
+      title: 'Agregar Proveedor',
       dollars: dollarsDTO,
     });
   } catch (error) {
@@ -44,11 +42,10 @@ export const editSupplierPage = async (req, res) => {
     const dollars = await dollarService.getDollars();
 
     const supplierDTO = SupplierDTO.getSuppliersToPage(supplier[0]);
-    console.log(supplierDTO);
     const dollarsDTO = DollarDTO.getDollarsToPage(dollars);
 
-    return res.render("editSupplier", {
-      title: "Editar Proveedor",
+    return res.render('editSupplier', {
+      title: 'Editar Proveedor',
       supplier: supplierDTO,
       dollars: dollarsDTO,
     });

@@ -1,15 +1,14 @@
 const deleteSupplier = async (e) => {
-  const sid = e.target.getAttribute("data-supplier-id");
-  console.log(sid);
+  const sid = e.target.getAttribute('data-supplier-id');
   try {
     const response = await fetch(`/api/suppliers/${sid}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
     if (response.ok) {
-      alert("Supplier deleted successfully");
+      alert('Supplier deleted successfully');
       window.location.reload();
     } else {
       const error = await response.json();

@@ -1,4 +1,4 @@
-import { productModel } from "../models/product.model.js";
+import { productModel } from '../models/product.model.js';
 
 export default class Product {
   add = async (product) => {
@@ -18,7 +18,7 @@ export default class Product {
   };
   getByCode = async (code) => {
     try {
-      return await productModel.findOne({ code: code }).populate("factor");
+      return await productModel.findOne({ code: code }).populate('factor');
     } catch (error) {
       console.log(error);
     }
@@ -39,9 +39,9 @@ export default class Product {
   };
   getWithParams = async (filter, page, limit, sort, brand) => {
     try {
-      const words = filter.replace(".", "\\.").split(" ");
+      const words = filter.replace('.', '\\.').split(' ');
       const conditions = words.map((word) => {
-        const regex = new RegExp(word, "i");
+        const regex = new RegExp(word, 'i');
         return {
           $or: [
             { ingelec_id: regex },
@@ -61,43 +61,43 @@ export default class Product {
         },
         {
           $lookup: {
-            from: "factors",
-            localField: "factor",
-            foreignField: "_id",
-            as: "factorData",
+            from: 'factors',
+            localField: 'factor',
+            foreignField: '_id',
+            as: 'factorData',
           },
         },
         {
           $unwind: {
-            path: "$factorData",
+            path: '$factorData',
             preserveNullAndEmptyArrays: true,
           },
         },
         {
           $lookup: {
-            from: "suppliers",
-            localField: "supplier",
-            foreignField: "_id",
-            as: "supplierData",
+            from: 'suppliers',
+            localField: 'supplier',
+            foreignField: '_id',
+            as: 'supplierData',
           },
         },
         {
           $unwind: {
-            path: "$supplierData",
+            path: '$supplierData',
             preserveNullAndEmptyArrays: true,
           },
         },
         {
           $lookup: {
-            from: "dollars",
-            localField: "supplierData.dollar",
-            foreignField: "_id",
-            as: "dollarsData",
+            from: 'dollars',
+            localField: 'supplierData.dollar',
+            foreignField: '_id',
+            as: 'dollarsData',
           },
         },
         {
           $unwind: {
-            path: "$dollarsData",
+            path: '$dollarsData',
             preserveNullAndEmptyArrays: true,
           },
         },
@@ -110,14 +110,14 @@ export default class Product {
             factor: 1,
             final_price: {
               $multiply: [
-                { $ifNull: ["$price_list", 0] },
-                { $ifNull: ["$factorData.value", 1] },
-                { $ifNull: ["$dollarsData.value", 1] },
-                { $add: [1, { $ifNull: ["$iva", 0] }] },
+                { $ifNull: ['$price_list', 0] },
+                { $ifNull: ['$factorData.value', 1] },
+                { $ifNull: ['$dollarsData.value', 1] },
+                { $add: [1, { $ifNull: ['$iva', 0] }] },
               ],
             },
             iva: 1,
-            supplier: "$supplierData.name",
+            supplier: '$supplierData.name',
             item: 1,
             sub_item: 1,
             presentation: 1,
@@ -140,7 +140,7 @@ export default class Product {
         },
         {
           $limit: limit,
-        },
+        }
       );
       return {
         docs: await productModel.aggregate(aggregationPipeline),
@@ -160,7 +160,7 @@ export default class Product {
     try {
       return await productModel.findByIdAndUpdate(
         { _id: pid },
-        { ...product, updated_at: new Date() },
+        { ...product, updated_at: new Date() }
       );
     } catch (error) {
       console.log(error);
@@ -169,7 +169,7 @@ export default class Product {
 
   getBrands = async () => {
     try {
-      return await productModel.distinct("brand");
+      return await productModel.distinct('brand');
     } catch (error) {
       console.log(error);
     }
@@ -177,7 +177,7 @@ export default class Product {
 
   getItems = async (sid) => {
     try {
-      return await productModel.distinct("item", { supplier: sid });
+      return await productModel.distinct('item', { supplier: sid });
     } catch (error) {
       console.log(error);
     }
@@ -185,38 +185,32 @@ export default class Product {
 
   getSubItems = async (item) => {
     try {
-      return await productModel.distinct("sub_item", { item });
+      return await productModel.distinct('sub_item', { item });
     } catch (error) {
       console.log(error);
     }
   };
-  updatePrice = async (sid, item, sub_item, percentage,adjustment_type) => {
+  updatePrice = async (sid, item, sub_item, percentage, adjustment_type) => {
     try {
-      const mul= adjustment_type === "increase" ? { $mul: { price_list: 1 + percentage / 100 } } : { $mul: { price_list: 1 - percentage / 100 } };
+      const mul =
+        adjustment_type === 'increase'
+          ? { $mul: { price_list: 1 + percentage / 100 } }
+          : { $mul: { price_list: 1 - percentage / 100 } };
 
       if (
-        sid === "all-suppliers" &&
-        item === "all-items" &&
-        sub_item === "all-sub-items"
+        sid === 'all-suppliers' &&
+        item === 'all-items' &&
+        sub_item === 'all-sub-items'
       ) {
-        return await productModel.updateMany(
-          {},
-          mul,
-        );
-      } else if (item === "all-items" && sub_item === "all-sub-items") {
-        return await productModel.updateMany(
-          { supplier: sid },
-          mul,
-        );
-      } else if (sub_item === "all-sub-items" && item !== "all-items") {
-        return await productModel.updateMany(
-          { supplier: sid, item },
-          mul,
-        );
+        return await productModel.updateMany({}, mul);
+      } else if (item === 'all-items' && sub_item === 'all-sub-items') {
+        return await productModel.updateMany({ supplier: sid }, mul);
+      } else if (sub_item === 'all-sub-items' && item !== 'all-items') {
+        return await productModel.updateMany({ supplier: sid, item }, mul);
       } else {
         return await productModel.updateMany(
           { supplier: sid, item, sub_item },
-          mul,
+          mul
         );
       }
     } catch (error) {

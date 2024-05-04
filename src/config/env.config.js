@@ -1,22 +1,23 @@
-import dotenv from "dotenv";
-import { Command } from "commander";
+import dotenv from 'dotenv';
+import { Command } from 'commander';
 
 const program = new Command();
 
-program.requiredOption("--mode <mode>", "Mode App", "prod");
+program.requiredOption('--mode <mode>', 'Mode App', 'prod');
 program.parse();
 
 const env = program.opts().mode;
 
 dotenv.config({
-  path: env === "prod" ? "./.env.prod" : "./.env.dev",
+  path: `.env.${env}`,
+  override: true,
 });
 
 export default {
-  API: process.env.API,
-  DB: process.env.DB,
-  DB_USER: process.env.DB_USER,
-  DB_PASS: process.env.DB_PASS,
+  URL: process.env.URL,
+  MONGODB_HOST: process.env.MONGODB_HOST,
+  MONGODB_USER: process.env.MONGODB_USER,
+  MONGODB_PASSWORD: process.env.MONGODB_PASSWORD,
   PORT: process.env.PORT,
   MODE: process.env.MODE,
   JWT_SECRET: process.env.JWT_SECRET,

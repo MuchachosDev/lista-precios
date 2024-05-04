@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-const dollarCollection = "dollars";
+const dollarCollection = 'dollars';
 
 const dollarSchema = new Schema({
   name: {

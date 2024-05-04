@@ -1,23 +1,23 @@
-<div class="h-screen w-screen flex justify-center items-center bg-gray-100">
-  <div class="w-full max-w-lg">
-    <h1 class="text-lg font-semibold text-gray-700 text-center mb-6">Subir nueva
+<div class='h-screen w-screen flex justify-center items-center bg-gray-100'>
+  <div class='w-full max-w-lg'>
+    <h1 class='text-lg font-semibold text-gray-700 text-center mb-6'>Subir nueva
       lista de precios</h1>
     <form
-      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-      onsubmit="sendDocument(event)"
+      class='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
+      onsubmit='sendDocument(event)'
     >
-      <div class="mb-4">
+      <div class='mb-4'>
         <label
-          for="supplier"
-          class="block text-gray-700 text-sm font-bold mb-2"
+          for='supplier'
+          class='block text-gray-700 text-sm font-bold mb-2'
         >Descuento - Proveedor:</label>
-        <div class="relative">
+        <div class='relative'>
           <select
-            name="factor"
-            class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            name='factor'
+            class='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
           >
             {{#each factors}}
-              <option value="{{this._id}}-{{this.supplier_id}}">{{this.name}}
+              <option value='{{this._id}}-{{this.supplier_id}}'>{{this.name}}
                 -
                 {{this.value}}
                 -
@@ -25,42 +25,42 @@
             {{/each}}
           </select>
           <div
-            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+            class='pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700'
           >
             <svg
-              class="fill-current h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
+              class='fill-current h-4 w-4'
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 20 20'
             >
               <path
-                d="M5.705 7.705l4.295 4.295 4.295-4.295-1.41-1.41-2.885 2.885-2.885-2.885-1.41 1.41z"
+                d='M5.705 7.705l4.295 4.295 4.295-4.295-1.41-1.41-2.885 2.885-2.885-2.885-1.41 1.41z'
               />
             </svg>
           </div>
         </div>
       </div>
-      <div class="mb-6">
+      <div class='mb-6'>
         <label
-          for="file"
-          class="block text-gray-700 text-sm font-bold mb-2"
+          for='file'
+          class='block text-gray-700 text-sm font-bold mb-2'
         >Documento:</label>
         <input
-          type="file"
-          name="file"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          autocomplete="off"
+          type='file'
+          name='file'
+          class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          autocomplete='off'
         />
       </div>
-      <div class="flex items-center justify-between">
+      <div class='flex items-center justify-between'>
         <button
-          type="submit"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type='submit'
+          class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
         >
           Enviar
         </button>
         <a
-          href="/"
-          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          href='/'
+          class='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
         >
           Inicio
         </a>
@@ -68,14 +68,14 @@
 
     </form>
     <div
-      id="loadingScreen"
-      class="flex hidden fixed inset-0 bg-gray-800 bg-opacity-50 z-50 justify-center items-center"
+      id='loadingScreen'
+      class='flex hidden fixed inset-0 bg-gray-800 bg-opacity-50 z-50 justify-center items-center'
     >
       <div
-        class="animate-spin rounded-full h-24 w-24 border-t-8 border-b-8 border-blue-500"
+        class='animate-spin rounded-full h-24 w-24 border-t-8 border-b-8 border-blue-500'
       ></div>
     </div>
 
   </div>
 </div>
-<script src="/js/uploadDocument.js"></script>
+<script src='/js/uploadDocument.js'></script>

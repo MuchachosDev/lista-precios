@@ -135,3 +135,4 @@ package-lock.json
 
 */**/.ods
 */**/.csv
+public/**/uploads/*

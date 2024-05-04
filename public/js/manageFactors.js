@@ -1,15 +1,15 @@
 const deleteFactor = async (e) => {
-  const fid = e.target.getAttribute("data-factor-id");
+  const fid = e.target.getAttribute('data-factor-id');
 
   try {
     const response = await fetch(`/api/factors/${fid}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
     if (response.ok) {
-      alert("Factor deleted successfully");
+      alert('Factor deleted successfully');
       window.location.reload();
     } else {
       const error = await response.json();

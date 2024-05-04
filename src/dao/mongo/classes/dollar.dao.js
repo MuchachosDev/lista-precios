@@ -1,4 +1,4 @@
-import { dollarModel } from "../models/dollar.model.js";
+import { dollarModel } from '../models/dollar.model.js';
 
 export default class Dollar {
   add = async (dollar) => {

@@ -1,6 +1,6 @@
-import ProductDTO from "../dto/product.dto.js";
-import xlsx from "xlsx";
-import { parseTextToIva, parseTextToNumber } from "../util/parser.util.js";
+import ProductDTO from '../dto/product.dto.js';
+import xlsx from 'xlsx';
+import { parseTextToIva, parseTextToNumber } from '../util/parser.util.js';
 
 export const convertToBody = async (req, res, next) => {
   const { file } = req;
@@ -8,9 +8,9 @@ export const convertToBody = async (req, res, next) => {
   const regex = /^["]*(.*);(.*);(.*);(.*);(.*);(.*);(.*);(.*);(.*);(.*)["]*$/;
   const workbook = xlsx.readFile(file.path);
   const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-  const csv = xlsx.utils.sheet_to_csv(worksheet, { FS: ";" });
+  const csv = xlsx.utils.sheet_to_csv(worksheet, { FS: ';' });
 
-  const rows = csv.split("\n").slice(1);
+  const rows = csv.split('\n').slice(1);
 
   rows.forEach((row) => {
     if (row.match(regex)) {
@@ -27,8 +27,6 @@ export const convertToBody = async (req, res, next) => {
         price_list: parseTextToNumber(row.match(regex)[10]),
       });
       req.body.products.push(product);
-    } else {
-      console.log(row);
     }
   });
   next();

@@ -8,11 +8,11 @@ export const customLevelsOptions = {
     debug: 5,
   },
   colors: {
-    fatal: "black",
-    error: "red",
-    warning: "yellow",
-    info: "blue",
-    http: "green",
-    debug: "white",
+    fatal: 'black',
+    error: 'red',
+    warning: 'yellow',
+    info: 'blue',
+    http: 'green',
+    debug: 'white',
   },
 };

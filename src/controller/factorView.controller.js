@@ -1,9 +1,9 @@
-import FactorDTO from "../dto/factor.dto.js";
-import SupplierDTO from "../dto/supplier.dto.js";
+import FactorDTO from '../dto/factor.dto.js';
+import SupplierDTO from '../dto/supplier.dto.js';
 import {
   factorService,
   supplierService,
-} from "../repositories/index.repository.js";
+} from '../repositories/index.repository.js';
 
 export const addFactorPage = async (req, res) => {
   try {
@@ -12,8 +12,8 @@ export const addFactorPage = async (req, res) => {
     const suppliersDTO = suppliers.map((supplier) => {
       return SupplierDTO.getSuppliersToPage(supplier);
     });
-    return res.render("addFactor", {
-      title: "Add Factor",
+    return res.render('addFactor', {
+      title: 'Add Factor',
       suppliers: suppliersDTO,
     });
   } catch (error) {
@@ -29,8 +29,8 @@ export const manageFactorsPage = async (req, res) => {
       return FactorDTO.getFactorToPage(factor);
     });
 
-    return res.render("manageFactors", {
-      title: "Administración de Factores de Multiplicación",
+    return res.render('manageFactors', {
+      title: 'Administración de Factores de Multiplicación',
       factors: factorsDTO,
     });
   } catch (error) {
@@ -50,8 +50,8 @@ export const editFactorPage = async (req, res) => {
       return SupplierDTO.getSuppliersToPage(supplier);
     });
 
-    return res.render("editFactor", {
-      title: "Editar Factor",
+    return res.render('editFactor', {
+      title: 'Editar Factor',
       factor: factorDTO,
       suppliers: suppliersDTO,
       supplierToFactor: factor.supplier._id,

@@ -1,10 +1,10 @@
-import FactorDTO from "../dto/factor.dto.js";
+import FactorDTO from '../dto/factor.dto.js';
 import {
   factorService,
   productService,
   supplierService,
-} from "../repositories/index.repository.js";
-import { parseTextToNumber } from "../util/parser.util.js";
+} from '../repositories/index.repository.js';
+import { parseTextToNumber } from '../util/parser.util.js';
 
 export const addFactor = async (req, res) => {
   try {
@@ -12,18 +12,18 @@ export const addFactor = async (req, res) => {
 
     const sup = await supplierService.getSupplierById(supplier);
 
-    if (!sup) return res.sendNotFound("Supplier not found");
+    if (!sup) return res.sendNotFound('Supplier not found');
 
     const response = await factorService.addFactor(
       new FactorDTO(
         parseTextToNumber(value.trim()),
         sup[0]._id,
-        name.trim().toUpperCase(),
-      ),
+        name.trim().toUpperCase()
+      )
     );
 
-    if (!response) return res.sendClientError("Factor not added");
-    return res.sendSuccessCreated({ message: "Factor added successfully" });
+    if (!response) return res.sendClientError('Factor not added');
+    return res.sendSuccessCreated({ message: 'Factor added successfully' });
   } catch (error) {
     return res.sendClientError(error);
   }
@@ -37,14 +37,14 @@ export const editFactor = async (req, res) => {
     const factorDTO = new FactorDTO(
       parseTextToNumber(value.trim()),
       sid,
-      name.trim().toUpperCase(),
+      name.trim().toUpperCase()
     );
 
     const response = await factorService.updateFactor(fid, factorDTO);
 
-    if (!response) return res.sendClientError("Factor not updated");
+    if (!response) return res.sendClientError('Factor not updated');
 
-    return res.sendSuccessCreated({ message: "Factor updated successfully" });
+    return res.sendSuccessCreated({ message: 'Factor updated successfully' });
   } catch (error) {
     return res.sendClientError(error);
   }
@@ -58,14 +58,14 @@ export const deleteFactor = async (req, res) => {
 
     if (existProduct)
       return res.sendUnauthorized({
-        message: "Factor has products, please delete products first",
+        message: 'Factor has products, please delete products first',
       });
 
     const response = await factorService.deleteFactor(fid);
 
-    if (!response) return res.sendClientError("Factor not deleted");
+    if (!response) return res.sendClientError('Factor not deleted');
 
-    return res.sendSuccess({ message: "Factor deleted successfully" });
+    return res.sendSuccess({ message: 'Factor deleted successfully' });
   } catch (error) {
     return res.sendClientError(error);
   }

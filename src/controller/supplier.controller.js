@@ -1,29 +1,28 @@
-import SupplierDTO from "../dto/supplier.dto.js";
+import SupplierDTO from '../dto/supplier.dto.js';
 import {
   factorService,
   productService,
   supplierService,
-} from "../repositories/index.repository.js";
+} from '../repositories/index.repository.js';
 
 export const addSupplier = async (req, res) => {
   const { name, dollar, enableCurrencySelect } = req.body;
   try {
     const exist = await supplierService.getSupplierByName(name);
 
-    if (exist) return res.sendClientError("Supplier already exists");
+    if (exist) return res.sendClientError('Supplier already exists');
     let response;
     if (enableCurrencySelect) {
       response = await supplierService.addSupplier(
-        new SupplierDTO(name.trim().toUpperCase(), dollar),
+        new SupplierDTO(name.trim().toUpperCase(), dollar)
       );
     } else {
       response = await supplierService.addSupplier(
-        new SupplierDTO(name.trim().toUpperCase(), null),
+        new SupplierDTO(name.trim().toUpperCase(), null)
       );
-      console.log(response);
     }
 
-    if (!response) return res.sendClientError("Supplier not created");
+    if (!response) return res.sendClientError('Supplier not created');
     return res.sendSuccessCreated(name);
   } catch (error) {
     return res.sendClientError(error);
@@ -37,23 +36,23 @@ export const editSupplier = async (req, res) => {
     const exist = await supplierService.getSupplierById(sid);
 
     if (exist.name === name && exist.dollar === enableCurrencySelect)
-      return res.sendClientError("Supplier already exists");
+      return res.sendClientError('Supplier already exists');
     let response;
 
     if (enableCurrencySelect) {
       response = await supplierService.updateSupplier(
         new SupplierDTO(name.trim().toUpperCase(), dollar),
-        sid,
+        sid
       );
     } else {
       response = await supplierService.updateSupplier(
         new SupplierDTO(name.trim().toUpperCase(), null),
-        sid,
+        sid
       );
     }
 
-    if (!response) return res.sendClientError("Supplier not updated");
-    return res.sendSuccessCreated({ message: "Supplier updated successfully" });
+    if (!response) return res.sendClientError('Supplier not updated');
+    return res.sendSuccessCreated({ message: 'Supplier updated successfully' });
   } catch (error) {
     return res.sendClientError(error);
   }
@@ -79,9 +78,8 @@ export const deleteSupplier = async (req, res) => {
     }
     const response = await supplierService.deleteSupplier(sid);
 
-    console.log(response);
-    if (!response) return res.sendClientError("Supplier not deleted");
-    return res.sendSuccessCreated({ message: "Supplier deleted successfully" });
+    if (!response) return res.sendClientError('Supplier not deleted');
+    return res.sendSuccessCreated({ message: 'Supplier deleted successfully' });
   } catch (error) {
     return res.sendClientError(error);
   }

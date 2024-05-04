@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
-const factorCollection = "factors";
+const factorCollection = 'factors';
 
 const factorSchema = new Schema({
   value: {
@@ -10,11 +10,11 @@ const factorSchema = new Schema({
   name: {
     type: String,
     required: true,
-    default: "General",
+    default: 'General',
   },
   supplier: {
     type: Schema.Types.ObjectId,
-    ref: "suppliers",
+    ref: 'suppliers',
     required: true,
   },
 
@@ -31,12 +31,12 @@ const factorSchema = new Schema({
   },
 });
 
-factorSchema.pre("findOne", function () {
-  this.populate("supplier");
+factorSchema.pre('findOne', function () {
+  this.populate('supplier');
 });
 
-factorSchema.pre("find", function () {
-  this.populate("supplier");
+factorSchema.pre('find', function () {
+  this.populate('supplier');
 });
 
 export const factorModel = model(factorCollection, factorSchema);
