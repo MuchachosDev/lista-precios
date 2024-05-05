@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '3001:3000'
     command: npm start
     restart: unless-stopped
     environment:
@@ -20,6 +20,10 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN}
       PREFIX_DATABASE_ID: ${PREFIX_DATABASE_ID}
+      MANAGER_USERNAME: ${MANAGER_USERNAME}
+      MANAGER_PASSWORD: ${MANAGER_PASSWORD}
+      READ_ONLY_USERNAME: ${READ_ONLY_USERNAME}
+      READ_ONLY_PASSWORD: ${READ_ONLY_PASSWORD}
     depends_on:
       - mongo
     networks:
