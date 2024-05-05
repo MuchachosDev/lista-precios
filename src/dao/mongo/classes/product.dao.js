@@ -37,14 +37,14 @@ export default class Product {
       return error;
     }
   };
-  getWithParams = async (filter, page, limit, sort, brand) => {
+  getWithPagination = async (filter, page, limit, sort, brand) => {
     try {
       const words = filter.replace('.', '\\.').split(' ');
       const conditions = words.map((word) => {
         const regex = new RegExp(word, 'i');
         return {
           $or: [
-            { ingelec_id: regex },
+            { internal_id: regex },
             { bar_code: regex },
             { model: regex },
             { description: regex },
@@ -103,7 +103,7 @@ export default class Product {
         },
         {
           $project: {
-            ingelec_id: 1,
+            internal_id: 1,
             model: 1,
             description: 1,
             brand: 1,
@@ -213,6 +213,14 @@ export default class Product {
           mul
         );
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getWithFilter = async (filter) => {
+    try {
+      return await productModel.find(filter);
     } catch (error) {
       console.log(error);
     }

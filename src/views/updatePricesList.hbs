@@ -35,7 +35,7 @@
     <select name="sub_item"
       class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
       autocomplete="off" {{#if (eq item "all-items")}} disabled {{/if}} onchange="selectSubItem(event)">
-           <option value="all-items" {{#if (eq this.sid "all-items")}}selected{{/if}}>Todos los Sub Rubros</option>
+           <option value="all-items" {{#if (eq this.sid "all-items")}}selected{{/if}}>Todos los SubRubros</option>
       {{#each sub_items}}
       <option value="{{this.sub_item}}" {{#if (eq this.sub_item ../sub_item)}}selected{{/if}}>{{this.sub_item}}</option>
       {{/each}}

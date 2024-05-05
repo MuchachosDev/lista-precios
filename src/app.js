@@ -91,7 +91,7 @@ try {
 createUsers();
 
 // Create index
-createIndexes;
+createIndexes();
 
 // Init default dollar
 defaultDollar();

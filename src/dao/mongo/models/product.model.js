@@ -73,6 +73,7 @@ const productSchema = new Schema({
 
 productSchema.pre('find', function () {
   this.populate('factor');
+  this.populate('supplier');
 });
 
 productSchema.pre('aggregate', function () {
@@ -87,7 +88,6 @@ productSchema.pre('aggregate', function () {
 
 productSchema.pre('save', async function (next) {
   const doc = this;
-  const prefix = envConfig.PREFIX_DATABASE_ID;
   try {
     if (this.isNew) {
       const counter = await counterModel.findOneAndUpdate(
@@ -95,9 +95,8 @@ productSchema.pre('save', async function (next) {
         { $inc: { seq: 1 } },
         { new: true }
       );
-      doc.ingelec_id = `${prefix}-${counter.seq.toString().padStart(9, '0')}`;
+      doc.internal_id = counter.internal_id;
     }
-    const counter = await counterModel.findByIdAndUpdate();
     next();
   } catch (error) {
     next(error);

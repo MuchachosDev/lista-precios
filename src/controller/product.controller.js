@@ -1,3 +1,4 @@
+import bwipjs from 'bwip-js';
 import {
   factorService,
   productService,

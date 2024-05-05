@@ -7,6 +7,7 @@ import {
   productService,
   supplierService,
 } from '../repositories/index.repository.js';
+import bwipjs from 'bwip-js';
 
 export const getHomePage = async (req, res) => {
   res.render('home', {
@@ -65,7 +66,7 @@ export const getListProductsPage = async (req, res) => {
     }
 
     const { docs, hasNextPage, hasPrevPage, prevPage, nextPage, totalDocs } =
-      await productService.getProductsWithParams(
+      await productService.getProductsWithPagination(
         filter,
         page,
         limit,
@@ -90,13 +91,13 @@ export const getListProductsPage = async (req, res) => {
       hasNextPage,
       hasPrevPage,
       prevPage:
-        `${envConfig.URL}/list-products?page=${prevPage}` +
+        `${envConfig.API}/list-products?page=${prevPage}` +
         `${limit ? `&limit=${limit}` : ''}` +
         `${filter ? `&filter=${filter}` : ''}` +
         `${brand ? `&brand=${brand}` : ''}` +
         `${sort ? `&sort=${sort}` : ''}`,
       nextPage:
-        `${envConfig.URL}/list-products?page=${nextPage}` +
+        `${envConfig.API}/list-products?page=${nextPage}` +
         `${limit ? `&limit=${limit}` : ''}` +
         `${filter ? `&filter=${filter}` : ''}` +
         `${brand ? `&brand=${brand}` : ''}` +
@@ -154,5 +155,105 @@ export const getUpdatePricesListPage = async (req, res) => {
     });
   } catch (error) {
     return res.sendClientError(error);
+  }
+};
+
+export const getGenerateCodebarsPage = async (req, res) => {
+  let { sid, item, sub_item } = req.query;
+
+  if (!sid) {
+    sid = 'all-suppliers';
+  }
+  if (!item) {
+    item = 'all-items';
+  }
+  if (!sub_item) {
+    sub_item = 'all-sub-items';
+  }
+
+  try {
+    const suppliers = await supplierService.getAllSuppliers();
+    const items = await productService.getDistinctItems(
+      sid === 'all-suppliers' ? null : sid
+    );
+    const subItems = await productService.getDistinctSubItems(
+      item === 'all-items' ? null : item
+    );
+
+    const suppliersDTO = suppliers.map((supplier) => {
+      return SupplierDTO.getSuppliersToPage(supplier);
+    });
+
+    const itemsDTO = items.map((item) => {
+      return ProductDTO.getItemToProduct(item);
+    });
+
+    const subItemsDTO = subItems.map((subItem) => {
+      return ProductDTO.getSubItemToProduct(subItem);
+    });
+    return res.render('generateCodebars', {
+      title: 'Update Prices',
+      suppliers: suppliersDTO,
+      items: itemsDTO,
+      item: item,
+      sub_items: subItemsDTO,
+      sub_item: sub_item,
+      sid,
+    });
+  } catch (error) {
+    return res.sendClientError(error);
+  }
+};
+
+export const getCodebarsPrintPage = async (req, res) => {
+  let { sid, item, sub_item, codeType } = req.query;
+  const filter = {
+    supplier: sid === 'all-suppliers' ? undefined : sid,
+    item: item === 'all-items' ? undefined : item,
+    sub_item: sub_item === 'all-sub-items' ? undefined : sub_item,
+  };
+  if (codeType !== 'code128' && codeType !== 'qrcode') {
+    codeType = 'code128';
+  }
+
+  Object.keys(filter).forEach(
+    (key) => filter[key] === undefined && delete filter[key]
+  );
+
+  try {
+    const products = await productService.getProductsWithFilter(filter);
+
+    const productsDTO = await Promise.all(
+      products.map(async (product) => {
+        try {
+          const imageData = await bwipjs.toBuffer({
+            bcid: codeType,
+            text: product.internal_id,
+            scale: 1,
+            includetext: true,
+            textxalign: 'center',
+          });
+      
+
+          const imageSrc = `data:image/png;base64,${imageData.toString('base64')}`;
+
+          return { description: product.description, bar_code: imageSrc };
+        } catch (error) {
+          console.error(
+            'Error generating barcode for product',
+            product.description,
+            error
+          );
+          return null;
+        }
+      })
+    );
+
+    return res.render('codebarsPrint', {
+      title: 'Imprimir Codigos de Barras',
+      products: productsDTO});
+  } catch (error) {
+    console.error('Error fetching products', error);
+    res.status(500).json({ error: 'Error fetching products', details: error });
   }
 };

@@ -13,7 +13,7 @@ export default class ProductDTO {
   }
   static getProductToListView = (product) => {
     return {
-      ingelec_id: product.ingelec_id,
+      internal_id: product.internal_id,
       model: product.model,
       description: product.description,
       brand: product.brand,
@@ -41,6 +41,13 @@ export default class ProductDTO {
   static getSubItemToProduct = (sub_item) => {
     return {
       sub_item: sub_item,
+    };
+  };
+
+  static getBarcodesToPrint = (product) => {
+    return {
+      description: product.description,
+      bar_code: product.bar_code,
     };
   };
 }

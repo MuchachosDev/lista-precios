@@ -31,9 +31,9 @@ export default class ProductRepository {
       return error;
     }
   };
-  getProductsWithParams = async (filter, page, limit, sort, brand) => {
+  getProductsWithPagination = async (filter, page, limit, sort, brand) => {
     try {
-      return await this.dao.getWithParams(filter, page, limit, sort, brand);
+      return await this.dao.getWithPagination(filter, page, limit, sort, brand);
     } catch (error) {
       return error;
     }
@@ -84,6 +84,13 @@ export default class ProductRepository {
         percentage,
         adjustment_type
       );
+    } catch (error) {
+      return error;
+    }
+  };
+  getProductsWithFilter = async (filter) => {
+    try {
+      return await this.dao.getWithFilter(filter);
     } catch (error) {
       return error;
     }

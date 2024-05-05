@@ -1,4 +1,5 @@
 import envConfig from '../config/env.config.js';
+import { counterModel } from '../dao/mongo/models/counter.model.js';
 import { productModel } from '../dao/mongo/models/product.model.js';
 import DollarDTO from '../dto/dollar.dto.js';
 import {
@@ -56,6 +57,11 @@ export const createUsers = async () => {
 export const createIndexes = async () => {
   try {
     await productModel.createIndexes();
+    const counters = await counterModel.find();
+    if (counters.length === 0) {
+      await counterModel.create({ seq: 1 });
+      console.log('Counter created');
+    }
   } catch (error) {
     console.log(error);
   }

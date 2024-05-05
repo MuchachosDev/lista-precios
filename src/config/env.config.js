@@ -14,7 +14,7 @@ dotenv.config({
 });
 
 export default {
-  URL: process.env.URL,
+  API: process.env.API,
   MONGODB_HOST: process.env.MONGODB_HOST,
   MONGODB_USER: process.env.MONGODB_USER,
   MONGODB_PASSWORD: process.env.MONGODB_PASSWORD,
