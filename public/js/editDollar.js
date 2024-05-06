@@ -14,7 +14,7 @@ const editDollar = async (e) => {
     });
     if (response.ok) {
       alert('Dollar edited');
-      window.location.href = '/';
+      window.location.href = '/manage-dollars';
     } else {
       alert('Dollar cannot be edited');
     }
