@@ -233,7 +233,6 @@ export const getCodebarsPrintPage = async (req, res) => {
             includetext: true,
             textxalign: 'center',
           });
-      
 
           const imageSrc = `data:image/png;base64,${imageData.toString('base64')}`;
 
@@ -251,7 +250,8 @@ export const getCodebarsPrintPage = async (req, res) => {
 
     return res.render('codebarsPrint', {
       title: 'Imprimir Codigos de Barras',
-      products: productsDTO});
+      products: productsDTO,
+    });
   } catch (error) {
     console.error('Error fetching products', error);
     res.status(500).json({ error: 'Error fetching products', details: error });

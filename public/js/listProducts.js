@@ -96,3 +96,25 @@ document.addEventListener('keydown', (e) => {
       break;
   }
 });
+
+const copyDetail = async (e) => {
+  let target;
+  if(e.target.tagName === 'svg') {
+    target = e.target.parentElement;
+  } else {
+    target = e.target;
+  }
+
+  const description = target.getAttribute('data-product-description');
+  const model = target.getAttribute('data-product-model');
+  const brand = target.getAttribute('data-product-brand');
+  const presentation = target.getAttribute('data-product-presentation');
+
+  console.log(description, model, brand, presentation);
+try{
+  await navigator.clipboard.writeText(`${description} ${model} ${brand} x ${presentation}`);
+  console.log("Copiado al portapapeles");
+} catch (error){
+  alert('No se pudo copiar al portapapeles');
+}
+};

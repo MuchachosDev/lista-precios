@@ -1,7 +1,7 @@
 <div class="w-full mx-auto px-4 py-8 h-screen flex flex-col">
   <div class="flex justify-between items-center mb-4">
     <h1 class="text-2xl font-semibold text-gray-800">Lista de Productos</h1>
-        <a href="/api/users/logout" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Logout</a>
+    <a href="/api/users/logout" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Logout</a>
   </div>
 
   <div class="sticky top-0 z-50 bg-white">
@@ -9,7 +9,7 @@
       <a href="/"
         class="bg-green-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300 ease-in-out">Inicio</a>
       <form onsubmit="searchProduct(event)" class="flex items-center w-full m-0">
-        <input type="text" id="inputSearch" name="filter" placeholder="Buscar producto..." autocomplete="off" 
+        <input type="text" id="inputSearch" name="filter" placeholder="Buscar producto..." autocomplete="off"
           class="flex-grow px-4 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
         <button type="submit"
           class="px-4 py-2 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600">Buscar</button>
@@ -60,38 +60,48 @@
 
     <div class="w-5/6 flex flex-col">
       <div class="overflow-x-auto mb-4 flex-grow">
-       <table class="w-full min-w-full border-collapse bg-white shadow-lg text-sm">
-  <thead class="sticky top-0 z-10 bg-white">
-    <tr class="bg-blue-600 text-white">
-      <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Código interno</th>
-      <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Modelo</th>
-      <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Descripción</th>
-      <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Marca</th>
-      <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Proveedor</th>
-      <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Rubro</th>
-      <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Sub Rubro</th>
-      <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Presentación</th>
-      <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">IVA</th>
-      <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Precio Final</th>
-    </tr>
-  </thead>
-  <tbody class="text-gray-700 overflow-y-auto">
-    {{#each products}}
-    <tr class="hover:bg-gray-100 transition duration-300 ease-in-out">
-      <td class="py-2 px-3 border-b border-gray-200">{{this.internal_id}}</td>
-      <td class="py-2 px-3 border-b border-gray-200">{{this.model}}</td>
-      <td class="py-2 px-3 border-b border-gray-200">{{this.description}}</td>
-      <td class="py-2 px-3 border-b border-gray-200">{{this.brand}}</td>
-      <td class="py-2 px-3 border-b border-gray-200">{{this.supplier}}</td>
-      <td class="py-2 px-3 border-b border-gray-200">{{this.item}}</td>
-      <td class="py-2 px-3 border-b border-gray-200">{{this.sub_item}}</td>
-      <td class="py-2 px-3 border-b border-gray-200">{{this.presentation}}</td>
-      <td class="py-2 px-3 border-b border-gray-200">{{this.iva}}</td>
-      <td class="py-2 px-3 border-b border-gray-200 bg-amber-100 text-center font-bold">${{this.final_price}}</td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+        <table class="w-full min-w-full border-collapse bg-white shadow-lg text-sm">
+          <thead class="sticky top-0 z-10 bg-white">
+            <tr class="bg-blue-600 text-white">
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Código interno
+              </th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Modelo</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Descripción</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Marca</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Proveedor</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Rubro</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Sub Rubro</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Presentación</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">IVA</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Precio Final</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-700 overflow-y-auto">
+            {{#each products}}
+            <tr class="hover:bg-gray-100 transition duration-300 ease-in-out">
+              <td class="py-2 px-3 border-b border-gray-200">{{this.internal_id}}</td>
+              <td class="py-2 px-3 border-b border-gray-200">{{this.model}}</td>
+              <td class="py-2 px-3 border-b border-gray-200 flex flex-row gap-4 cursor-pointer z-10" onclick="copyDetail(event)"
+                data-product-model="{{this.model}}" data-product-description="{{this.description}}"
+                data-product-brand="{{this.brand}}" data-product-presentation="{{this.presentation}}"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="lucide lucide-copy z-0">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                </svg>{{this.description}}</td>
+              <td class="py-2 px-3 border-b border-gray-200">{{this.brand}}</td>
+              <td class="py-2 px-3 border-b border-gray-200">{{this.supplier}}</td>
+              <td class="py-2 px-3 border-b border-gray-200">{{this.item}}</td>
+              <td class="py-2 px-3 border-b border-gray-200">{{this.sub_item}}</td>
+              <td class="py-2 px-3 border-b border-gray-200">{{this.presentation}}</td>
+              <td class="py-2 px-3 border-b border-gray-200">{{this.iva}}</td>
+              <td class="py-2 px-3 border-b border-gray-200 bg-amber-100 text-center font-bold">${{this.final_price}}
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
 
       </div>
 

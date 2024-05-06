@@ -14,7 +14,6 @@ const sendDocument = async (e) => {
   formData.append('file', e.target.file.files[0], e.target.file.files[0].name);
 
   try {
-    
     const response = await fetch('/api/products/', {
       method: 'POST',
       body: formData,
