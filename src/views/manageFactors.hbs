@@ -5,17 +5,17 @@
   <div class='flex justify-between items-center mb-4'>
     <a
       href='/'
-      class='bg-green-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300 ease-in-out'
+      class='bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-300'
     >Inicio</a>
     <a
       href='/add-factor'
-      class='bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700'
+      class='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300'
     >Agregar Nuevo Factor</a>
   </div>
 
-  <div class='bg-white shadow-md rounded my-6'>
-    <table class='min-w-full table-auto'>
-      <thead class='bg-blue-600 text-white'>
+  <div class='bg-white shadow-md rounded-md overflow-hidden'>
+    <table class='w-full table-auto'>
+      <thead class='bg-blue-500 text-white'>
         <tr>
           <th
             class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
@@ -37,9 +37,9 @@
           >Acciones</th>
         </tr>
       </thead>
-      <tbody class='bg-gray-200'>
+      <tbody class='bg-gray-100'>
         {{#each factors}}
-          <tr class='hover:bg-gray-100'>
+          <tr class='hover:bg-gray-200 transition duration-300'>
             <td
               class='py-3 px-4 border-b border-gray-200 text-left'
             >{{this.value}}</td>
@@ -56,15 +56,14 @@
               class='py-3 px-4 border-b border-gray-200 text-left'
             >{{formatDate this.updated_at}}</td>
             <td
-              class='py-3 px-4 border-b border-gray-200 text-right'
-              data-factor-id='{{this._id}}'
+              class='py-3 px-4 border-b border-gray-200 text-right flex justify-end gap-2'
             >
               <a
                 href='/edit-factor/{{this._id}}'
-                class='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700'
+                class='bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition duration-300'
               >Editar</a>
               <button
-                class='bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700'
+                class='bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded-md transition duration-300'
                 onclick='deleteFactor(event)'
                 data-factor-id='{{this._id}}'
               >Eliminar</button>
@@ -75,4 +74,31 @@
     </table>
   </div>
 </div>
+
+<div
+  id='confirmationModal'
+  class='hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50'
+>
+  <div class='relative mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
+    <div class='text-center'>
+      <h3 class='text-lg leading-6 font-medium text-gray-900'>Confirmación de
+        Actualización</h3>
+      <div class='mt-2 px-7 py-3'>
+        <p class='text-sm text-gray-500'>¿Estás seguro de que deseas aplicar los
+          cambios?</p>
+      </div>
+      <div class='flex justify-center gap-4 mt-4'>
+        <button
+          id='cancelBtn'
+          class='px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 focus:outline-none transition duration-300'
+        >Atrás</button>
+        <button
+          id='confirmBtn'
+          class='px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded focus:outline-none transition duration-300'
+        >Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src='/js/manageFactors.js'></script>

@@ -1,0 +1,290 @@
+<div class="min-h-screen bg-gray-100 flex items-center justify-center">
+  <div class="max-w-4xl mx-auto bg-white rounded-lg shadow overflow-hidden">
+    <div class="md:flex">
+      <div class="p-8 w-full">
+        <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-6">Editar Detalles del Producto
+        </div>
+        <div class="mb-6 bg-gray-50 p-4 rounded-lg shadow-sm w-full">
+          <div class="mb-2">
+            <strong class="text-gray-700">Moneda:</strong>
+            <span class="ml-2 text-gray-600">{{currency.name}}</span>
+          </div>
+          <div class="mb-2">
+            <strong class="text-gray-700">ID Interno:</strong>
+            <span class="ml-2 text-gray-600">{{product.internal_id}}</span>
+          </div>
+          <div>
+            <strong class="text-gray-700">Precio Final:</strong>
+            <span id="final_price" class="ml-2 text-gray-600">${{product.final_price}}</span>
+          </div>
+        </div>
+        <form onsubmit="editProduct(event)" class="space-y-6" data-product-id="{{product._id}}">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+            <div>
+              <div class="mb-4">
+                <label for="model" class="block text-gray-700 font-semibold mb-2">Modelo</label>
+                <input type="text" id="model" name="model" value="{{product.model}}"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  required autocomplete="off">
+              </div>
+              <div class="mb-4">
+                <label for="description" class="block text-gray-700 font-semibold mb-2">Descripción</label>
+                <textarea id="description" name="description"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  required autocomplete="off">{{product.description}}</textarea>
+              </div>
+              <div class="mb-4">
+                <label for="bar_code" class="block text-gray-700 font-semibold mb-2">Código de Barras</label>
+                <input type="text" id="bar_code" name="bar_code" value="{{product.bar_code}}"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  autocomplete="off" onkeydown="handlePreventSubmit(event)">
+              </div>
+              <div class="mb-4">
+                <label for="sku" class="block text-gray-700 font-semibold mb-2">SKU</label>
+                <input type="text" id="sku" name="sku" value="{{product.sku}}"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  autocomplete="off">
+              </div>
+              <div class="mb-4">
+                <label for="brand" class="block text-gray-700 font-semibold mb-2">Marca</label>
+                <input type="text" id="brand" name="brand" value="{{product.brand}}"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  required autocomplete="off">
+              </div>
+              <div class="mb-4">
+                <label for="presentation" class="block text-gray-700 font-semibold mb-2">Presentación</label>
+                <input type="text" id="presentation" name="presentation" value="{{product.presentation}}"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  required autocomplete="off">
+              </div>
+            </div>
+            <div>
+              <div class="mb-4">
+                <label for="iva" class="block text-gray-700 font-semibold mb-2">IVA (%)</label>
+                <input type="number" id="iva" name="iva" value="{{product.iva}}" step="0.1" min="0"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  required autocomplete="off" onchange="handleFinalPrice(event)">
+              </div>
+              <div class="mb-4">
+                <label for="price_list" class="block text-gray-700 font-semibold mb-2">Precio de Lista ($)</label>
+                <input type="number" id="price_list" name="price_list" step="0.01" value="{{product.price_list}}"
+                  min="0"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  required autocomplete="off" onchange="handleFinalPrice(event)">
+              </div>
+              <div class="mb-4">
+                <label for="supplier" class="block text-gray-700 font-semibold mb-2">Proveedor</label>
+                <select id="supplier" name="supplier" autocomplete="off"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  onchange="selectSupplier(event)">
+                  {{#each suppliers}}
+                  <option value="{{this._id}}" {{#if (eq this._id ../sid)}}selected{{/if}}>{{this.name}}</option>
+                  {{/each}}
+                </select>
+                <p class="text-xs text-gray-600 mt-2">
+                  * Cambiar el proveedor recargará la página y perdera los datos no guardados.
+                </p>
+              </div>
+
+              <div class="mb-4">
+                <label for="item" class="block text-gray-700 font-semibold mb-2">Rubro</label>
+                <div class="flex">
+                  <select id="item" name="item" autocomplete="off"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    {{#each items}}
+                    <option value="{{this.item}}" {{#if (eq this.item ../product.item)}}selected{{/if}}>{{this.item}}
+                    </option>
+                    {{/each}}
+                  </select>
+                  <button type="button"
+                    class="ml-2 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
+                    onclick="showItemModal()">
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd"
+                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="mb-4">
+                <label for="sub_item" class="block text-gray-700 font-semibold mb-2">SubRubro</label>
+                <div class="flex">
+                  <select id="sub_item" name="sub_item" autocomplete="off"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    {{#each sub_items}}
+                    <option value="{{this.sub_item}}" {{#if (eq this.sub_item ../product.sub_item)}}selected{{/if}}>
+                      {{this.sub_item}}</option>
+                    {{/each}}
+                  </select>
+                  <button type="button"
+                    class="ml-2 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
+                    onclick="showSubItemModal()">
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd"
+                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="mb-4">
+                <label for="factor" class="block text-gray-700 font-semibold mb-2">Descuento - Proveedor:</label>
+                <select name="factor" id="factor" autocomplete="off"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  onchange="handleFinalPrice(event)">
+                  {{#each factors}}
+                  <option value="{{this._id}} - {{this.value}}" class="bg-white text-gray-900 hover:bg-gray-200">
+                    {{this.value}} - {{this.name}} - {{this.supplier}}
+                  </option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-between gap-4 pt-6">
+            <a href="/list-products"
+              class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg">Cancelar</a>
+            <button type="submit"
+              class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg">Guardar
+              Cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="itemModal" class="fixed z-50 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog"
+    aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen px-4">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+      <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all max-w-lg w-full">
+        <div class="bg-white px-6 pt-6 pb-4">
+          <div class="sm:flex sm:items-start">
+            <div
+              class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg class="h-6 w-6 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                Crear nuevo rubro
+              </h3>
+              <div class="mt-2 relative">
+                <input type="text" id="newItemInput"
+                  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-10 sm:text-lg border-gray-300 rounded-md p-3"
+                  placeholder="Nombre del rubro">
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-6 py-4 sm:flex sm:flex-row-reverse">
+          <button type="button"
+            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+            onclick="createNewItem()">
+            Crear
+          </button>
+          <button type="button"
+            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            onclick="hideItemModal()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="subItemModal" class="fixed z-50 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog"
+    aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen px-4">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+      <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all max-w-lg w-full">
+        <div class="bg-white px-6 pt-6 pb-4">
+          <div class="sm:flex sm:items-start">
+            <div
+              class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg class="h-6 w-6 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                Crear nuevo subrubro
+              </h3>
+              <div class="mt-2">
+                <input type="text" id="newSubItemInput"
+                  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-lg border-gray-300 rounded-md p-3"
+                  placeholder="Nombre del subrubro">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-6 py-4 sm:flex sm:flex-row-reverse">
+          <button type="button"
+            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+            onclick="createNewSubItem()">
+            Crear
+          </button>
+          <button type="button"
+            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            onclick="hideSubItemModal()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="toast" class="hidden fixed bottom-5 left-5 z-50 max-w-sm mx-auto overflow-hidden rounded-lg shadow-md"
+    role="alert">
+    <div class="bg-white rounded-lg shadow-xs overflow-hidden">
+      <div class="p-4 flex items-center">
+        <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-blue-100 text-blue-500">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <div class="ml-3 text-sm font-normal" id="textNotification">Mensaje de la notificación.</div>
+        <button type="button"
+          class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8"
+          data-dismiss-target="#toast" aria-label="Cerrar">
+          <span class="sr-only">Cerrar</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id='confirmationModal'
+    class='hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50'>
+    <div class='relative mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
+      <div class='text-center'>
+        <h3 class='text-lg leading-6 font-medium text-gray-900'>Confirmación de
+          Actualización</h3>
+        <div class='mt-2 px-7 py-3'>
+          <p class='text-sm text-gray-500'>¿Estás seguro de que deseas aplicar los
+            cambios?</p>
+        </div>
+        <div class='flex justify-center gap-4 mt-4'>
+          <button id='cancelBtn'
+            class='px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 focus:outline-none transition duration-300'>Atrás</button>
+          <button id='confirmBtn'
+            class='px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded focus:outline-none transition duration-300'>Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/editProduct.js"></script>

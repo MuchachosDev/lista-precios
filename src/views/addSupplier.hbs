@@ -1,25 +1,25 @@
 <div class='flex justify-center items-center min-h-screen bg-gray-100'>
-  <div class='px-8 py-12 bg-white rounded-lg shadow-xl max-w-lg'>
+  <div class='max-w-lg w-full bg-white rounded-lg shadow-xl p-8'>
     <h1 class='text-2xl font-semibold text-gray-800 mb-8 text-center'>Crear
       Proveedor</h1>
+
     <form onsubmit='createSupplier(event)' class='rounded px-8 pt-6 pb-8'>
       <div class='mb-6'>
         <label
           for='supplier'
           class='block text-gray-700 text-sm font-bold mb-2'
-        >
-          Nombre del Proveedor
-        </label>
+        >Nombre del Proveedor</label>
         <input
           type='text'
           id='supplier'
           name='name'
-          class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50'
+          class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           placeholder='Ingrese el nombre del proveedor'
           autocomplete='off'
         />
       </div>
-      <div class='flex items-center mb-2'>
+
+      <div class='mb-4 flex items-center'>
         <input
           id='enableCurrencySelect'
           name='enableCurrencySelect'
@@ -30,22 +30,20 @@
         <label
           for='enableCurrencySelect'
           class='ml-2 text-gray-700 text-sm font-bold'
-        >
-          Activar Moneda Extranjera
-        </label>
+        >Activar Moneda Extranjera</label>
       </div>
+
       <div class='mb-6'>
         <label
           for='currencySelect'
           class='block text-gray-700 text-sm font-bold mb-2'
-        >
-          Seleccionar Moneda
-        </label>
+        >Seleccionar Moneda</label>
         <select
           id='currencySelect'
           name='dollar'
-          class='block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50'
+          class='block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline'
           autocomplete='off'
+          disabled
         >
           {{#each dollars}}
             <option value='{{this._id}}'>{{this.name}}</option>
@@ -54,20 +52,21 @@
       </div>
 
       <div class='flex items-center justify-between mt-8'>
-        <button
-          type='submit'
-          class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
-        >
-          Crear
-        </button>
         <a
           href='/'
-          class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50'
+          class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
         >
           Atrás
         </a>
+        <button
+          type='submit'
+          class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+        >
+          Crear
+        </button>
       </div>
     </form>
   </div>
 </div>
+
 <script src='/js/addSupplier.js'></script>

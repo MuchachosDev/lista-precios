@@ -99,7 +99,7 @@ document.addEventListener('keydown', (e) => {
 
 const copyDetail = async (e) => {
   let target;
-  if(e.target.tagName === 'svg') {
+  if (e.target.tagName === 'svg') {
     target = e.target.parentElement;
   } else {
     target = e.target;
@@ -110,11 +110,33 @@ const copyDetail = async (e) => {
   const brand = target.getAttribute('data-product-brand');
   const presentation = target.getAttribute('data-product-presentation');
 
-  console.log(description, model, brand, presentation);
-try{
-  await navigator.clipboard.writeText(`${description} ${model} ${brand} x ${presentation}`);
-  console.log("Copiado al portapapeles");
-} catch (error){
-  alert('No se pudo copiar al portapapeles');
-}
+  try {
+    await navigator.clipboard.writeText(
+      `${description} ${model} ${brand} x ${presentation}`
+    );
+
+    document.getElementById('textNotification').innerHTML =
+      'Detalle copiado al portapapeles';
+    showToast();
+  } catch (error) {
+    alert('Error al copiar detalle', error);
+  }
 };
+
+const showToast = () => {
+  const toast = document.getElementById('toast');
+  toast.classList.remove('hidden');
+  setTimeout(() => {
+    toast.classList.add('hidden');
+  }, 5000);
+};
+
+const closeToast = () => {
+  const closeButton = document.querySelector('[data-dismiss-target]');
+  closeButton.addEventListener('click', function () {
+    const target = this.getAttribute('data-dismiss-target');
+    document.querySelector(target).classList.add('hidden');
+  });
+};
+
+closeToast();

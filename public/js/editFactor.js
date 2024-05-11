@@ -18,12 +18,32 @@ const editFactor = async (e) => {
     });
 
     if (response.ok) {
-      alert('Factor updated successfully');
-      window.location.href = '/manage-factors';
+      document.getElementById('textNotification').innerHTML =
+        'Factor actualizado correctamente';
+      showToast();
     } else {
-      alert('Factor not updated');
+      document.getElementById('textNotification').innerHTML =
+        'Factor no actualizado';
     }
   } catch (error) {
-    alert(error);
+    alert('Error al actualizar factor', error);
   }
 };
+
+const showToast = () => {
+  const toast = document.getElementById('toast');
+  toast.classList.remove('hidden');
+  setTimeout(() => {
+    toast.classList.add('hidden');
+  }, 5000);
+};
+
+const closeToast = () => {
+  const closeButton = document.querySelector('[data-dismiss-target]');
+  closeButton.addEventListener('click', function () {
+    const target = this.getAttribute('data-dismiss-target');
+    document.querySelector(target).classList.add('hidden');
+  });
+};
+
+closeToast();

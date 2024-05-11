@@ -1,5 +1,6 @@
 import {
   getCodebarsPrintPage,
+  getEditProductPage,
   getGenerateCodebarsPage,
   getHomePage,
   getListProductsPage,
@@ -16,5 +17,6 @@ export default class ProductViewRouter extends RouterBase {
     this.get('/', ['MANAGER'], getHomePage);
     this.get('/generate-codebars', ['MANAGER'], getGenerateCodebarsPage);
     this.get('/codebars-print', ['MANAGER'], getCodebarsPrintPage);
+    this.get('/edit-product/:pid', ['MANAGER'], getEditProductPage);
   }
 }

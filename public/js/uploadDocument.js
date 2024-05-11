@@ -20,13 +20,13 @@ const sendDocument = async (e) => {
     });
 
     if (response.ok) {
-      alert('File uploaded successfully');
+      alert('Archivo subido correctamente');
       window.location.href = '/';
     } else {
-      alert('File upload failed');
+      alert('Archivo no subido');
     }
   } catch (error) {
-    alert(error);
+    alert('Error al subir archivo', error);
   } finally {
     document.getElementById('loadingScreen').classList.add('hidden');
   }

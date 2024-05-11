@@ -1,12 +1,12 @@
 <div class='h-screen w-screen flex justify-center items-center bg-gray-100'>
-  <div class='w-full max-w-lg'>
+  <div class='w-full max-w-lg px-4'>
     <h1 class='text-lg font-semibold text-gray-700 text-center mb-6'>Subir nueva
       lista de precios</h1>
     <form
-      class='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
+      class='bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4'
       onsubmit='sendDocument(event)'
     >
-      <div class='mb-4'>
+      <div class='mb-6'>
         <label
           for='supplier'
           class='block text-gray-700 text-sm font-bold mb-2'
@@ -14,12 +14,12 @@
         <div class='relative'>
           <select
             name='factor'
-            class='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
+            class='block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded-lg shadow focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500'
           >
             {{#each factors}}
-              <option value='{{this._id}}-{{this.supplier_id}}'>{{this.name}}
+              <option value='{{this._id}}-{{this.supplier_id}}'>{{this.value}}
                 -
-                {{this.value}}
+                {{this.name}}
                 -
                 {{this.supplier}}</option>
             {{/each}}
@@ -47,35 +47,33 @@
         <input
           type='file'
           name='file'
-          class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-          autocomplete='off'
+          class='shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
         />
       </div>
       <div class='flex items-center justify-between'>
-        <button
-          type='submit'
-          class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-        >
-          Enviar
-        </button>
         <a
           href='/'
-          class='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-        >
-          Inicio
-        </a>
+          class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out'
+        >Atras</a>
+        <button
+          type='submit'
+          class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out'
+        >Enviar</button>
       </div>
-
     </form>
     <div
       id='loadingScreen'
-      class='flex hidden fixed inset-0 bg-gray-800 bg-opacity-50 z-50 justify-center items-center'
+      class='fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden'
     >
-      <div
-        class='animate-spin rounded-full h-24 w-24 border-t-8 border-b-8 border-blue-500'
-      ></div>
+      <div class='lds-ripple'>
+        <div
+          class='absolute border-4 border-yellow-500 opacity-100 rounded-full animate-ripple'
+        ></div>
+        <div
+          class='absolute border-4 border-yellow-500 opacity-100 rounded-full animate-ripple animation-delay-500'
+        ></div>
+      </div>
     </div>
-
   </div>
 </div>
 <script src='/js/uploadDocument.js'></script>

@@ -9,6 +9,13 @@ export default class Product {
       console.log(error);
     }
   };
+  getById = async (pid) => {
+    try {
+      return await productModel.findOne({ _id: pid });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   getByFactorId = async (fid) => {
     try {
       return await productModel.findOne({ factor: fid });
@@ -183,9 +190,12 @@ export default class Product {
     }
   };
 
-  getSubItems = async (item) => {
+  getSubItems = async (sid, item = null) => {
     try {
-      return await productModel.distinct('sub_item', { item });
+      if (item) {
+        return await productModel.distinct('sub_item', { supplier: sid, item });
+      }
+      return await productModel.distinct('sub_item', { supplier: sid });
     } catch (error) {
       console.log(error);
     }

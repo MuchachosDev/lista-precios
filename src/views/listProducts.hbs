@@ -1,68 +1,74 @@
-<div class="w-full mx-auto px-4 py-8 h-screen flex flex-col">
-  <div class="flex justify-between items-center mb-4">
-    <h1 class="text-2xl font-semibold text-gray-800">Lista de Productos</h1>
-    <a href="/api/users/logout" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Logout</a>
-  </div>
-
-  <div class="sticky top-0 z-50 bg-white">
-    <div class="flex flex-row items-center gap-4 bg-gray-100 py-2 px-4 rounded-lg">
-      <a href="/"
-        class="bg-green-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300 ease-in-out">Inicio</a>
-      <form onsubmit="searchProduct(event)" class="flex items-center w-full m-0">
-        <input type="text" id="inputSearch" name="filter" placeholder="Buscar producto..." autocomplete="off"
-          class="flex-grow px-4 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
-        <button type="submit"
-          class="px-4 py-2 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600">Buscar</button>
-      </form>
+<div class="w-full mx-auto px-4 py-8 min-h-screen flex flex-col bg-gray-100">
+  <header class="bg-white shadow-md rounded-md p-4 mb-4">
+    <div class="flex justify-between items-center">
+      <h1 class="text-2xl font-semibold text-gray-800">Lista de Productos</h1>
+      <a href="/api/users/logout"
+        class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300">Cerrar
+        Sesión</a>
     </div>
-  </div>
+  </header>
 
-  <div class="flex justify-between items-center my-4">
-    <p class="text-lg font-semibold text-gray-700">
-      Total de productos: <span class="text-blue-600">{{totalDocs}}</span>
-    </p>
-
-    <div class="flex items-center">
-      <p class="text-lg font-semibold text-gray-700 mr-2">Ordenar por:</p>
-      <select name="sort"
-        class="border border-gray-300 text-gray-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
-        onchange="sortPrice(event)" autocomplete="off">
-        <option value="">Por defecto</option>
-        <option value="1" {{#if (eq sort 1)}}selected{{/if}}>Precio ascendente</option>
-        <option value="-1" {{#if (eq sort -1)}}selected{{/if}}>Precio descendente</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="flex-grow flex overflow-hidden">
-    <div class="w-1/6 bg-gray-100 p-4 mr-4">
-      <h2 class="text-lg font-semibold mb-4">Filtrar por Marca</h2>
+  <div class="flex flex-col md:flex-row gap-4">
+    <div class="md:w-1/6 bg-white shadow-md rounded-md p-4">
+      <h2 class="text-lg font-semibold mb-4 text-gray-800">Filtrar por Marca</h2>
       <form onsubmit="{{#if brandSelected}}deleteFilterBrand(event){{else}}filterBrand(event){{/if}}">
         {{#if brandSelected}}
-        <div class="inline-flex items-center bg-blue-500 text-white text-md font-medium rounded-lg px-4 py-2">
+        <div class="inline-flex items-center bg-blue-500 text-white text-sm font-medium rounded-full px-3 py-1 mb-2">
           <span>{{brandSelected}}</span>
           <button class="ml-2 text-white text-lg leading-none" name="brand">&times;</button>
         </div>
         {{else}}
         {{#each brands}}
-        <div>
+        <div class="mb-2">
           <input type="radio" id="brand-{{@index}}" name="brand" value="{{this}}" {{#if (eq this
-            brandSelected)}}checked{{/if}} class="mr-2 focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-            autocomplete="off">
+            brandSelected)}}checked{{/if}} class="mr-2 focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
           <label for="brand-{{@index}}" class="text-sm font-medium text-gray-700">{{this}}</label>
         </div>
         {{/each}}
-        <button type="submit" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg mt-4 w-full">Aplicar
+        <button type="submit"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md mt-4 w-full transition duration-300">Aplicar
           Filtro</button>
         {{/if}}
       </form>
     </div>
 
-    <div class="w-5/6 flex flex-col">
-      <div class="overflow-x-auto mb-4 flex-grow">
-        <table class="w-full min-w-full border-collapse bg-white shadow-lg text-sm">
+    <div class="md:w-5/6 bg-white shadow-md rounded-md p-4">
+      <div class="mb-4">
+        <div class="flex flex-col md:flex-row items-center gap-4 bg-gray-100 py-2 px-4 rounded-md">
+          <a href="/"
+            class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md shadow transition duration-300">Inicio</a>
+          <form onsubmit="searchProduct(event)" class="flex items-center w-full m-0">
+            <input type="text" id="inputSearch" name="filter" placeholder="Buscar producto..." autocomplete="off"
+              class="flex-grow px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+            <button type="submit"
+              class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-r-md transition duration-300">Buscar</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center mb-4">
+        <p class="text-lg font-semibold text-gray-700">
+          Total de productos: <span class="text-blue-500">{{totalDocs}}</span>
+        </p>
+
+        <div class="flex items-center">
+          <p class="text-lg font-semibold text-gray-700 mr-2">Ordenar por:</p>
+          <select name="sort"
+            class="border border-gray-300 text-gray-700 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onchange="sortPrice(event)" autocomplete="off">
+            <option value="">Por defecto</option>
+            <option value="1" {{#if (eq sort 1)}}selected{{/if}}>Precio ascendente</option>
+            <option value="-1" {{#if (eq sort -1)}}selected{{/if}}>Precio descendente</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-full border-collapse bg-white text-sm">
           <thead class="sticky top-0 z-10 bg-white">
-            <tr class="bg-blue-600 text-white">
+            <tr class="bg-blue-500 text-white">
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">
+              </th>
               <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Código interno
               </th>
               <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Modelo</th>
@@ -71,56 +77,67 @@
               <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Proveedor</th>
               <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Rubro</th>
               <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Sub Rubro</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Presentación</th>
+              <th class="py-2 px -3 uppercase font-medium text-sm border-b border-gray-200 text-start">Presentación</th>
               <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">IVA</th>
               <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Precio Final</th>
             </tr>
           </thead>
-          <tbody class="text-gray-700 overflow-y-auto">
+          <tbody class="text-gray-700">
             {{#each products}}
-            <tr class="hover:bg-gray-100 transition duration-300 ease-in-out">
+            <tr class="hover:bg-gray-100 transition duration-300">
+              <td class="py-2 px-3 border-b border-gray-200">
+                <a href="/edit-product/{{this._id}}" class="text-blue-500 hover:text-blue-600 transition duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                      d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                  </svg>
+                </a>
+              </td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.internal_id}}</td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.model}}</td>
-              <td class="py-2 px-3 border-b border-gray-200 flex flex-row gap-4 cursor-pointer z-10" onclick="copyDetail(event)"
-                data-product-model="{{this.model}}" data-product-description="{{this.description}}"
-                data-product-brand="{{this.brand}}" data-product-presentation="{{this.presentation}}"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="lucide lucide-copy z-0">
-                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-                </svg>{{this.description}}</td>
+              <td class="py-2 px-3 border-b border-gray-200 flex flex-row items-center gap-2 cursor-pointer z-10"
+                onclick="copyDetail(event)" data-product-model="{{this.model}}"
+                data-product-description="{{this.description}}" data-product-brand="{{this.brand}}"
+                data-product-presentation="{{this.presentation}}">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-gray-400 hover:text-blue-500 transition duration-300" viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                  <path
+                    d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                </svg>
+                <span>{{this.description}}</span>
+              </td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.brand}}</td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.supplier}}</td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.item}}</td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.sub_item}}</td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.presentation}}</td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.iva}}</td>
-              <td class="py-2 px-3 border-b border-gray-200 bg-amber-100 text-center font-bold">${{this.final_price}}
-              </td>
+              <td class="py-2 px-3 border-b border-gray-200 bg-amber-100 text-center font-bold rounded-md">
+                ${{this.final_price}}</td>
             </tr>
             {{/each}}
           </tbody>
         </table>
-
       </div>
 
-      <div class="mt-auto flex justify-center items-center">
+      <div class="mt-4 flex justify-center items-center gap-2">
         {{#if hasPrevPage}}
         <a href="{{prevPage}}"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg mr-2 transition duration-300 ease-in-out">Anterior</a>
+          class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow transition duration-300">Anterior</a>
         {{/if}}
         {{#if hasNextPage}}
         <a href="{{nextPage}}"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out">Siguiente</a>
+          class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow transition duration-300">Siguiente</a>
         {{/if}}
       </div>
 
       <div class="flex justify-between items-center mt-4">
         <div class="flex-grow"></div>
-        <div>
-          <label for="pageSize" class="text-sm">Productos por página:</label>
-          <select id="pageSize" class="border border-gray-300 rounded-lg ml-2 p-2 bg-white"
+        <div class="flex items-center">
+          <label for="pageSize" class="text-sm text-gray-700 mr-2">Productos por página:</label>
+          <select id="pageSize" class="border border-gray-300 rounded-md px-2 py-1 bg-white"
             onchange="limitChange(event)">
             <option value="12" {{#if (eq limit "12" )}}selected{{/if}}>12</option>
             <option value="24" {{#if (eq limit "24" )}}selected{{/if}}>24</option>
@@ -128,6 +145,24 @@
           </select>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<div id="toast" class="hidden fixed bottom-5 left-5 z-50 max-w-sm mx-auto overflow-hidden rounded-lg shadow-md" role="alert">
+  <div class="bg-white rounded-lg shadow-xs overflow-hidden">
+    <div class="p-4 flex items-center">
+      <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-blue-100 text-blue-500">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <div class="ml-3 text-sm font-normal" id="textNotification">Mensaje de la notificación.</div>
+      <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" data-dismiss-target="#toast" aria-label="Cerrar">
+        <span class="sr-only">Cerrar</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
     </div>
   </div>
 </div>

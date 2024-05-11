@@ -13,6 +13,7 @@ export default class ProductDTO {
   }
   static getProductToListView = (product) => {
     return {
+      _id: product._id,
       internal_id: product.internal_id,
       model: product.model,
       description: product.description,
@@ -23,6 +24,24 @@ export default class ProductDTO {
       presentation: product.presentation,
       iva: product.iva * 100 + '%',
       final_price: product.final_price.toFixed(2),
+    };
+  };
+  static getProductToEditPage = (product) => {
+    return {
+      _id: product._id,
+      internal_id: product.internal_id,
+      model: product.model,
+      description: product.description,
+      brand: product.brand,
+      supplier: product.supplier,
+      item: product.item,
+      sub_item: product.sub_item,
+      presentation: product.presentation,
+      iva: product.iva * 100,
+      price_list: product.price_list,
+      final_price: product.final_price.toFixed(2),
+      bar_code: product.bar_code,
+      sku: product.sku,
     };
   };
   generatePriceToProduct = (list_price) => {

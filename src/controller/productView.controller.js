@@ -257,3 +257,70 @@ export const getCodebarsPrintPage = async (req, res) => {
     res.status(500).json({ error: 'Error fetching products', details: error });
   }
 };
+
+export const getEditProductPage = async (req, res) => {
+  const { pid } = req.params;
+  let { sid } = req.query;
+
+  try {
+    const product = await productService.getProductById(pid);
+    const factors = await factorService.getFactorsBySupplier(
+      sid ?? product.supplier._id.toString()
+    );
+    const suppliers = await supplierService.getAllSuppliers();
+
+    const suppliersDTO = suppliers.map((supplier) => {
+      return SupplierDTO.getSuppliersToPage(supplier);
+    });
+
+    let itemsDTO = [];
+    let subItemsDTO = [];
+    if (!sid) {
+      sid = product.supplier._id.toString();
+    }
+    if (product.supplier._id.toString() === sid) {
+      const items = await productService.getDistinctItems(product.supplier._id);
+      const subItems = await productService.getDistinctSubItems(
+        sid,
+        product.item
+      );
+      itemsDTO = items.map((item) => {
+        return ProductDTO.getItemToProduct(item);
+      });
+
+      subItemsDTO = subItems.map((subItem) => {
+        return ProductDTO.getSubItemToProduct(subItem);
+      });
+    } else {
+      const items = await productService.getDistinctItems(sid);
+      const subItems = await productService.getDistinctSubItems(sid);
+      itemsDTO = items.map((item) => {
+        return ProductDTO.getItemToProduct(item);
+      });
+
+      subItemsDTO = subItems.map((subItem) => {
+        return ProductDTO.getSubItemToProduct(subItem);
+      });
+    }
+    const productDTO = ProductDTO.getProductToEditPage(product);
+    const factorsDTO = factors.map((factor) => {
+      return FactorDTO.getFactorToPage(factor);
+    });
+
+    return res.render('editProduct', {
+      title: 'Edit Product',
+      product: productDTO,
+      currency: {
+        name: `${product.supplier.dollar?.name ?? 'Peso'} ${product.supplier.dollar?.value ? '(USD)' : '(ARS)'}`,
+        value: product.supplier.dollar?.value,
+      },
+      factors: factorsDTO,
+      suppliers: suppliersDTO,
+      items: itemsDTO,
+      sub_items: subItemsDTO,
+      sid: sid ?? product.supplier._id.toString(),
+    });
+  } catch (error) {
+    return res.sendClientError(error);
+  }
+};

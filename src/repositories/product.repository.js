@@ -10,6 +10,13 @@ export default class ProductRepository {
       return error;
     }
   };
+  getProductById = async (pid) => {
+    try {
+      return await this.dao.getById(pid);
+    } catch (error) {
+      return error;
+    }
+  };
   getAllProducts = async () => {
     try {
       return await this.dao.getAll();
@@ -61,9 +68,9 @@ export default class ProductRepository {
     }
   };
 
-  getDistinctSubItems = async (item) => {
+  getDistinctSubItems = async (sid, item) => {
     try {
-      return await this.dao.getSubItems(item);
+      return await this.dao.getSubItems(sid, item);
     } catch (error) {
       return error;
     }

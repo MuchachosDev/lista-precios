@@ -4,6 +4,7 @@ import {
   productService,
   supplierService,
 } from '../repositories/index.repository.js';
+import { parseTextToIva, parseTextToNumber } from '../util/parser.util.js';
 
 export const addFile = async (req, res) => {
   const { products, factor, sid } = req.body;
@@ -74,6 +75,73 @@ export const updatePricePerItem = async (req, res) => {
     }
 
     return res.sendSuccess({ message: 'Price/s updated' });
+  } catch (error) {
+    return res.sendClientError(error);
+  }
+};
+
+export const updateProduct = async (req, res) => {
+  const { pid } = req.params;
+  let {
+    model,
+    description,
+    bar_code,
+    sku,
+    brand,
+    presentation,
+    iva,
+    price_list,
+    supplier,
+    item,
+    sub_item,
+    factor,
+  } = req.body;
+
+  if (
+    !model ||
+    !description ||
+    !brand ||
+    !presentation ||
+    !iva ||
+    !price_list ||
+    !supplier ||
+    !item ||
+    !sub_item ||
+    !factor
+  ) {
+    return res.sendClientError({ message: 'All fields are required' });
+  }
+  if (iva < 0 || iva > 100) {
+    return res.sendClientError({ message: 'IVA must be between 0 and 100' });
+  }
+  if (price_list < 0) {
+    return res.sendClientError({
+      message: 'Price list must be greater than 0',
+    });
+  }
+  try {
+    const updated = await productService.updateProduct(pid, {
+      model: model.trim(),
+      description: description.trim(),
+      bar_code: bar_code.trim(),
+      sku: sku.trim(),
+      brand: brand.trim(),
+      presentation: presentation.trim(),
+      iva: parseTextToIva(iva),
+      price_list: parseTextToNumber(price_list),
+      supplier,
+      item: item.trim(),
+      sub_item: sub_item.trim(),
+      factor: factor.substring(0, factor.indexOf('-')).trim(),
+    });
+
+    if (!updated) {
+      return res.sendClientError({
+        message: 'Error updating product',
+      });
+    }
+
+    return res.sendSuccess({ message: 'Product updated' });
   } catch (error) {
     return res.sendClientError(error);
   }

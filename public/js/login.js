@@ -5,7 +5,7 @@ const login = async (e) => {
   const password = e.target.password.value;
 
   if (!username || !password) {
-    return alert('Please enter all fields');
+    return alert('Por favor, complete todos los campos');
   }
 
   const loginData = {
@@ -22,6 +22,6 @@ const login = async (e) => {
   if (response.ok) {
     document.location.replace('/');
   } else {
-    alert('Login failed!');
+    alert('Inicio de sesión fallido, por favor intente de nuevo');
   }
 };

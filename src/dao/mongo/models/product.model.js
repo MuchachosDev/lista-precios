@@ -1,5 +1,4 @@
 import { Schema, model } from 'mongoose';
-import envConfig from '../../../config/env.config.js';
 import { counterModel } from './counter.model.js';
 
 const productCollection = 'products';
@@ -101,5 +100,19 @@ productSchema.pre('save', async function (next) {
   } catch (error) {
     next(error);
   }
+});
+
+productSchema.pre('findOne', function () {
+  this.populate('factor');
+  this.populate('supplier');
+  this.populate('supplier.dollar');
+});
+
+productSchema.post('findOne', function (doc) {
+  doc.final_price =
+    doc.price_list *
+    (doc.iva + 1) *
+    doc.factor.value *
+    (doc.supplier.dollar?.value || 1);
 });
 export const productModel = model(productCollection, productSchema);
