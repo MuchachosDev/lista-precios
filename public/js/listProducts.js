@@ -56,20 +56,14 @@ const deleteFilterBrand = (e) => {
 const input = document.getElementById('inputSearch');
 
 document.addEventListener('keydown', (e) => {
-  e.preventDefault();
   let key = e.key;
 
-  if (['Backspace', 'Enter', 'Escape'].includes(key)) {
-    e.preventDefault();
+  if (e.ctrlKey && (key === 'c' || key === 'C' || key === 'v' || key === 'V')) {
+    return;
   }
 
-  if (e.ctrlKey) {
-    if (key === 'c' || key === 'C') {
-      return;
-    }
-    if (key === 'v' || key === 'V') {
-      return;
-    }
+  if (['Backspace', 'Enter', 'Escape'].includes(key) || e.ctrlKey) {
+    e.preventDefault();
   }
 
   switch (key) {
@@ -96,6 +90,7 @@ document.addEventListener('keydown', (e) => {
       break;
   }
 });
+
 
 const copyDetail = async (e) => {
   let target;

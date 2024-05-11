@@ -114,23 +114,13 @@ export const getListProductsPage = async (req, res) => {
 export const getUpdatePricesListPage = async (req, res) => {
   let { sid, item, sub_item } = req.query;
 
-  if (!sid) {
-    sid = 'all-suppliers';
-  }
-  if (!item) {
-    item = 'all-items';
-  }
-  if (!sub_item) {
-    sub_item = 'all-sub-items';
-  }
-
   try {
     const suppliers = await supplierService.getAllSuppliers();
     const items = await productService.getDistinctItems(
-      sid === 'all-suppliers' ? null : sid
+      sid
     );
-    const subItems = await productService.getDistinctSubItems(
-      item === 'all-items' ? null : item
+    const subItems = await productService.getDistinctSubItems(sid,
+      item
     );
 
     const suppliersDTO = suppliers.map((supplier) => {
@@ -160,24 +150,13 @@ export const getUpdatePricesListPage = async (req, res) => {
 
 export const getGenerateCodebarsPage = async (req, res) => {
   let { sid, item, sub_item } = req.query;
-
-  if (!sid) {
-    sid = 'all-suppliers';
-  }
-  if (!item) {
-    item = 'all-items';
-  }
-  if (!sub_item) {
-    sub_item = 'all-sub-items';
-  }
-
   try {
     const suppliers = await supplierService.getAllSuppliers();
     const items = await productService.getDistinctItems(
-      sid === 'all-suppliers' ? null : sid
+      sid
     );
-    const subItems = await productService.getDistinctSubItems(
-      item === 'all-items' ? null : item
+    const subItems = await productService.getDistinctSubItems(sid,
+      item
     );
 
     const suppliersDTO = suppliers.map((supplier) => {

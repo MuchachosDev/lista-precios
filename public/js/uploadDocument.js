@@ -21,7 +21,7 @@ const sendDocument = async (e) => {
 
     if (response.ok) {
       alert('Archivo subido correctamente');
-      window.location.href = '/';
+      window.location.href = '/upload-document';
     } else {
       alert('Archivo no subido');
     }

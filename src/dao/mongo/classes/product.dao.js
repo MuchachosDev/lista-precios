@@ -182,9 +182,12 @@ export default class Product {
     }
   };
 
-  getItems = async (sid) => {
+  getItems = async (sid=null) => {
     try {
-      return await productModel.distinct('item', { supplier: sid });
+      if(sid){
+        return await productModel.distinct('item', { supplier: sid });
+      }
+      return[];
     } catch (error) {
       console.log(error);
     }
