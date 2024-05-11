@@ -94,13 +94,14 @@ document.addEventListener('keydown', (e) => {
 
 const copyDetail = async (e) => {
   e.preventDefault();
-  const target = document.getElementById('detail');
-  console.log(target);
+  let target=e.target;
+  while(!target.id){
+    target=target.parentNode;
+  }
   const description = target.getAttribute('data-product-description');
   const model = target.getAttribute('data-product-model');
   const brand = target.getAttribute('data-product-brand');
   const presentation = target.getAttribute('data-product-presentation');
-
   try {
     await navigator.clipboard.writeText(
       `${description} ${model} ${brand} x ${presentation}`

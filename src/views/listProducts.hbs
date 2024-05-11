@@ -95,9 +95,9 @@
               </td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.internal_id}}</td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.model}}</td>
-              <td id='detail'
+              <td id="{{this._id}}"
                 class="py-2 px-3 border-b border-gray-200 flex flex-row items-center gap-2 cursor-pointer z-10"
-                onclick="copyDetail(event)" data-product-model="{{this.model}}"
+                onclick='copyDetail(event)' data-product-model="{{this.model}}"
                 data-product-description="{{this.description}}" data-product-brand="{{this.brand}}"
                 data-product-presentation="{{this.presentation}}">
                 <svg xmlns="http://www.w3.org/2000/svg"
