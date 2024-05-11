@@ -95,12 +95,13 @@
               </td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.internal_id}}</td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.model}}</td>
-              <td class="py-2 px-3 border-b border-gray-200 flex flex-row items-center gap-2 cursor-pointer z-10"
+              <td id='detail'
+                class="py-2 px-3 border-b border-gray-200 flex flex-row items-center gap-2 cursor-pointer z-10"
                 onclick="copyDetail(event)" data-product-model="{{this.model}}"
                 data-product-description="{{this.description}}" data-product-brand="{{this.brand}}"
                 data-product-presentation="{{this.presentation}}">
                 <svg xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5 text-gray-400 hover:text-blue-500 transition duration-300" viewBox="0 0 20 20"
+                  class="h-5 w-5 text-gray-400 hover:text-blue-500 transition duration-300 z-0" viewBox="0 0 20 20"
                   fill="currentColor">
                   <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
                   <path
