@@ -42,6 +42,7 @@ const filterBrand = (e) => {
 
   const searchParams = new URLSearchParams(search);
   searchParams.set('brand', brand);
+  searchParams.delete('page');
   window.location.href = `${pathname}?${searchParams.toString()}`;
 };
 

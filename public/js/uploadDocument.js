@@ -18,9 +18,9 @@ const sendDocument = async (e) => {
       method: 'POST',
       body: formData,
     });
-
     if (response.ok) {
-      alert('Archivo subido correctamente');
+      const {payload} = await response.json();
+      alert(payload.message);
       window.location.href = '/upload-document';
     } else {
       alert('Archivo no subido');

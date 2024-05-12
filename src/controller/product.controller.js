@@ -12,15 +12,23 @@ export const addFile = async (req, res) => {
     const existFactor = await factorService.getFactorById(factor);
 
     if (!existFactor) {
-      return res.sendNotFound({ message: 'Factor not found' });
+      return res.sendNotFound({ message: 'Factor no encontrado' });
     }
 
     const existSupplier = await supplierService.getSupplierById(sid);
 
     if (!existSupplier) {
-      return res.sendNotFound({ message: 'Supplier not found' });
+      return res.sendNotFound({ message: 'Proveedor no encontrado' });
     }
+    let existProducts=0;
+    let addedProducts=0;
     for (const product of products) {
+      const exist= await productService.getProductsWithFilter({model:product.model,brand:product.brand})
+
+      if(exist.length>0){
+        existProducts++;
+        continue;
+      }
       const productAdded = await productService.addProduct({
         ...product,
         factor: existFactor._id,
@@ -29,11 +37,12 @@ export const addFile = async (req, res) => {
 
       if (!productAdded) {
         return res.sendClientError({
-          message: 'Error adding products',
+          message: 'Error al agregar productos',
         });
       }
+      addedProducts++;
     }
-    return res.sendSuccessCreated({ message: 'Products added' });
+    return res.sendSuccessCreated({ message: `${addedProducts} productos agregados, ${existProducts} productos ya existen` });
   } catch (error) {
     return res.sendClientError(error);
   }
@@ -44,9 +53,9 @@ export const updatePricePerItem = async (req, res) => {
   const { percentage, adjustment_type } = req.body;
 
   if (percentage == 0) {
-    return res.sendClientError({ message: "Percentage can't be 0" });
+    return res.sendClientError({ message: 'Porcentaje no puede ser 0' });
   } else if (percentage < 0) {
-    return res.sendClientError({ message: "Percentage can't be negative" });
+    return res.sendClientError({ message: "Porcentaje no puede ser negativo" });
   }
 
   if (!sid) {
@@ -70,11 +79,11 @@ export const updatePricePerItem = async (req, res) => {
 
     if (!updated) {
       return res.sendClientError({
-        message: 'Error updating price',
+        message: 'Error al actualizar precios',
       });
     }
 
-    return res.sendSuccess({ message: 'Price/s updated' });
+    return res.sendSuccess({ message: 'Precios actualizados' });
   } catch (error) {
     return res.sendClientError(error);
   }
@@ -109,14 +118,14 @@ export const updateProduct = async (req, res) => {
     !sub_item ||
     !factor
   ) {
-    return res.sendClientError({ message: 'All fields are required' });
+    return res.sendClientError({ message: 'Todos los campos son requeridos' });
   }
   if (iva < 0 || iva > 100) {
-    return res.sendClientError({ message: 'IVA must be between 0 and 100' });
+    return res.sendClientError({ message: 'IVA debe estar entre 0 y 100' });
   }
   if (price_list < 0) {
     return res.sendClientError({
-      message: 'Price list must be greater than 0',
+      message: 'Precio de lista no puede ser negativo',
     });
   }
   try {
@@ -137,11 +146,11 @@ export const updateProduct = async (req, res) => {
 
     if (!updated) {
       return res.sendClientError({
-        message: 'Error updating product',
+        message: 'Error al actualizar producto',
       });
     }
 
-    return res.sendSuccess({ message: 'Product updated' });
+    return res.sendSuccess({ message: 'Productos actualizados' });
   } catch (error) {
     return res.sendClientError(error);
   }
