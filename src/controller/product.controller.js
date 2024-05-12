@@ -23,7 +23,7 @@ export const addFile = async (req, res) => {
     let existProducts=0;
     let addedProducts=0;
     for (const product of products) {
-      const exist= await productService.getProductsWithFilter({model:product.model,brand:product.brand})
+      const exist= await productService.getProductsWithFilter({model:product.model,brand:product.brand, sku:product.sku, sub_item:product.sub_item})
 
       if(exist.length>0){
         existProducts++;

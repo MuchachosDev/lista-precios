@@ -1,6 +1,6 @@
-const searchProduct = (e) => {
+const searchProduct = async(e) => {
   e.preventDefault();
-  const filter = e.target.filter.value;
+  const filter = await e.target.filter.value;
   if (filter) {
     window.location.href = `/list-products?filter=${filter}`;
   } else {
@@ -57,9 +57,8 @@ const deleteFilterBrand = (e) => {
 const input = document.getElementById('inputSearch');
 
 document.addEventListener('keydown', (e) => {
-  const input = e.target;
   const key = e.key;
-  const isModifierKey = key === 'Control' || key === 'Alt' || key === 'Shift' || key === 'CapsLock' || key === 'Tab' || key === 'Meta';
+  const isModifierKey = key === 'Control' || key === 'Alt' || key === 'Shift' || key === 'CapsLock' || key === 'Tab' || key === 'Meta' || key=== 'ArrowLeft' || key=== 'ArrowRight' || key=== 'ArrowUp' || key=== 'ArrowDown';
   const allowedKeys = /^[a-zA-Z0-9\s,.-]*$/;
   if ((e.ctrlKey || e.metaKey) && (key === 'c' || key === 'x' || key === 'v')) {
     return;
@@ -76,6 +75,7 @@ document.addEventListener('keydown', (e) => {
   } else if (allowedKeys.test(key) && !isModifierKey) {
     input.value += key;
   }
+  console.log(typeof key);
   e.preventDefault();
 });
 
