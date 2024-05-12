@@ -1,15 +1,17 @@
+import { parseTextToIva, parseTextToNumber } from "../util/parser.util.js";
+
 export default class ProductDTO {
   constructor(product) {
     this.bar_code = product.bar_code || '----';
-    this.sku = product.sku || '----';
-    this.model = product.model || '----';
-    this.description = product.description || '----';
-    this.brand = product.brand || '----';
-    this.item = product.item || '----';
-    this.sub_item = product.sub_item || '----';
-    this.presentation = product.presentation || '----';
-    this.iva = product.iva || 0.21;
-    this.price_list = product.price_list || 0;
+    this.sku = product.sku.toUpperCase() || '----';
+    this.model = product.model.toUpperCase() || '----';
+    this.description = product.description.toUpperCase() || '----';
+    this.brand = product.brand.toUpperCase() || '----';
+    this.item = product.item.toUpperCase() || '----';
+    this.sub_item = product.sub_item.toUpperCase() || '----';
+    this.presentation = product.presentation.toUpperCase() || '----';
+    this.iva = parseTextToIva(product.iva) || 0.21;
+    this.price_list = parseTextToNumber(product.price_list) || 0;
   }
   static getProductToListView = (product) => {
     return {

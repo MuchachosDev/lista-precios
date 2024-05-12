@@ -23,8 +23,8 @@ export const convertToBody = async (req, res, next) => {
         item: row.match(regex)[6],
         sub_item: row.match(regex)[7],
         presentation: row.match(regex)[8],
-        iva: parseTextToIva(row.match(regex)[9]),
-        price_list: parseTextToNumber(row.match(regex)[10]),
+        iva: row.match(regex)[9],
+        price_list: row.match(regex)[10],
       });
       req.body.products.push(product);
     }
