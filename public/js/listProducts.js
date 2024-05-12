@@ -56,39 +56,26 @@ const deleteFilterBrand = (e) => {
 const input = document.getElementById('inputSearch');
 
 document.addEventListener('keydown', (e) => {
-  let key = e.key;
-
-  if (e.ctrlKey && (key === 'c' || key === 'C' || key === 'v' || key === 'V')) {
+  const input = e.target;
+  const key = e.key;
+  const isModifierKey = key === 'Control' || key === 'Alt' || key === 'Shift' || key === 'CapsLock' || key === 'Tab' || key === 'Meta';
+  const allowedKeys = /^[a-zA-Z0-9\s,.-]*$/;
+  if ((e.ctrlKey || e.metaKey) && (key === 'c' || key === 'x' || key === 'v')) {
     return;
   }
-
-  if (['Backspace', 'Enter', 'Escape'].includes(key) || e.ctrlKey) {
+  if (['Backspace', 'Enter', 'Escape'].includes(key)) {
     e.preventDefault();
   }
-
-  switch (key) {
-    case 'Backspace':
-      input.value = input.value.slice(0, -1);
-      break;
-    case 'Enter':
-      window.location.href = `/list-products?filter=${input.value}`;
-      break;
-    case 'Escape':
-      input.value = '';
-      break;
-    case 'Control':
-    case 'Alt':
-    case 'Shift':
-    case 'CapsLock':
-    case 'Tab':
-    case 'Meta':
-      break;
-    default:
-      if (key.length === 1 && !e.ctrlKey) {
-        input.value += key;
-      }
-      break;
+  if (key === 'Backspace') {
+    input.value = input.value.slice(0, -1);
+  } else if (key === 'Enter') {
+    window.location.href = `/list-products?filter=${encodeURIComponent(input.value)}`;
+  } else if (key === 'Escape') {
+    input.value = '';
+  } else if (allowedKeys.test(key) && !isModifierKey) {
+    input.value += key;
   }
+  e.preventDefault();
 });
 
 
