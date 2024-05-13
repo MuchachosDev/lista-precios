@@ -12,12 +12,12 @@ import FactorViewRouter from './router/factorView.router.js';
 import SupplierRouter from './router/supplier.router.js';
 import SupplierViewRouter from './router/supplierView.router.js';
 import ErrorViewRouter from './router/errors.router.js';
-import DollarRouter from './router/dollar.router.js';
-import DollarViewRouter from './router/dollarView.router.js';
+import CurrencyRouter from './router/currency.router.js';
+import CurrencyViewRouter from './router/currencyView.router.js';
 import {
   createIndexes,
   createUsers,
-  defaultDollar,
+  defaultCurrency,
 } from './util/initServer.util.js';
 import UserViewRouter from './router/userView.router.js';
 
@@ -69,10 +69,10 @@ const supplierViewRouter = new SupplierViewRouter();
 app.use('/', supplierViewRouter.getRouter());
 const errorViewRouter = new ErrorViewRouter();
 app.use('/', errorViewRouter.getRouter());
-const dollarRouter = new DollarRouter();
-app.use('/api/dollars', dollarRouter.getRouter());
-const dollarViewRouter = new DollarViewRouter();
-app.use('/', dollarViewRouter.getRouter());
+const currencyRouter = new CurrencyRouter();
+app.use('/api/currencys', currencyRouter.getRouter());
+const currencyViewRouter = new CurrencyViewRouter();
+app.use('/', currencyViewRouter.getRouter());
 const userRouter = new UserRouter();
 app.use('/api/users', userRouter.getRouter());
 const userViewRouter = new UserViewRouter();
@@ -93,8 +93,8 @@ createUsers();
 // Create index
 createIndexes();
 
-// Init default dollar
-defaultDollar();
+// Init default currency
+defaultCurrency();
 
 // Init Server
 app.listen(envConfig.PORT, () => {

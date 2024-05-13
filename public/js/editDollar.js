@@ -1,11 +1,11 @@
-const editDollar = async (e) => {
+const editCurrency = async (e) => {
   e.preventDefault();
 
   const value = e.target.value.value;
   const name = e.target.name.value;
   const did = e.target.getAttribute('data-dolar-id');
   try {
-    const response = await fetch(`/api/dollars/${did}`, {
+    const response = await fetch(`/api/currencys/${did}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

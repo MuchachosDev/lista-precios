@@ -1,22 +1,22 @@
 import envConfig from '../config/env.config.js';
 import { counterModel } from '../dao/mongo/models/counter.model.js';
 import { productModel } from '../dao/mongo/models/product.model.js';
-import DollarDTO from '../dto/dollar.dto.js';
+import CurrencyDTO from '../dto/currency.dto.js';
 import {
-  dollarService,
+  currencyService,
   userService,
 } from '../repositories/index.repository.js';
 import { createHash } from './crypto.util.js';
 
-export const defaultDollar = async () => {
+export const defaultCurrency = async () => {
   try {
-    const dollars = await dollarService.getDollars();
-    if (dollars.length === 0) {
-      const newDollar = await dollarService.addDollar(
-        new DollarDTO({ name: 'Dólar blue', value: envConfig.DEFAULT_DOLLAR })
+    const currencys = await currencyService.getCurrencys();
+    if (currencys.length === 0) {
+      const newCurrency = await currencyService.addCurrency(
+        new CurrencyDTO({ name: envConfig.DEFAULT_CURRENCY_NAME, value: envConfig.DEFAULT_CURRENCY })
       );
-      if (!newDollar) {
-        console.log('Dollar not created');
+      if (!newCurrency) {
+        console.log('Currency not created');
       }
     }
   } catch (error) {

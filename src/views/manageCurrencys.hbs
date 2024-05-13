@@ -8,7 +8,7 @@
       class='rounded-lg bg-green-500 px-4 py-2 font-semibold text-white shadow transition duration-300 hover:bg-green-600'
     >INICIO</a>
     <a
-      href='/add-dollar'
+      href='/add-currency'
       class='rounded bg-blue-500 px-4 py-2 font-semibold text-white transition duration-300 hover:bg-blue-700'
     >AGREGAR NUEVO TIPO DE CAMBIO</a>
   </div>
@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody class='bg-gray-100'>
-        {{#each dollars}}
+        {{#each currencys}}
           <tr class='transition duration-300 hover:bg-gray-200'>
             <td
               class='border-b border-gray-200 px-4 py-3 text-left'
@@ -51,10 +51,10 @@
             >{{formatDate this.updated_at}}</td>
             <td
               class='border-b border-gray-200 px-4 py-3 text-right'
-              data-dollar-id='{{this._id}}'
+              data-currency-id='{{this._id}}'
             >
               <a
-                href='/edit-dollar/{{this._id}}'
+                href='/edit-currency/{{this._id}}'
                 class='rounded-md bg-blue-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-blue-700'
               >EDITAR</a>
             </td>

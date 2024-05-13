@@ -11,7 +11,6 @@ const productSchema = new Schema({
   bar_code: {
     type: String,
     required: true,
-    unique: true,
   },
   sku: {
     type: String,
@@ -52,12 +51,10 @@ const productSchema = new Schema({
   created_at: {
     type: Date,
     required: true,
-    default: new Date(),
   },
   updated_at: {
     type: Date,
     required: true,
-    default: new Date(),
   },
   factor: {
     type: Schema.Types.ObjectId,
@@ -106,7 +103,7 @@ productSchema.pre('save', async function (next) {
 productSchema.pre('findOne', function () {
   this.populate('factor');
   this.populate('supplier');
-  this.populate('supplier.dollar');
+  this.populate('supplier.currency');
 });
 
 productSchema.post('findOne', function (doc) {
@@ -114,6 +111,6 @@ productSchema.post('findOne', function (doc) {
     doc.price_list *
     (doc.iva + 1) *
     doc.factor.value *
-    (doc.supplier.dollar?.value || 1);
+    (doc.supplier.currency?.value || 1);
 });
 export const productModel = model(productCollection, productSchema);

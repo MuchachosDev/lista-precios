@@ -1,32 +1,32 @@
-export default class DollarRepository {
+export default class CurrencyRepository {
   constructor(dao) {
     this.dao = dao;
   }
 
-  addDollar = async (dollar) => {
+  addCurrency = async (currency) => {
     try {
-      return await this.dao.add(dollar);
+      return await this.dao.add(currency);
     } catch (error) {
       return error;
     }
   };
-  getDollarById = async (did) => {
+  getCurrencyById = async (did) => {
     try {
       return await this.dao.getById(did);
     } catch (error) {
       return error;
     }
   };
-  getDollars = async () => {
+  getCurrencys = async () => {
     try {
       return await this.dao.get();
     } catch (error) {
       return error;
     }
   };
-  updateDollar = async (did, dollar) => {
+  updateCurrency = async (did, currency) => {
     try {
-      return await this.dao.update(did, dollar);
+      return await this.dao.update(did, currency);
     } catch (error) {
       return error;
     }

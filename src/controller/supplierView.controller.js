@@ -1,7 +1,7 @@
-import DollarDTO from '../dto/dollar.dto.js';
+import CurrencyDTO from '../dto/currency.dto.js';
 import SupplierDTO from '../dto/supplier.dto.js';
 import {
-  dollarService,
+  currencyService,
   supplierService,
 } from '../repositories/index.repository.js';
 
@@ -22,12 +22,12 @@ export const manageSupplierPage = async (req, res) => {
 
 export const addSupplierPage = async (req, res) => {
   try {
-    const dollars = await dollarService.getDollars();
-    const dollarsDTO = DollarDTO.getDollarsToPage(dollars);
+    const currencys = await currencyService.getCurrencys();
+    const currencysDTO = CurrencyDTO.getCurrencysToPage(currencys);
 
     return res.render('addSupplier', {
       title: 'AGREGAR PROVEEDOR',
-      dollars: dollarsDTO,
+      currencys: currencysDTO,
     });
   } catch (error) {
     return res.sendClientError(error);
@@ -39,15 +39,15 @@ export const editSupplierPage = async (req, res) => {
     const { sid } = req.params;
 
     const supplier = await supplierService.getSupplierById(sid);
-    const dollars = await dollarService.getDollars();
+    const currencys = await currencyService.getCurrencys();
 
     const supplierDTO = SupplierDTO.getSuppliersToPage(supplier[0]);
-    const dollarsDTO = DollarDTO.getDollarsToPage(dollars);
+    const currencysDTO = CurrencyDTO.getCurrencysToPage(currencys);
 
     return res.render('editSupplier', {
       title: 'EDITAR PROVEEDOR',
       supplier: supplierDTO,
-      dollars: dollarsDTO,
+      currencys: currencysDTO,
     });
   } catch (error) {
     return res.sendClientError(error);

@@ -42,7 +42,7 @@
             >{{this.name}}</td>
             <td
               class='border-b border-gray-200 px-4 py-3 text-left'
-            >{{this.dollar}}</td>
+            >{{this.currency}}</td>
             <td
               class='border-b border-gray-200 px-4 py-3 text-left'
             >{{formatDate this.created_at}}</td>
@@ -75,7 +75,7 @@
 >
   <div class='relative mx-auto w-96 rounded-md border bg-white p-5 shadow-lg'>
     <div class='text-center'>
-      <h3 class='text-lg font-medium leading-6 text-gray-900'>CONFIRMACIÓN DE
+      <h3 class='text-lg font-bold leading-6 text-gray-900'>CONFIRMACIÓN DE
         ELIMINACIÓN</h3>
       <div class='mt-2 px-7 py-3'>
         <p class='text-sm text-gray-500'>¿ESTAS SEGURO DE QUE DESEAS ELIMINAR
@@ -84,11 +84,11 @@
       <div class='mt-4 flex justify-center gap-4'>
         <button
           id='cancelBtn'
-          class='rounded bg-gray-200 px-4 py-2 text-gray-800 transition duration-300 hover:bg-gray-300 focus:outline-none'
+          class='rounded font-bold bg-gray-200 px-4 py-2 text-gray-800 transition duration-300 hover:bg-gray-300 focus:outline-none'
         >ATRÁS</button>
         <button
           id='confirmBtn'
-          class='rounded bg-green-500 px-4 py-2 text-white transition duration-300 hover:bg-green-600 focus:outline-none'
+          class='rounded font-bold bg-green-500 px-4 py-2 text-white transition duration-300 hover:bg-green-600 focus:outline-none'
         >CONFIRMAR</button>
       </div>
     </div>

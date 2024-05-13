@@ -1,7 +1,7 @@
 const createSupplier = async (e) => {
   e.preventDefault();
   const name = e.target.supplier.value;
-  const dollar = e.target.dollar.value;
+  const currency = e.target.currency.value;
   const enableCurrencySelect = e.target.enableCurrencySelect.checked;
   try {
     const response = await fetch('/api/suppliers', {
@@ -10,7 +10,7 @@ const createSupplier = async (e) => {
         'Content-Type': 'application/json',
       },
 
-      body: JSON.stringify({ name, dollar, enableCurrencySelect }),
+      body: JSON.stringify({ name, currency, enableCurrencySelect }),
     });
     if (response.ok) {
       alert('PROVEEDOR CREADO CORRECTAMENTE');

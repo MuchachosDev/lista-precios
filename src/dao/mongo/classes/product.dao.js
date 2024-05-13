@@ -56,6 +56,7 @@ export default class Product {
             { model: regex },
             { description: regex },
             { brand: regex },
+            {sku: regex},
           ],
         };
       });
@@ -96,15 +97,15 @@ export default class Product {
         },
         {
           $lookup: {
-            from: 'dollars',
-            localField: 'supplierData.dollar',
+            from: 'currencys',
+            localField: 'supplierData.currency',
             foreignField: '_id',
-            as: 'dollarsData',
+            as: 'currencysData',
           },
         },
         {
           $unwind: {
-            path: '$dollarsData',
+            path: '$currencysData',
             preserveNullAndEmptyArrays: true,
           },
         },
@@ -119,7 +120,7 @@ export default class Product {
               $multiply: [
                 { $ifNull: ['$price_list', 0] },
                 { $ifNull: ['$factorData.value', 1] },
-                { $ifNull: ['$dollarsData.value', 1] },
+                { $ifNull: ['$currencysData.value', 1] },
                 { $add: [1, { $ifNull: ['$iva', 0] }] },
               ],
             },

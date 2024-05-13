@@ -56,38 +56,12 @@ const deleteFilterBrand = (e) => {
 
 const input = document.getElementById('inputSearch');
 
-document.addEventListener('keydown', (e) => {
-  const key = e.key;
-  const isModifierKey =
-    key === 'Control' ||
-    key === 'Alt' ||
-    key === 'Shift' ||
-    key === 'CapsLock' ||
-    key === 'Tab' ||
-    key === 'Meta' ||
-    key === 'ArrowLeft' ||
-    key === 'ArrowRight' ||
-    key === 'ArrowUp' ||
-    key === 'ArrowDown';
-  const allowedKeys = /^[a-zA-Z0-9\s,.-]*$/;
-  if ((e.ctrlKey || e.metaKey) && (key === 'c' || key === 'x' || key === 'v')) {
-    return;
-  }
-  if (['Backspace', 'Enter', 'Escape'].includes(key)) {
-    e.preventDefault();
-  }
-  if (key === 'Backspace') {
-    input.value = input.value.slice(0, -1);
-  } else if (key === 'Enter') {
-    window.location.href = `/list-products?filter=${encodeURIComponent(input.value)}`;
-  } else if (key === 'Escape') {
-    input.value = '';
-  } else if (allowedKeys.test(key) && !isModifierKey) {
-    input.value += key;
-  }
-  console.log(typeof key);
-  e.preventDefault();
-});
+const maintainFocus = () => {
+  setTimeout(() => input.focus(), 10);
+}
+
+window.onload = maintainFocus;
+input.onblur = maintainFocus;
 
 const copyDetail = async (e) => {
   e.preventDefault();

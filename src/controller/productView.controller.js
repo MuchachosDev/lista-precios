@@ -105,6 +105,7 @@ export const getListProductsPage = async (req, res) => {
       brands,
       sort,
       brandSelected: brand,
+      isAdmin: req.user.role === 'MANAGER', 
     });
   } catch (error) {
     return res.sendClientError(error);
@@ -282,8 +283,8 @@ export const getEditProductPage = async (req, res) => {
       title: 'EDITAR PRODUCTO',
       product: productDTO,
       currency: {
-        name: `${product.supplier.dollar?.name ?? 'Peso'} ${product.supplier.dollar?.value ? '(USD)' : '(ARS)'}`,
-        value: product.supplier.dollar?.value,
+        name: `${product.supplier.currency?.name ?? 'Peso'} ${product.supplier.currency?.value ? '(USD)' : '(ARS)'}`,
+        value: product.supplier.currency?.value,
       },
       factors: factorsDTO,
       suppliers: suppliersDTO,

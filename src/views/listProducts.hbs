@@ -3,7 +3,8 @@
     <div class="flex justify-between items-center">
       <h1 class="text-2xl font-semibold text-gray-800">LISTA DE PRODUCTOS</h1>
       <a href="/api/users/logout"
-        class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300">CERRAR SESIÓN</a>
+        class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300">CERRAR
+        SESIÓN</a>
     </div>
   </header>
 
@@ -25,8 +26,8 @@
         </div>
         {{/each}}
         <button type="submit"
-          class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md mt-4 w-full transition duration-300">Aplicar
-          Filtro</button>
+          class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md mt-4 w-full transition duration-300">APLICAR
+          FILTROS</button>
         {{/if}}
       </form>
     </div>
@@ -34,13 +35,15 @@
     <div class="md:w-[7/8] bg-white shadow-md rounded-md p-4 flex-grow">
       <div class="mb-4">
         <div class="flex flex-col md:flex-row items-center gap-4 bg-gray-100 py-2 px-4 rounded-md">
+          {{#if isAdmin}}
           <a href="/"
             class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md shadow transition duration-300">INICIO</a>
+            {{/if}}
           <form onsubmit="searchProduct(event)" class="flex items-center w-full m-0">
             <input type="text" id="inputSearch" name="filter" placeholder="BUSCAR PRODUCTO" autocomplete="off"
               class="flex-grow px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
             <button type="submit"
-              class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-r-md transition duration-300">Buscar</button>
+              class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-r-md transition duration-300">BUSCAR</button>
           </form>
         </div>
       </div>
@@ -66,23 +69,26 @@
         <table class="w-full min-w-full border-collapse bg-white text-sm">
           <thead class="sticky top-0 z-10 bg-white">
             <tr class="bg-blue-500 text-white">
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">
+              {{#if isAdmin}}
+              <th class="py-2 px-3 uppercase font-bold text-sm border-b border-gray-200 text-start">
               </th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">CODIGO INTERNO
+              {{/if}}
+              <th class="py-2 px-3 uppercase font-bold text-sm border-b border-gray-200 text-start">CODIGO INTERNO
               </th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">MODELO</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">DESCRIPCIÓN</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">MARCA</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">PROVEEDOR</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">RUBRO</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">SUBRUBRO</th>
-              <th class="py-2 px -3 uppercase font-medium text-sm border-b border-gray-200 text-start">PRESENTACIÓN</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">IVA</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">PRECIO FINAL</th>
+              <th class="py-2 px-3 uppercase font-bold text-sm border-b border-gray-200 text-start">MODELO</th>
+              <th class="py-2 px-3 uppercase font-bold text-sm border-b border-gray-200 text-start">DESCRIPCIÓN</th>
+              <th class="py-2 px-3 uppercase font-bold text-sm border-b border-gray-200 text-start">MARCA</th>
+              <th class="py-2 px-3 uppercase font-bold text-sm border-b border-gray-200 text-start">PROVEEDOR</th>
+              <th class="py-2 px-3 uppercase font-bold text-sm border-b border-gray-200 text-start">RUBRO</th>
+              <th class="py-2 px-3 uppercase font-bold text-sm border-b border-gray-200 text-start">SUBRUBRO</th>
+              <th class="py-2 px -3 uppercase font-bold text-sm border-b border-gray-200 text-start">PRESENTACIÓN</th>
+              <th class="py-2 px-3 uppercase font-bold text-sm border-b border-gray-200 text-start">IVA</th>
+              <th class="py-2 px-3 uppercase font-bold text-sm border-b border-gray-200 text-start">PRECIO FINAL</th>
             </tr>
           </thead>
           <tbody class="text-gray-700">
             {{#each products}}
+            {{#if ../isAdmin}}
             <tr class="hover:bg-gray-100 transition duration-300">
               <td class="py-2 px-3 border-b border-gray-200">
                 <a href="/edit-product/{{this._id}}" class="text-blue-500 hover:text-blue-600 transition duration-300">
@@ -92,6 +98,7 @@
                   </svg>
                 </a>
               </td>
+              {{/if}}
               <td class="py-2 px-3 border-b border-gray-200">{{this.internal_id}}</td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.model}}</td>
               <td id="{{this._id}}"
@@ -114,7 +121,7 @@
               <td class="py-2 px-3 border-b border-gray-200">{{this.sub_item}}</td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.presentation}}</td>
               <td class="py-2 px-3 border-b border-gray-200">{{this.iva}}</td>
-              <td class="py-2 px-3 border-b border-gray-200 bg-amber-100 text-center font-bold rounded-md">
+              <td class="py-2 px-3 border-b border-gray-200 bg-amber-100 text-center font-bold">
                 ${{this.final_price}}</td>
             </tr>
             {{/each}}
@@ -136,7 +143,7 @@
       <div class="flex justify-between items-center mt-4">
         <div class="flex-grow"></div>
         <div class="flex items-center">
-          <label for="pageSize" class="text-sm text-gray-700 mr-2">PRODUCTOS POR PÁGINA:</label>
+          <label for="pageSize" class="text-sm text-gray-700 mr-2 font-bold">PRODUCTOS POR PÁGINA:</label>
           <select id="pageSize" class="border border-gray-300 rounded-md px-2 py-1 bg-white"
             onchange="limitChange(event)">
             <option value="12" {{#if (eq limit "12" )}}selected{{/if}}>12</option>

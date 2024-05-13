@@ -12,10 +12,12 @@ export default class ProductDTO {
     this.presentation = product.presentation.toUpperCase() || '----';
     this.iva = parseTextToIva(product.iva) || 0.21;
     this.price_list = parseTextToNumber(product.price_list) || 0;
+    this.created_at = product.created_at || new Date();
+    this.updated_at = product.updated_at || new Date();
   }
   static getProductToListView = (product) => {
     return {
-      _id: product._id,
+      _id: product._id.toString(),
       internal_id: product.internal_id,
       model: product.model,
       description: product.description,
@@ -30,7 +32,7 @@ export default class ProductDTO {
   };
   static getProductToEditPage = (product) => {
     return {
-      _id: product._id,
+      _id: product._id.toString(),
       internal_id: product.internal_id,
       model: product.model,
       description: product.description,

@@ -1,23 +1,23 @@
 <div class='flex min-h-screen items-center justify-center bg-gray-100'>
   <div class='w-full max-w-md rounded-lg bg-white p-8 shadow-xl'>
     <h1 class='mb-6 text-center text-2xl font-semibold text-gray-800'>EDITAR
-      VALOR DEL DÓLAR</h1>
+      VALOR DE LA MONEDA</h1>
 
     <form
-      onsubmit='editDollar(event)'
+      onsubmit='editCurrency(event)'
       class='rounded bg-white px-8 pb-8 pt-6'
-      data-dolar-id='{{dollar._id}}'
+      data-dolar-id='{{currency._id}}'
     >
       <div class='mb-6'>
         <label
-          for='dollarName'
+          for='currencyName'
           class='mb-2 block text-sm font-bold text-gray-700'
-        >NOMBRE DEL DÓLAR:</label>
+        >NOMBRE DE LA MONEDA:</label>
         <input
           type='text'
-          id='dollarName'
+          id='currencyName'
           name='name'
-          value='{{dollar.name}}'
+          value='{{currency.name}}'
           class='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
           required
           autocomplete='off'
@@ -26,15 +26,15 @@
 
       <div class='mb-6'>
         <label
-          for='dollarValue'
+          for='currencyValue'
           class='mb-2 block text-sm font-bold text-gray-700'
-        >VALOR ACTUAL DEL DÓLAR:</label>
+        >VALOR ACTUAL DE LA MONEDA:</label>
         <input
           type='number'
-          id='dollarValue'
+          id='currencyValue'
           name='value'
           step='0.01'
-          value='{{dollar.value}}'
+          value='{{currency.value}}'
           class='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
           required
           autocomplete='off'
@@ -50,7 +50,7 @@
           type='text'
           id='lastModified'
           name='lastModified'
-          value='{{formatDate dollar.updated_at}}'
+          value='{{formatDate currency.updated_at}}'
           class='w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow'
           disabled
         />
@@ -58,7 +58,7 @@
 
       <div class='flex items-center justify-between gap-4'>
         <a
-          href='/manage-dollars'
+          href='/manage-currencys'
           class='focus:shadow-outline rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none'
         >
           ATRÁS
@@ -127,4 +127,4 @@
   </div>
 </div>
 
-<script src='/js/editDollar.js'></script>
+<script src='/js/editCurrency.js'></script>

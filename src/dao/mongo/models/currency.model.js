@@ -1,8 +1,8 @@
 import { Schema, model } from 'mongoose';
 
-const dollarCollection = 'dollars';
+const currencyCollection = 'currencys';
 
-const dollarSchema = new Schema({
+const currencySchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -14,12 +14,10 @@ const dollarSchema = new Schema({
   },
   created_at: {
     type: Date,
-    default: new Date(),
   },
   updated_at: {
     type: Date,
-    default: new Date(),
   },
 });
 
-export const dollarModel = model(dollarCollection, dollarSchema);
+export const currencyModel = model(currencyCollection, currencySchema);

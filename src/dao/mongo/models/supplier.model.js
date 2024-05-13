@@ -11,21 +11,19 @@ const supplierSchema = new Schema({
   created_at: {
     type: Date,
     required: true,
-    default: new Date(),
   },
   updated_at: {
     type: Date,
     required: true,
-    default: new Date(),
   },
-  dollar: {
+  currency: {
     type: Schema.Types.ObjectId || null,
-    ref: 'dollars',
+    ref: 'currencys',
   },
 });
 
 supplierSchema.pre('find', function () {
-  this.populate('dollar');
+  this.populate('currency');
 });
 
 export const supplierModel = model(supplierCollection, supplierSchema);

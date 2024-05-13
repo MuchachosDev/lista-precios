@@ -18,7 +18,7 @@ export const addFactor = async (req, res) => {
       new FactorDTO(
         parseTextToNumber(value.trim()),
         sup[0]._id,
-        name.trim()oUpperCase()
+        name.trim()
       )
     );
 

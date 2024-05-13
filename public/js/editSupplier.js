@@ -2,7 +2,7 @@ const editSupplier = async (e) => {
   e.preventDefault();
   const name = e.target.name.value;
   const sid = e.target.getAttribute('data-supplier-id');
-  const dollar = e.target.dollar.value;
+  const currency = e.target.currency.value;
   const enableCurrencySelect = e.target.enableCurrencySelect.checked;
   try {
     const response = await fetch(`/api/suppliers/${sid}`, {
@@ -12,7 +12,7 @@ const editSupplier = async (e) => {
       },
       body: JSON.stringify({
         name,
-        dollar,
+        currency,
         enableCurrencySelect,
       }),
     });

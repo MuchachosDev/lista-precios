@@ -54,7 +54,7 @@ export const editFactorPage = async (req, res) => {
       title: 'EDITAR FACTOR',
       factor: factorDTO,
       suppliers: suppliersDTO,
-      supplierToFactor: factor.supplier._id,
+      supplierToFactor: factor.supplier._id.toString(),
     });
   } catch (error) {
     return res.sendClientError(error);

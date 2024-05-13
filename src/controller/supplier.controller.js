@@ -6,7 +6,7 @@ import {
 } from '../repositories/index.repository.js';
 
 export const addSupplier = async (req, res) => {
-  const { name, dollar, enableCurrencySelect } = req.body;
+  const { name, currency, enableCurrencySelect } = req.body;
   try {
     const exist = await supplierService.getSupplierByName(name);
 
@@ -14,7 +14,7 @@ export const addSupplier = async (req, res) => {
     let response;
     if (enableCurrencySelect) {
       response = await supplierService.addSupplier(
-        new SupplierDTO(name.trim(), dollar)
+        new SupplierDTO(name.trim(), currency)
       );
     } else {
       response = await supplierService.addSupplier(
@@ -30,18 +30,18 @@ export const addSupplier = async (req, res) => {
 };
 
 export const editSupplier = async (req, res) => {
-  const { name, dollar, enableCurrencySelect } = req.body;
+  const { name, currency, enableCurrencySelect } = req.body;
   const { sid } = req.params;
   try {
     const exist = await supplierService.getSupplierById(sid);
 
-    if (exist.name === name && exist.dollar === enableCurrencySelect)
+    if (exist.name === name && exist.currency === enableCurrencySelect)
       return res.sendClientError('Supplier already exists');
     let response;
 
     if (enableCurrencySelect) {
       response = await supplierService.updateSupplier(
-        new SupplierDTO(name.trim().toUpperCase(), dollar),
+        new SupplierDTO(name.trim().toUpperCase(), currency),
         sid
       );
     } else {

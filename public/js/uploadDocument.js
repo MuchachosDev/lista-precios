@@ -23,7 +23,7 @@ const sendDocument = async (e) => {
       alert(payload.message);
       window.location.href = '/upload-document';
     } else {
-      alert('ARCHIVO NO SUBIDO CORRECTAMENTE');
+      alert('ARCHIVO NO SUBIDO');
     }
   } catch (error) {
     alert('ERROR AL SUBIR EL ARCHIVO', error);

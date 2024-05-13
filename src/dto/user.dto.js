@@ -5,7 +5,7 @@ export default class UserDTO {
     this.username = user.username || 'user';
     this.role = user.role || 'READ_ONLY';
     this.password = user.password || 'password';
-    this.createdAt = user.createdAt || Date.now();
+    this.createdAt = user.createdAt || new Date();
   }
 
   getUserForToken = () => {

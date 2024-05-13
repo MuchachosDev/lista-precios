@@ -25,7 +25,7 @@
           name="enableCurrencySelect"
           type="checkbox"
           class="form-checkbox h-5 w-5 text-blue-600"
-          {{#unless (eq supplier.dollar "Peso")}}checked="checked"{{/unless}}
+          {{#unless (eq supplier.currency "Peso")}}checked="checked"{{/unless}}
         />
         <label for="enableCurrencySelect" class="ml-2 text-gray-700 text-sm font-bold">ACTIVAR MONEDA EXTRANJERA</label>
       </div>
@@ -34,11 +34,11 @@
         <label for="currencySelect" class="block text-gray-700 text-sm font-bold mb-2">SELECCIONAR MONEDA</label>
         <select
           id="currencySelect"
-          name="dollar"
+          name="currency"
           class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline"
           autocomplete="off"
         >
-          {{#each dollars}}
+          {{#each currencys}}
           <option value="{{ this._id }}">{{ this.name }}</option>
           {{/each}}
         </select>

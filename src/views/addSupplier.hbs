@@ -40,12 +40,12 @@
         >SELECCIONAR MONEDA EXTRANJERA</label>
         <select
           id='currencySelect'
-          name='dollar'
+          name='currency'
           class='focus:shadow-outline block w-full appearance-none rounded border border-gray-300 bg-white px-4 py-2 pr-8 leading-tight hover:border-gray-400 focus:outline-none'
           autocomplete='off'
           disabled
         >
-          {{#each dollars}}
+          {{#each currencys}}
             <option value='{{this._id}}'>{{this.name}}</option>
           {{/each}}
         </select>
