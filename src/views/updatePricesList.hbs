@@ -1,15 +1,15 @@
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
   <div class="max-w-lg mx-auto p-8 bg-white rounded-lg shadow-md">
-    <h2 class="text-2xl font-semibold text-center text-gray-900 mb-6">Seleccionar Proveedor, Rubro y Subrubro</h2>
+    <h2 class="text-2xl font-semibold text-center text-gray-900 mb-6">SELECCIONAR PROVEEDOR, RUBRO Y SUBRUBRO</h2>
     <form onsubmit="updatePrice(event)">
       <div class="mb-6">
         <label for="supplier" class="block text-gray-800 text-sm font-bold mb-2">
-          Proveedor
+          PROVEEDOR
         </label>
         <select name="supplier"
           class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-3 pr-8 rounded shadow leading-tight focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
           autocomplete="off" onchange="selectSupplier(event)">
-          <option value="all-suppliers" {{#if (eq this.sid "all-suppliers" )}}selected{{/if}}>Todos los proveedores
+          <option value="all-suppliers" {{#if (eq this.sid "all-suppliers" )}}selected{{/if}}>TODOS LOS PROVEEDORES
           </option>
           {{#each suppliers}}
           <option value="{{this._id}}" {{#if (eq this._id ../sid)}}selected{{/if}}>{{this.name}}</option>
@@ -18,12 +18,12 @@
       </div>
       <div class="mb-6">
         <label for="item" class="block text-gray-800 text-sm font-bold mb-2">
-          Rubro
+          RUBRO
         </label>
         <select name="item"
           class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-3 pr-8 rounded shadow leading-tight focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
           autocomplete="off" {{#if (eq sid "all-suppliers" )}} disabled {{/if}} onchange="selectItem(event)">
-          <option value="all-items" {{#if (eq item "all-items" )}}selected{{/if}}>Todos los Rubros</option>
+          <option value="all-items" {{#if (eq item "all-items" )}}selected{{/if}}>TODOS LOS RUBROS</option>
           {{#each items}}
           <option value="{{this.item}}" {{#if (eq this.item ../item)}}selected{{/if}}>{{this.item}}</option>
           {{/each}}
@@ -31,12 +31,12 @@
       </div>
       <div class="mb-6">
         <label for="sub_item" class="block text-gray-800 text-sm font-bold mb-2">
-          Sub Rubros
+          SUBRUBRO
         </label>
         <select name="sub_item"
           class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-3 pr-8 rounded shadow leading-tight focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
           autocomplete="off" {{#if (eq item "all-items" )}} disabled {{/if}} onchange="selectSubItem(event)">
-          <option value="all-items" {{#if (eq this.sid "all-items" )}}selected{{/if}}>Todos los SubRubros</option>
+          <option value="all-items" {{#if (eq this.sid "all-items" )}}selected{{/if}}>TODOS LOS SUBRUBROS</option>
           {{#each sub_items}}
           <option value="{{this.sub_item}}" {{#if (eq this.sub_item ../sub_item)}}selected{{/if}}>{{this.sub_item}}
           </option>
@@ -44,18 +44,18 @@
         </select>
       </div>
       <div class="mb-6">
-        <label for="porcentaje" class="block text-gray-800 text-sm font-medium mb-2">Porcentaje de Aumento o Descuento
+        <label for="porcentaje" class="block font-bold text-gray-800 text-sm mb-2">PORCENTAJE DE AUMENTO
           %</label>
         <div class="flex items-center mb-4">
           <div class="flex items-center mr-4">
             <input type="radio" id="increase" name="adjustment_type" value="increase"
               class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300" checked>
-            <label for="increase" class="ml-2 block text-sm text-gray-800">Aumento</label>
+            <label for="increase" class="ml-2 block text-sm text-gray-800">AUMENTO</label>
           </div>
           <div class="flex items-center">
             <input type="radio" id="discount" name="adjustment_type" value="discount"
               class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
-            <label for="discount" class="ml-2 block text-sm text-gray-800">Descuento</label>
+            <label for="discount" class="ml-2 block text-sm text-gray-800">DESCUENTO</label>
           </div>
         </div>
         <input type="number" id="porcentaje" name="percentage" step="0.01" value="0"
@@ -65,11 +65,11 @@
       <div class="flex justify-between">
         <a href="/"
           class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
-          Atrás
+          ATRÁS
         </a>
         <button type="submit"
-          class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300">
-          Aplicar
+          class="bg-blue-500 text-white px-4 py-2 font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition duration-300">
+          APLICAR
         </button>
       </div>
     </form>
@@ -78,13 +78,13 @@
 <div id="confirmationModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50">
   <div class="relative mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
     <div class="text-center">
-      <h3 class="text-lg leading-6 font-medium text-gray-900">Confirmación de Actualización</h3>
+      <h3 class="text-lg leading-6 font-medium text-gray-900">CONFIRMACIÓN DE ACTUALIZACIÓN</h3>
       <div class="mt-2 px-7 py-3">
-        <p class="text-sm text-gray-500">¿Estás seguro de que deseas aplicar los cambios?</p>
+        <p class="text-sm text-gray-500">¿ESTÁS SEGURO DE QUE DESEAS ACTUALIZAR LOS PRECIOS?</p>
       </div>
       <div class="flex justify-center gap-4 mt-4">
-        <button id="cancelBtn" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 focus:outline-none transition duration-300">Atrás</button>
-        <button id="confirmBtn" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded focus:outline-none transition duration-300">Confirmar</button>
+        <button id="cancelBtn" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 focus:outline-none transition duration-300">ATRÁS</button>
+        <button id="confirmBtn" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded focus:outline-none transition duration-300">CONFIRMAR</button>
       </div>
     </div>
   </div>
@@ -97,9 +97,9 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
       </div>
-      <div class="ml-3 text-sm font-normal" id="textNotification">Mensaje de la notificación.</div>
-      <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" data-dismiss-target="#toast" aria-label="Cerrar">
-        <span class="sr-only">Cerrar</span>
+      <div class="ml-3 text-sm font-normal" id="textNotification">MENSAJE DE LA NOTIFICACIÓN</div>
+      <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" data-dismiss-target="#toast" aria-label="CERRAR">
+        <span class="sr-only">CERRAR</span>
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>

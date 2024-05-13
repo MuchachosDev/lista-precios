@@ -1,21 +1,21 @@
-<div class='flex justify-center items-center min-h-screen bg-gray-100'>
-  <div class='max-w-md w-full bg-white rounded-lg shadow-lg p-8'>
-    <h1 class='text-2xl font-semibold text-gray-800 mb-6 text-center'>Agregar
-      Factor</h1>
+<div class='flex min-h-screen items-center justify-center bg-gray-100'>
+  <div class='w-full max-w-md rounded-lg bg-white p-8 shadow-lg'>
+    <h1 class='mb-6 text-center text-2xl font-semibold text-gray-800'>AGREGAR
+      FACTOR</h1>
 
     <form
       onsubmit='createFactor(event)'
-      class='bg-white rounded px-8 pt-6 pb-8 mb-4'
+      class='mb-4 rounded bg-white px-8 pb-8 pt-6'
     >
       <div class='mb-4'>
         <label
           for='name'
-          class='block text-gray-700 text-sm font-bold mb-2'
-        >Nombre del factor</label>
+          class='mb-2 block text-sm font-bold text-gray-700'
+        >NOMBRE DEL FACTOR</label>
         <input
           type='text'
           name='name'
-          class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
           required
           autocomplete='off'
         />
@@ -24,14 +24,14 @@
       <div class='mb-4'>
         <label
           for='value'
-          class='block text-gray-700 text-sm font-bold mb-2'
-        >Valor del factor</label>
+          class='mb-2 block text-sm font-bold text-gray-700'
+        >VALOR DEL FACTOR</label>
         <input
           type='number'
           name='value'
           step='0.01'
           value='1'
-          class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
           required
           autocomplete='off'
         />
@@ -40,11 +40,11 @@
       <div class='mb-6'>
         <label
           for='supplier'
-          class='block text-gray-700 text-sm font-bold mb-2'
-        >Proveedor</label>
+          class='mb-2 block text-sm font-bold text-gray-700'
+        >PROVEEDOR</label>
         <select
           name='supplier'
-          class='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline block w-full appearance-none rounded border border-gray-400 bg-white px-4 py-2 pr-8 leading-tight shadow hover:border-gray-500 focus:outline-none'
           autocomplete='off'
         >
           {{#each suppliers}}
@@ -56,15 +56,15 @@
       <div class='flex items-center justify-between'>
         <a
           href='/'
-          class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none'
         >
-          Atras
+          ATRÁS
         </a>
         <button
           type='submit'
-          class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none'
         >
-          Agregar
+          AGREGAR
         </button>
       </div>
     </form>

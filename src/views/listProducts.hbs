@@ -1,16 +1,15 @@
 <div class="w-full mx-auto px-4 py-8 min-h-screen flex flex-col bg-gray-100">
   <header class="bg-white shadow-md rounded-md p-4 mb-4">
     <div class="flex justify-between items-center">
-      <h1 class="text-2xl font-semibold text-gray-800">Lista de Productos</h1>
+      <h1 class="text-2xl font-semibold text-gray-800">LISTA DE PRODUCTOS</h1>
       <a href="/api/users/logout"
-        class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300">Cerrar
-        Sesión</a>
+        class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300">CERRAR SESIÓN</a>
     </div>
   </header>
 
   <div class="flex flex-col md:flex-row gap-4">
     <div class="md:w-[1/8] bg-white shadow-md rounded-md p-4">
-      <h2 class="text-lg font-semibold mb-4 text-gray-800">Filtrar por Marca</h2>
+      <h2 class="text-lg font-semibold mb-4 text-gray-800">FILTRAR POR MARCA</h2>
       <form onsubmit="{{#if brandSelected}}deleteFilterBrand(event){{else}}filterBrand(event){{/if}}">
         {{#if brandSelected}}
         <div class="inline-flex items-center bg-blue-500 text-white text-sm font-medium rounded-full px-3 py-1 mb-2">
@@ -36,9 +35,9 @@
       <div class="mb-4">
         <div class="flex flex-col md:flex-row items-center gap-4 bg-gray-100 py-2 px-4 rounded-md">
           <a href="/"
-            class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md shadow transition duration-300">Inicio</a>
+            class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md shadow transition duration-300">INICIO</a>
           <form onsubmit="searchProduct(event)" class="flex items-center w-full m-0">
-            <input type="text" id="inputSearch" name="filter" placeholder="Buscar producto..." autocomplete="off"
+            <input type="text" id="inputSearch" name="filter" placeholder="BUSCAR PRODUCTO" autocomplete="off"
               class="flex-grow px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
             <button type="submit"
               class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-r-md transition duration-300">Buscar</button>
@@ -48,7 +47,7 @@
 
       <div class="flex justify-between items-center mb-4">
         <p class="text-lg font-semibold text-gray-700">
-          Total de productos: <span class="text-blue-500">{{totalDocs}}</span>
+          CANTIDAD DE PRODUCTOS: <span class="text-blue-500">{{totalDocs}}</span>
         </p>
 
         <div class="flex items-center">
@@ -56,9 +55,9 @@
           <select name="sort"
             class="border border-gray-300 text-gray-700 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             onchange="sortPrice(event)" autocomplete="off">
-            <option value="">Por defecto</option>
-            <option value="1" {{#if (eq sort 1)}}selected{{/if}}>Precio ascendente</option>
-            <option value="-1" {{#if (eq sort -1)}}selected{{/if}}>Precio descendente</option>
+            <option value="">POR DEFECTO</option>
+            <option value="1" {{#if (eq sort 1)}}selected{{/if}}>PRECIO ASCENDENTE</option>
+            <option value="-1" {{#if (eq sort -1)}}selected{{/if}}>PRECIO DESCENDENTE</option>
           </select>
         </div>
       </div>
@@ -69,17 +68,17 @@
             <tr class="bg-blue-500 text-white">
               <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">
               </th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Código interno
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">CODIGO INTERNO
               </th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Modelo</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Descripción</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Marca</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Proveedor</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Rubro</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Sub Rubro</th>
-              <th class="py-2 px -3 uppercase font-medium text-sm border-b border-gray-200 text-start">Presentación</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">MODELO</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">DESCRIPCIÓN</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">MARCA</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">PROVEEDOR</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">RUBRO</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">SUBRUBRO</th>
+              <th class="py-2 px -3 uppercase font-medium text-sm border-b border-gray-200 text-start">PRESENTACIÓN</th>
               <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">IVA</th>
-              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">Precio Final</th>
+              <th class="py-2 px-3 uppercase font-medium text-sm border-b border-gray-200 text-start">PRECIO FINAL</th>
             </tr>
           </thead>
           <tbody class="text-gray-700">
@@ -137,7 +136,7 @@
       <div class="flex justify-between items-center mt-4">
         <div class="flex-grow"></div>
         <div class="flex items-center">
-          <label for="pageSize" class="text-sm text-gray-700 mr-2">Productos por página:</label>
+          <label for="pageSize" class="text-sm text-gray-700 mr-2">PRODUCTOS POR PÁGINA:</label>
           <select id="pageSize" class="border border-gray-300 rounded-md px-2 py-1 bg-white"
             onchange="limitChange(event)">
             <option value="12" {{#if (eq limit "12" )}}selected{{/if}}>12</option>
@@ -159,11 +158,11 @@
             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
       </div>
-      <div class="ml-3 text-sm font-normal" id="textNotification">Mensaje de la notificación.</div>
+      <div class="ml-3 text-sm font-normal" id="textNotification">MENSAJE DE LA NOTIFICACIÓN</div>
       <button type="button"
         class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8"
-        data-dismiss-target="#toast" aria-label="Cerrar">
-        <span class="sr-only">Cerrar</span>
+        data-dismiss-target="#toast" aria-label="CERRAR">
+        <span class="sr-only">CERRAR</span>
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>

@@ -34,7 +34,7 @@ export default class Supplier {
     try {
       return await supplierModel.updateOne(
         { _id: sid },
-        { ...supplier, updated_at: Date.now() }
+        { ...supplier, updated_at: new Date() }
       );
     } catch (error) {
       return { error };

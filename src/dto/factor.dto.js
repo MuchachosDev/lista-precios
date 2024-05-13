@@ -2,7 +2,7 @@ export default class FactorDTO {
   constructor(value, supplier, name) {
     this.value = value;
     this.supplier = supplier;
-    this.name = name || 'GENERAL';
+    this.name = name.toUpperCase() || 'GENERAL';
   }
   static getFactorToPage = (factor) => {
     return {

@@ -604,10 +604,6 @@ video {
   pointer-events: none;
 }
 
-.invisible {
-  visibility: hidden;
-}
-
 .static {
   position: static;
 }
@@ -651,14 +647,6 @@ video {
 
 .top-0 {
   top: 0px;
-}
-
-.left-0 {
-  left: 0px;
-}
-
-.top-full {
-  top: 100%;
 }
 
 .z-0 {
@@ -762,10 +750,6 @@ video {
   margin-top: 2rem;
 }
 
-.mt-1 {
-  margin-top: 0.25rem;
-}
-
 .block {
   display: block;
 }
@@ -780,10 +764,6 @@ video {
 
 .table {
   display: table;
-}
-
-.table-cell {
-  display: table-cell;
 }
 
 .grid {
@@ -858,14 +838,6 @@ video {
   width: 100vw;
 }
 
-.w-auto {
-  width: auto;
-}
-
-.w-\[300px\] {
-  width: 300px;
-}
-
 .min-w-full {
   min-width: 100%;
 }
@@ -886,20 +858,12 @@ video {
   max-width: 24rem;
 }
 
-.max-w-full {
-  max-width: 100%;
-}
-
 .flex-shrink-0 {
   flex-shrink: 0;
 }
 
 .flex-grow {
   flex-grow: 1;
-}
-
-.flex-grow-0 {
-  flex-grow: 0;
 }
 
 .table-auto {
@@ -916,10 +880,6 @@ video {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.resize {
-  resize: both;
 }
 
 .appearance-none {
@@ -997,20 +957,6 @@ video {
 
 .overflow-y-auto {
   overflow-y: auto;
-}
-
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.whitespace-normal {
-  white-space: normal;
-}
-
-.whitespace-nowrap {
-  white-space: nowrap;
 }
 
 .rounded {
@@ -1197,11 +1143,6 @@ video {
 .bg-yellow-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(202 138 4 / var(--tw-bg-opacity));
-}
-
-.bg-gray-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {
@@ -1794,10 +1735,6 @@ video {
   --tw-ring-offset-width: 2px;
 }
 
-.group:hover .group-hover\:visible {
-  visibility: visible;
-}
-
 @media (min-width: 640px) {
   .sm\:mx-0 {
     margin-left: 0px;
@@ -1869,32 +1806,12 @@ video {
     display: flex;
   }
 
-  .md\:w-1\/6 {
-    width: 16.666667%;
-  }
-
-  .md\:w-5\/6 {
-    width: 83.333333%;
-  }
-
-  .md\:w-\[\] {
-    width: ;
-  }
-
-  .md\:w-\[1\/\] {
-    width: 1/;
-  }
-
   .md\:w-\[1\/8\] {
     width: 1/8;
   }
 
   .md\:w-\[7\/8\] {
     width: 7/8;
-  }
-
-  .md\:w-\[7\/\] {
-    width: 7/;
   }
 
   .md\:grid-cols-2 {

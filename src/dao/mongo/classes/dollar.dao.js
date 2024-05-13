@@ -26,7 +26,7 @@ export default class Dollar {
     try {
       return await dollarModel.findByIdAndUpdate(did, {
         ...dollar,
-        updated_at: Date.now(),
+        updated_at: new Date(),
       });
     } catch (error) {
       return error;

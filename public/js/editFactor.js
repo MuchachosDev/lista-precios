@@ -19,14 +19,17 @@ const editFactor = async (e) => {
 
     if (response.ok) {
       document.getElementById('textNotification').innerHTML =
-        'Factor actualizado correctamente';
+        'FACTOR ACTUALIZADO CORRECTAMENTE';
       showToast();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } else {
       document.getElementById('textNotification').innerHTML =
-        'Factor no actualizado';
+        'FACTOR NO ACTUALIZADO';
     }
   } catch (error) {
-    alert('Error al actualizar factor', error);
+    alert('ERROR AL ACTUALIZAR FACTOR', error);
   }
 };
 

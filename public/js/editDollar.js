@@ -14,15 +14,18 @@ const editDollar = async (e) => {
     });
     if (response.ok) {
       document.getElementById('textNotification').innerHTML =
-        'Dólar actualizado correctamente';
+        'MONEDA ACTUALIZADA CORRECTAMENTE';
       showToast();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } else {
       document.getElementById('textNotification').innerHTML =
-        'Dólar no actualizado';
+        'MONEDA NO ACTUALIZADO';
       showToast();
     }
   } catch (error) {
-    alert('Error al actualizar dolar', error);
+    alert('ERROR AL ACTUALIZAR MONEDA', error);
   }
 };
 

@@ -11,6 +11,7 @@ const productSchema = new Schema({
   bar_code: {
     type: String,
     required: true,
+    unique: true,
   },
   sku: {
     type: String,

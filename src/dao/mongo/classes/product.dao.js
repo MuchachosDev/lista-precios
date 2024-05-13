@@ -182,12 +182,12 @@ export default class Product {
     }
   };
 
-  getItems = async (sid=null) => {
+  getItems = async (sid = null) => {
     try {
-      if(sid){
+      if (sid) {
         return await productModel.distinct('item', { supplier: sid });
       }
-      return[];
+      return [];
     } catch (error) {
       console.log(error);
     }
@@ -207,8 +207,14 @@ export default class Product {
     try {
       const mul =
         adjustment_type === 'increase'
-          ? { $mul: { price_list: 1 + percentage / 100 } }
-          : { $mul: { price_list: 1 - percentage / 100 } };
+          ? {
+              $mul: { price_list: 1 + percentage / 100 },
+              update_at: new Date(),
+            }
+          : {
+              $mul: { price_list: 1 - percentage / 100 },
+              update_at: new Date(),
+            };
 
       if (
         sid === 'all-suppliers' &&

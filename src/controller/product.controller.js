@@ -20,12 +20,17 @@ export const addFile = async (req, res) => {
     if (!existSupplier) {
       return res.sendNotFound({ message: 'Proveedor no encontrado' });
     }
-    let existProducts=0;
-    let addedProducts=0;
+    let existProducts = 0;
+    let addedProducts = 0;
     for (const product of products) {
-      const exist= await productService.getProductsWithFilter({model:product.model,brand:product.brand, sku:product.sku, sub_item:product.sub_item})
+      const exist = await productService.getProductsWithFilter({
+        model: product.model,
+        brand: product.brand,
+        sku: product.sku,
+        sub_item: product.sub_item,
+      });
 
-      if(exist.length>0){
+      if (exist.length > 0) {
         existProducts++;
         continue;
       }
@@ -42,7 +47,9 @@ export const addFile = async (req, res) => {
       }
       addedProducts++;
     }
-    return res.sendSuccessCreated({ message: `${addedProducts} productos agregados, ${existProducts} productos ya existen` });
+    return res.sendSuccessCreated({
+      message: `${addedProducts} productos agregados, ${existProducts} productos ya existen`,
+    });
   } catch (error) {
     return res.sendClientError(error);
   }
@@ -55,7 +62,7 @@ export const updatePricePerItem = async (req, res) => {
   if (percentage == 0) {
     return res.sendClientError({ message: 'Porcentaje no puede ser 0' });
   } else if (percentage < 0) {
-    return res.sendClientError({ message: "Porcentaje no puede ser negativo" });
+    return res.sendClientError({ message: 'Porcentaje no puede ser negativo' });
   }
 
   if (!sid) {

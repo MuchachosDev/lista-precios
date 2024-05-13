@@ -1,8 +1,8 @@
-let previewSupplier
+let previewSupplier;
 
 document.addEventListener('DOMContentLoaded', () => {
-previewSupplier = document.getElementById('supplier').value
-console.log(previewSupplier)
+  previewSupplier = document.getElementById('supplier').value;
+  console.log(previewSupplier);
 });
 
 const showModalConfirmation = () => {
@@ -21,9 +21,9 @@ const showModalConfirmation = () => {
     };
   });
 };
-const selectSupplier = async(e) => {
+const selectSupplier = async (e) => {
   e.preventDefault();
-  console.log(e.target)
+  console.log(e.target);
   const { search, pathname } = window.location;
   const supplier = e.target.value;
   const searchParams = new URLSearchParams(search);
@@ -31,7 +31,7 @@ const selectSupplier = async(e) => {
   const userConfirmation = await showModalConfirmation();
 
   if (!userConfirmation) {
-    document.getElementById('supplier').value = previewSupplier
+    document.getElementById('supplier').value = previewSupplier;
     return;
   }
   window.location.href = `${pathname}?${searchParams.toString()}`;
@@ -145,15 +145,15 @@ const editProduct = async (e) => {
     });
     if (response.ok) {
       document.getElementById('textNotification').innerHTML =
-        'Producto actualizado correctamente';
+        'PRODUCTO ACTUALIZADO CORRECTAMENTE';
       showToast();
     } else {
       document.getElementById('textNotification').innerHTML =
-        'Producto no actualizado';
+        'PRODUCTO NO ACTUALIZADO';
       showToast();
     }
   } catch (error) {
-    alert('Error al actualizar producto', error);
+    alert('ERROR AL ACTUALIZAR PRODUCTO', error);
   }
 };
 
@@ -161,16 +161,19 @@ const handleFinalPrice = (e) => {
   e.preventDefault();
   const price_list = parseFloat(document.getElementById('price_list').value);
   const iva = parseFloat(document.getElementById('iva').value);
-  const factor = parseFloat(document
-    .getElementById('factor')
-    .value.substring(document.getElementById('factor').value.indexOf('-')+1).trim());
+  const factor = parseFloat(
+    document
+      .getElementById('factor')
+      .value.substring(document.getElementById('factor').value.indexOf('-') + 1)
+      .trim()
+  );
 
-  document.getElementById('final_price').textContent = `$${( price_list * (iva/100 + 1) * factor).toFixed(2)}` ;
+  document.getElementById('final_price').textContent =
+    `$${(price_list * (iva / 100 + 1) * factor).toFixed(2)}`;
 };
 
 const handlePreventSubmit = (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
   }
-  
-}
+};

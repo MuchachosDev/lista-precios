@@ -19,15 +19,18 @@ const editSupplier = async (e) => {
 
     if (response.ok) {
       document.getElementById('textNotification').innerHTML =
-        'Proveedor actualizado correctamente';
+        'PROVEEDOR ACTUALIZADO CORRECTAMENTE';
       showToast();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } else {
       document.getElementById('textNotification').innerHTML =
-        'Proveedor no actualizado';
+        'PROVEEDOR NO ACTUALIZADO';
       showToast();
     }
   } catch (error) {
-    alert('Error al actualizar proveedor', error);
+    alert('ERROR AL ACTUALIZAR PRODUCTO', error);
   }
 };
 

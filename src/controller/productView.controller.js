@@ -28,7 +28,7 @@ export const getUploadDocumentPage = async (req, res) => {
     });
 
     return res.render('uploadDocument', {
-      title: 'Upload Documents',
+      title: 'SUBIR DOCUMENTO',
       factors: factorsDTO,
     });
   } catch (error) {
@@ -81,7 +81,7 @@ export const getListProductsPage = async (req, res) => {
     const brands = await productService.getDistinticBrands();
 
     return res.render('listProducts', {
-      title: 'List Products',
+      title: 'LISTA DE PRODUCTOS',
       styles: 'styles',
       products: productsDTO,
       filter,
@@ -116,12 +116,8 @@ export const getUpdatePricesListPage = async (req, res) => {
 
   try {
     const suppliers = await supplierService.getAllSuppliers();
-    const items = await productService.getDistinctItems(
-      sid
-    );
-    const subItems = await productService.getDistinctSubItems(sid,
-      item
-    );
+    const items = await productService.getDistinctItems(sid);
+    const subItems = await productService.getDistinctSubItems(sid, item);
 
     const suppliersDTO = suppliers.map((supplier) => {
       return SupplierDTO.getSuppliersToPage(supplier);
@@ -135,7 +131,7 @@ export const getUpdatePricesListPage = async (req, res) => {
       return ProductDTO.getSubItemToProduct(subItem);
     });
     return res.render('updatePricesList', {
-      title: 'Update Prices',
+      title: 'ACTUALIZAR PRECIOS',
       suppliers: suppliersDTO,
       items: itemsDTO,
       item: item,
@@ -152,12 +148,8 @@ export const getGenerateCodebarsPage = async (req, res) => {
   let { sid, item, sub_item } = req.query;
   try {
     const suppliers = await supplierService.getAllSuppliers();
-    const items = await productService.getDistinctItems(
-      sid
-    );
-    const subItems = await productService.getDistinctSubItems(sid,
-      item
-    );
+    const items = await productService.getDistinctItems(sid);
+    const subItems = await productService.getDistinctSubItems(sid, item);
 
     const suppliersDTO = suppliers.map((supplier) => {
       return SupplierDTO.getSuppliersToPage(supplier);
@@ -171,7 +163,7 @@ export const getGenerateCodebarsPage = async (req, res) => {
       return ProductDTO.getSubItemToProduct(subItem);
     });
     return res.render('generateCodebars', {
-      title: 'Update Prices',
+      title: 'GENERAR CODIGOS DE BARRAS',
       suppliers: suppliersDTO,
       items: itemsDTO,
       item: item,
@@ -228,7 +220,7 @@ export const getCodebarsPrintPage = async (req, res) => {
     );
 
     return res.render('codebarsPrint', {
-      title: 'Imprimir Codigos de Barras',
+      title: 'IMPRIMIR CODIGOS DE BARRAS',
       products: productsDTO,
     });
   } catch (error) {
@@ -287,7 +279,7 @@ export const getEditProductPage = async (req, res) => {
     });
 
     return res.render('editProduct', {
-      title: 'Edit Product',
+      title: 'EDITAR PRODUCTO',
       product: productDTO,
       currency: {
         name: `${product.supplier.dollar?.name ?? 'Peso'} ${product.supplier.dollar?.value ? '(USD)' : '(ARS)'}`,

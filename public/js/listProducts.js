@@ -1,4 +1,4 @@
-const searchProduct = async(e) => {
+const searchProduct = async (e) => {
   e.preventDefault();
   const filter = await e.target.filter.value;
   if (filter) {
@@ -58,7 +58,17 @@ const input = document.getElementById('inputSearch');
 
 document.addEventListener('keydown', (e) => {
   const key = e.key;
-  const isModifierKey = key === 'Control' || key === 'Alt' || key === 'Shift' || key === 'CapsLock' || key === 'Tab' || key === 'Meta' || key=== 'ArrowLeft' || key=== 'ArrowRight' || key=== 'ArrowUp' || key=== 'ArrowDown';
+  const isModifierKey =
+    key === 'Control' ||
+    key === 'Alt' ||
+    key === 'Shift' ||
+    key === 'CapsLock' ||
+    key === 'Tab' ||
+    key === 'Meta' ||
+    key === 'ArrowLeft' ||
+    key === 'ArrowRight' ||
+    key === 'ArrowUp' ||
+    key === 'ArrowDown';
   const allowedKeys = /^[a-zA-Z0-9\s,.-]*$/;
   if ((e.ctrlKey || e.metaKey) && (key === 'c' || key === 'x' || key === 'v')) {
     return;
@@ -79,12 +89,11 @@ document.addEventListener('keydown', (e) => {
   e.preventDefault();
 });
 
-
 const copyDetail = async (e) => {
   e.preventDefault();
-  let target=e.target;
-  while(!target.id){
-    target=target.parentNode;
+  let target = e.target;
+  while (!target.id) {
+    target = target.parentNode;
   }
   const description = target.getAttribute('data-product-description');
   const model = target.getAttribute('data-product-model');
@@ -96,10 +105,10 @@ const copyDetail = async (e) => {
     );
 
     document.getElementById('textNotification').innerHTML =
-      'Detalle copiado al portapapeles';
+      'DETALLE COPIADO CORRECTAMENTE';
     showToast();
   } catch (error) {
-    alert('Error al copiar detalle', error);
+    alert('ERROR AL COPIAR DETALLE', error);
   }
 };
 

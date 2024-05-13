@@ -13,12 +13,12 @@ const createSupplier = async (e) => {
       body: JSON.stringify({ name, dollar, enableCurrencySelect }),
     });
     if (response.ok) {
-      alert('Proveedor creado correctamente');
+      alert('PROVEEDOR CREADO CORRECTAMENTE');
       window.location.href = '/manage-suppliers';
     } else {
-      alert('Proveedor no creado');
+      alert('PROVEEDOR NO CREADO');
     }
   } catch (error) {
-    alert('Error al crear proveedor', error);
+    alert('ERROR AL CREAR PROVEEDOR', error);
   }
 };

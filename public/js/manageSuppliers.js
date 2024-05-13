@@ -4,7 +4,7 @@ const deleteSupplier = async (e) => {
   const userConfirmed = await showModalConfirmation();
 
   if (!userConfirmed) {
-    alert('Eliminación cancelada');
+    alert('ELIMINACIÓN CANCELADA');
     return;
   }
 
@@ -16,14 +16,14 @@ const deleteSupplier = async (e) => {
       },
     });
     if (response.ok) {
-      alert('Proveedor eliminado correctamente');
+      alert('PROVEEDOR ELIMINADO CORRECTAMENTE');
       window.location.reload();
     } else {
       const error = await response.json();
-      alert('Proveedor no eliminado');
+      alert('PROVEEDOR NO ELIMINADO');
     }
   } catch (error) {
-    alert('Error al eliminar proveedor');
+    alert('ERROR AL ELIMINAR PROVEEDOR', error);
   }
 };
 

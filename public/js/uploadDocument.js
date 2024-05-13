@@ -3,7 +3,7 @@ const sendDocument = async (e) => {
   document.getElementById('loadingScreen').classList.remove('hidden');
 
   if (e.target.file.files.length === 0) {
-    alert('Please select a file');
+    alert('POR FAVOR, SELECCIONE UN ARCHIVO');
     document.getElementById('loadingScreen').classList.add('hidden');
     return;
   }
@@ -19,14 +19,14 @@ const sendDocument = async (e) => {
       body: formData,
     });
     if (response.ok) {
-      const {payload} = await response.json();
+      const { payload } = await response.json();
       alert(payload.message);
       window.location.href = '/upload-document';
     } else {
-      alert('Archivo no subido');
+      alert('ARCHIVO NO SUBIDO CORRECTAMENTE');
     }
   } catch (error) {
-    alert('Error al subir archivo', error);
+    alert('ERROR AL SUBIR EL ARCHIVO', error);
   } finally {
     document.getElementById('loadingScreen').classList.add('hidden');
   }

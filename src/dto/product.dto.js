@@ -1,4 +1,4 @@
-import { parseTextToIva, parseTextToNumber } from "../util/parser.util.js";
+import { parseTextToIva, parseTextToNumber } from '../util/parser.util.js';
 
 export default class ProductDTO {
   constructor(product) {

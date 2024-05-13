@@ -1,24 +1,24 @@
-<div class='flex justify-center items-center min-h-screen bg-gray-100'>
-  <div class='max-w-md w-full bg-white rounded-lg shadow-xl p-8'>
-    <h1 class='text-2xl font-semibold text-gray-800 mb-6 text-center'>Editar
-      Valor del Dólar</h1>
+<div class='flex min-h-screen items-center justify-center bg-gray-100'>
+  <div class='w-full max-w-md rounded-lg bg-white p-8 shadow-xl'>
+    <h1 class='mb-6 text-center text-2xl font-semibold text-gray-800'>EDITAR
+      VALOR DEL DÓLAR</h1>
 
     <form
       onsubmit='editDollar(event)'
-      class='bg-white rounded px-8 pt-6 pb-8'
+      class='rounded bg-white px-8 pb-8 pt-6'
       data-dolar-id='{{dollar._id}}'
     >
       <div class='mb-6'>
         <label
           for='dollarName'
-          class='block text-gray-700 text-sm font-bold mb-2'
-        >Nombre del Dólar:</label>
+          class='mb-2 block text-sm font-bold text-gray-700'
+        >NOMBRE DEL DÓLAR:</label>
         <input
           type='text'
           id='dollarName'
           name='name'
           value='{{dollar.name}}'
-          class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
           required
           autocomplete='off'
         />
@@ -27,15 +27,15 @@
       <div class='mb-6'>
         <label
           for='dollarValue'
-          class='block text-gray-700 text-sm font-bold mb-2'
-        >Valor Actual del Dólar:</label>
+          class='mb-2 block text-sm font-bold text-gray-700'
+        >VALOR ACTUAL DEL DÓLAR:</label>
         <input
           type='number'
           id='dollarValue'
           name='value'
           step='0.01'
           value='{{dollar.value}}'
-          class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
           required
           autocomplete='off'
         />
@@ -44,30 +44,30 @@
       <div class='mb-6'>
         <label
           for='lastModified'
-          class='block text-gray-700 text-sm font-bold mb-2'
-        >Última Modificación:</label>
+          class='mb-2 block text-sm font-bold text-gray-700'
+        >ÚLTIMA MODIFICACIÓN:</label>
         <input
           type='text'
           id='lastModified'
           name='lastModified'
           value='{{formatDate dollar.updated_at}}'
-          class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight'
+          class='w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow'
           disabled
         />
       </div>
 
-      <div class='flex items-center gap-4 justify-between'>
+      <div class='flex items-center justify-between gap-4'>
         <a
           href='/manage-dollars'
-          class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none'
         >
-          Atrás
+          ATRÁS
         </a>
         <button
           type='submit'
-          class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none'
         >
-          Guardar Cambios
+          GUARDAR CAMBIOS
         </button>
       </div>
     </form>
@@ -76,16 +76,16 @@
 
 <div
   id='toast'
-  class='hidden fixed bottom-5 left-5 z-50 max-w-sm mx-auto overflow-hidden rounded-lg shadow-md'
+  class='fixed bottom-5 left-5 z-50 mx-auto hidden max-w-sm overflow-hidden rounded-lg shadow-md'
   role='alert'
 >
-  <div class='bg-white rounded-lg shadow-xs overflow-hidden'>
-    <div class='p-4 flex items-center'>
+  <div class='shadow-xs overflow-hidden rounded-lg bg-white'>
+    <div class='flex items-center p-4'>
       <div
-        class='inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-blue-100 text-blue-500'
+        class='inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-blue-100 text-blue-500'
       >
         <svg
-          class='w-5 h-5'
+          class='h-5 w-5'
           fill='none'
           stroke='currentColor'
           viewBox='0 0 24 24'
@@ -99,17 +99,17 @@
           ></path>
         </svg>
       </div>
-      <div class='ml-3 text-sm font-normal' id='textNotification'>Mensaje de la
-        notificación.</div>
+      <div class='ml-3 text-sm font-normal' id='textNotification'>MENSAJE DE LA
+        NOTIFICACIÓN</div>
       <button
         type='button'
-        class='ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8'
+        class='-mx-1.5 -my-1.5 ml-auto inline-flex h-8 w-8 rounded-lg bg-white p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300'
         data-dismiss-target='#toast'
-        aria-label='Cerrar'
+        aria-label='CERRAR'
       >
-        <span class='sr-only'>Cerrar</span>
+        <span class='sr-only'>CERRAR</span>
         <svg
-          class='w-5 h-5'
+          class='h-5 w-5'
           fill='none'
           stroke='currentColor'
           viewBox='0 0 24 24'

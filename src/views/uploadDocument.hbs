@@ -1,20 +1,20 @@
-<div class='h-screen w-screen flex justify-center items-center bg-gray-100'>
+<div class='flex h-screen w-screen items-center justify-center bg-gray-100'>
   <div class='w-full max-w-lg px-4'>
-    <h1 class='text-lg font-semibold text-gray-700 text-center mb-6'>Subir nueva
-      lista de precios</h1>
+    <h1 class='mb-6 text-center text-lg font-semibold text-gray-700'>SUBIR LISTA
+      DE PRODUCTOS</h1>
     <form
-      class='bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4'
+      class='mb-4 rounded-lg bg-white px-8 pb-8 pt-6 shadow-lg'
       onsubmit='sendDocument(event)'
     >
       <div class='mb-6'>
         <label
           for='supplier'
-          class='block text-gray-700 text-sm font-bold mb-2'
-        >Descuento - Proveedor:</label>
+          class='mb-2 block text-sm font-bold text-gray-700'
+        >DESCUENTO - PROVEEDOR:</label>
         <div class='relative'>
           <select
             name='factor'
-            class='block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded-lg shadow focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500'
+            class='block w-full appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 pr-8 shadow hover:border-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500'
           >
             {{#each factors}}
               <option value='{{this._id}}-{{this.supplier_id}}'>{{this.value}}
@@ -28,7 +28,7 @@
             class='pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700'
           >
             <svg
-              class='fill-current h-4 w-4'
+              class='h-4 w-4 fill-current'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 20 20'
             >
@@ -42,35 +42,35 @@
       <div class='mb-6'>
         <label
           for='file'
-          class='block text-gray-700 text-sm font-bold mb-2'
-        >Documento:</label>
+          class='mb-2 block text-sm font-bold text-gray-700'
+        >DOCUMENTO:</label>
         <input
           type='file'
           name='file'
-          class='shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline w-full appearance-none rounded-lg border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
         />
       </div>
       <div class='flex items-center justify-between'>
         <a
           href='/'
-          class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out'
-        >Atras</a>
+          class='focus:shadow-outline rounded-lg bg-red-500 px-4 py-2 font-bold text-white transition duration-300 ease-in-out hover:bg-red-700 focus:outline-none'
+        >ATRÁS</a>
         <button
           type='submit'
-          class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out'
-        >Enviar</button>
+          class='focus:shadow-outline rounded-lg bg-blue-500 px-4 py-2 font-bold text-white transition duration-300 ease-in-out hover:bg-blue-700 focus:outline-none'
+        >ENVIAR</button>
       </div>
     </form>
     <div
       id='loadingScreen'
-      class='fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden'
+      class='fixed inset-0 z-50 flex hidden items-center justify-center bg-black bg-opacity-50'
     >
       <div class='lds-ripple'>
         <div
-          class='absolute border-4 border-yellow-500 opacity-100 rounded-full animate-ripple'
+          class='animate-ripple absolute rounded-full border-4 border-yellow-500 opacity-100'
         ></div>
         <div
-          class='absolute border-4 border-yellow-500 opacity-100 rounded-full animate-ripple animation-delay-500'
+          class='animate-ripple animation-delay-500 absolute rounded-full border-4 border-yellow-500 opacity-100'
         ></div>
       </div>
     </div>

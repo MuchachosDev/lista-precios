@@ -1,66 +1,66 @@
 <div class='container mx-auto px-4 py-8'>
-  <h1 class='text-2xl font-semibold text-gray-800 mb-6'>Administración de
-    Proveedores</h1>
+  <h1 class='mb-6 text-2xl font-semibold text-gray-800'>ADMINISTRACIÓN DE
+    PROVEEDORES</h1>
 
-  <div class='flex justify-between items-center mb-4'>
+  <div class='mb-4 flex items-center justify-between'>
     <a
       href='/'
-      class='bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-300'
-    >Inicio</a>
+      class='rounded-lg bg-green-500 px-4 py-2 font-semibold text-white shadow transition duration-300 hover:bg-green-600'
+    >INICIO</a>
     <a
       href='/add-supplier'
-      class='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300'
-    >Agregar Nuevo Proveedor</a>
+      class='rounded bg-blue-500 px-4 py-2 font-semibold text-white transition duration-300 hover:bg-blue-700'
+    >AGREGAR NUEVO PROVEEDOR</a>
   </div>
 
-  <div class='bg-white shadow-md rounded-md overflow-hidden'>
+  <div class='overflow-hidden rounded-md bg-white shadow-md'>
     <table class='w-full table-auto'>
       <thead class='bg-blue-500 text-white'>
         <tr>
           <th
-            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
-          >Nombre</th>
+            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
+          >NOMBRE</th>
           <th
-            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
-          >Moneda</th>
+            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
+          >MONEDA</th>
           <th
-            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
-          >Creado</th>
+            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
+          >CREACIÓN</th>
           <th
-            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
+            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
           >ULTIMA MODIFICACIÓN</th>
           <th
-            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-right'
-          >Acciones</th>
+            class='border-b border-gray-200 px-4 py-3 text-right text-sm font-semibold uppercase'
+          >ACCIONES</th>
         </tr>
       </thead>
       <tbody class='bg-gray-100'>
         {{#each suppliers}}
-          <tr class='hover:bg-gray-200 transition duration-300'>
+          <tr class='transition duration-300 hover:bg-gray-200'>
             <td
-              class='py-3 px-4 border-b border-gray-200 text-left'
+              class='border-b border-gray-200 px-4 py-3 text-left'
             >{{this.name}}</td>
             <td
-              class='py-3 px-4 border-b border-gray-200 text-left'
+              class='border-b border-gray-200 px-4 py-3 text-left'
             >{{this.dollar}}</td>
             <td
-              class='py-3 px-4 border-b border-gray-200 text-left'
+              class='border-b border-gray-200 px-4 py-3 text-left'
             >{{formatDate this.created_at}}</td>
             <td
-              class='py-3 px-4 border-b border-gray-200 text-left'
+              class='border-b border-gray-200 px-4 py-3 text-left'
             >{{formatDate this.updated_at}}</td>
             <td
-              class='py-3 px-4 border-b border-gray-200 text-right flex justify-end gap-2'
+              class='flex justify-end gap-2 border-b border-gray-200 px-4 py-3 text-right'
             >
               <a
                 href='/edit-supplier/{{this._id}}'
-                class='bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition duration-300'
-              >Editar</a>
+                class='rounded-md bg-blue-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-blue-700'
+              >EDITAR</a>
               <button
-                class='bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded-md transition duration-300'
+                class='rounded-md bg-red-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-red-700'
                 onclick='deleteSupplier(event)'
                 data-supplier-id='{{this._id}}'
-              >Eliminar</button>
+              >ELIMINAR</button>
             </td>
           </tr>
         {{/each}}
@@ -71,25 +71,25 @@
 
 <div
   id='confirmationModal'
-  class='hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50'
+  class='fixed inset-0 z-50 flex hidden h-full w-full items-center justify-center overflow-y-auto bg-gray-600 bg-opacity-50'
 >
-  <div class='relative mx-auto p-5 border w-96 shadow-lg rounded-md bg-white'>
+  <div class='relative mx-auto w-96 rounded-md border bg-white p-5 shadow-lg'>
     <div class='text-center'>
-      <h3 class='text-lg leading-6 font-medium text-gray-900'>Confirmación de
-        Actualización</h3>
+      <h3 class='text-lg font-medium leading-6 text-gray-900'>CONFIRMACIÓN DE
+        ELIMINACIÓN</h3>
       <div class='mt-2 px-7 py-3'>
-        <p class='text-sm text-gray-500'>¿Estás seguro de que deseas aplicar los
-          cambios?</p>
+        <p class='text-sm text-gray-500'>¿ESTAS SEGURO DE QUE DESEAS ELIMINAR
+          ESTE PROVEEDOR?</p>
       </div>
-      <div class='flex justify-center gap-4 mt-4'>
+      <div class='mt-4 flex justify-center gap-4'>
         <button
           id='cancelBtn'
-          class='px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 focus:outline-none transition duration-300'
-        >Atrás</button>
+          class='rounded bg-gray-200 px-4 py-2 text-gray-800 transition duration-300 hover:bg-gray-300 focus:outline-none'
+        >ATRÁS</button>
         <button
           id='confirmBtn'
-          class='px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded focus:outline-none transition duration-300'
-        >Confirmar</button>
+          class='rounded bg-green-500 px-4 py-2 text-white transition duration-300 hover:bg-green-600 focus:outline-none'
+        >CONFIRMAR</button>
       </div>
     </div>
   </div>

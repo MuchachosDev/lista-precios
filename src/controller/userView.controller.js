@@ -1,7 +1,7 @@
 export const loginPage = (req, res) => {
   const { failSession } = req.query;
   return res.render('login', {
-    title: 'Login',
+    title: 'INICIO DE SESIÓN',
     failSession,
   });
 };

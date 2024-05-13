@@ -1,62 +1,62 @@
 <div class='container mx-auto px-4 py-8'>
-  <h1 class='text-2xl font-semibold text-gray-800 mb-6'>Administración de Tipos
-    de Cambio</h1>
+  <h1 class='mb-6 text-2xl font-semibold text-gray-800'>ADMINISTRACIÓN DE TIPOS
+    DE CAMBIO</h1>
 
-  <div class='flex justify-between items-center mb-4'>
+  <div class='mb-4 flex items-center justify-between'>
     <a
       href='/'
-      class='bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-300'
-    >Inicio</a>
+      class='rounded-lg bg-green-500 px-4 py-2 font-semibold text-white shadow transition duration-300 hover:bg-green-600'
+    >INICIO</a>
     <a
       href='/add-dollar'
-      class='bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition duration-300'
-    >Agregar Nuevo Tipo de Cambio</a>
+      class='rounded bg-blue-500 px-4 py-2 font-semibold text-white transition duration-300 hover:bg-blue-700'
+    >AGREGAR NUEVO TIPO DE CAMBIO</a>
   </div>
 
-  <div class='bg-white shadow-md rounded-md overflow-hidden'>
+  <div class='overflow-hidden rounded-md bg-white shadow-md'>
     <table class='w-full table-auto'>
       <thead class='bg-blue-500 text-white'>
         <tr>
           <th
-            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
-          >Nombre</th>
+            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
+          >NOMBRE</th>
           <th
-            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
-          >Valor</th>
+            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
+          >VALOR</th>
           <th
-            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
-          >Creado</th>
+            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
+          >CREACIÓN</th>
           <th
-            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-left'
+            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
           >ULTIMA MODIFICACIÓN</th>
           <th
-            class='py-3 px-4 uppercase font-semibold text-sm border-b border-gray-200 text-right'
-          >Acciones</th>
+            class='border-b border-gray-200 px-4 py-3 text-right text-sm font-semibold uppercase'
+          >ACCIONA</th>
         </tr>
       </thead>
       <tbody class='bg-gray-100'>
         {{#each dollars}}
-          <tr class='hover:bg-gray-200 transition duration-300'>
+          <tr class='transition duration-300 hover:bg-gray-200'>
             <td
-              class='py-3 px-4 border-b border-gray-200 text-left'
+              class='border-b border-gray-200 px-4 py-3 text-left'
             >{{this.name}}</td>
             <td
-              class='py-3 px-4 border-b border-gray-200 text-left'
+              class='border-b border-gray-200 px-4 py-3 text-left'
             >${{this.value}}</td>
             <td
-              class='py-3 px-4 border-b border-gray-200 text-left'
-            >{{formatDate this.updated_at}}</td>
-            <td
-              class='py-3 px-4 border-b border-gray-200 text-left'
+              class='border-b border-gray-200 px-4 py-3 text-left'
             >{{formatDate this.created_at}}</td>
             <td
-              class='py-3 px-4 border-b border-gray-200 text-right'
+              class='border-b border-gray-200 px-4 py-3 text-left'
+            >{{formatDate this.updated_at}}</td>
+            <td
+              class='border-b border-gray-200 px-4 py-3 text-right'
               data-dollar-id='{{this._id}}'
             >
               <a
                 href='/edit-dollar/{{this._id}}'
-                class='bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition duration-300'
-              >Editar</a>
+                class='rounded-md bg-blue-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-blue-700'
+              >EDITAR</a>
             </td>
           </tr>
         {{/each}}

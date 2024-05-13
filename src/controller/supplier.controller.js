@@ -14,11 +14,11 @@ export const addSupplier = async (req, res) => {
     let response;
     if (enableCurrencySelect) {
       response = await supplierService.addSupplier(
-        new SupplierDTO(name.trim().toUpperCase(), dollar)
+        new SupplierDTO(name.trim(), dollar)
       );
     } else {
       response = await supplierService.addSupplier(
-        new SupplierDTO(name.trim().toUpperCase(), null)
+        new SupplierDTO(name.trim(), null)
       );
     }
 

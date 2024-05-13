@@ -33,7 +33,7 @@ export default class Factor {
     try {
       return await factorModel.updateOne(
         { _id: fid },
-        { ...factor, updated_at: Date.now() }
+        { ...factor, updated_at: new Date() }
       );
     } catch (error) {
       return error;

@@ -13,7 +13,7 @@ export const addFactorPage = async (req, res) => {
       return SupplierDTO.getSuppliersToPage(supplier);
     });
     return res.render('addFactor', {
-      title: 'Add Factor',
+      title: 'AGREGAR FACTOR',
       suppliers: suppliersDTO,
     });
   } catch (error) {
@@ -30,7 +30,7 @@ export const manageFactorsPage = async (req, res) => {
     });
 
     return res.render('manageFactors', {
-      title: 'Administración de Factores de Multiplicación',
+      title: 'ADMISTRAR FACTORES',
       factors: factorsDTO,
     });
   } catch (error) {
@@ -51,7 +51,7 @@ export const editFactorPage = async (req, res) => {
     });
 
     return res.render('editFactor', {
-      title: 'Editar Factor',
+      title: 'EDITAR FACTOR',
       factor: factorDTO,
       suppliers: suppliersDTO,
       supplierToFactor: factor.supplier._id,

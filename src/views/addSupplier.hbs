@@ -1,20 +1,20 @@
-<div class='flex justify-center items-center min-h-screen bg-gray-100'>
-  <div class='max-w-lg w-full bg-white rounded-lg shadow-xl p-8'>
-    <h1 class='text-2xl font-semibold text-gray-800 mb-8 text-center'>Crear
-      Proveedor</h1>
+<div class='flex min-h-screen items-center justify-center bg-gray-100'>
+  <div class='w-full max-w-lg rounded-lg bg-white p-8 shadow-xl'>
+    <h1 class='mb-8 text-center text-2xl font-semibold text-gray-800'>CREAR
+      PROVEEDOR</h1>
 
-    <form onsubmit='createSupplier(event)' class='rounded px-8 pt-6 pb-8'>
+    <form onsubmit='createSupplier(event)' class='rounded px-8 pb-8 pt-6'>
       <div class='mb-6'>
         <label
           for='supplier'
-          class='block text-gray-700 text-sm font-bold mb-2'
-        >Nombre del Proveedor</label>
+          class='mb-2 block text-sm font-bold text-gray-700'
+        >NOMBRE DEL PROVEEDOR</label>
         <input
           type='text'
           id='supplier'
           name='name'
-          class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-          placeholder='Ingrese el nombre del proveedor'
+          class='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
+          placeholder='INGRESE EL NOMBRE DEL PROVEEDOR'
           autocomplete='off'
         />
       </div>
@@ -29,19 +29,19 @@
         />
         <label
           for='enableCurrencySelect'
-          class='ml-2 text-gray-700 text-sm font-bold'
-        >Activar Moneda Extranjera</label>
+          class='ml-2 text-sm font-bold text-gray-700'
+        >ACTIVAR MONEDA EXTRANJERA</label>
       </div>
 
       <div class='mb-6'>
         <label
           for='currencySelect'
-          class='block text-gray-700 text-sm font-bold mb-2'
-        >Seleccionar Moneda</label>
+          class='mb-2 block text-sm font-bold text-gray-700'
+        >SELECCIONAR MONEDA EXTRANJERA</label>
         <select
           id='currencySelect'
           name='dollar'
-          class='block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline block w-full appearance-none rounded border border-gray-300 bg-white px-4 py-2 pr-8 leading-tight hover:border-gray-400 focus:outline-none'
           autocomplete='off'
           disabled
         >
@@ -51,18 +51,18 @@
         </select>
       </div>
 
-      <div class='flex items-center justify-between mt-8'>
+      <div class='mt-8 flex items-center justify-between'>
         <a
           href='/'
-          class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none'
         >
-          Atrás
+          ATRÁS
         </a>
         <button
           type='submit'
-          class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+          class='focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none'
         >
-          Crear
+          CREAR
         </button>
       </div>
     </form>

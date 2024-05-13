@@ -32,7 +32,7 @@ const updatePrice = async (e) => {
 
   if (!userConfirmed) {
     document.getElementById('textNotification').innerText =
-      'Actualización de precios cancelada';
+      'ACTUALIZACIÓN DE PRECIOS CANCELADA';
     showToast();
     return;
   }
@@ -51,16 +51,16 @@ const updatePrice = async (e) => {
 
     if (response.ok) {
       document.getElementById('textNotification').innerText =
-        'Precios actualizados correctamente';
+        'PRECIOS ACTUALIZADOS CORRECTAMENTE';
       showToast();
     } else {
       document.getElementById('textNotification').innerText =
-        'Precios no actualizados';
+        'PRECIO NO ACTUALIZADOS';
       showToast();
     }
   } catch (error) {
     document.getElementById('textNotification').innerText =
-      'Price update failed due to an error';
+      'ERROR AL ACTUALIZAR PRECIOS';
     showToast();
   }
 };

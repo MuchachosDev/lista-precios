@@ -12,12 +12,12 @@ const createFactor = async (e) => {
       body: JSON.stringify({ value, supplier, name }),
     });
     if (response.ok) {
-      alert('Factor creado correctamente');
+      alert('FACTOR CREADO CORRECTAMENTE');
       window.location.href = '/manage-factors';
     } else {
-      alert('Factor no creado');
+      alert('FACTOR NO CREADO');
     }
   } catch (error) {
-    alert('Error al crear factor', error);
+    alert('ERROR AL CREAR PRODUCTO', error);
   }
 };

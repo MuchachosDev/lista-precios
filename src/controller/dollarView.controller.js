@@ -20,7 +20,7 @@ export const editDollarPage = async (req, res) => {
     const response = await dollarService.getDollarById(did);
     const dollarDTO = DollarDTO.getDollarToPage(response);
     return res.render('editDollar', {
-      title: 'Edit Dollar',
+      title: 'EDITAR MONEDA',
       dollar: dollarDTO,
     });
   } catch (error) {

@@ -12,7 +12,7 @@ export const manageSupplierPage = async (req, res) => {
       return SupplierDTO.getSuppliersToPage(supplier);
     });
     return res.render('manageSuppliers', {
-      title: 'Administrar Proveedores',
+      title: 'ADMINISTRAR PROVEEDORES',
       suppliers: suppliersDTO,
     });
   } catch (error) {
@@ -26,7 +26,7 @@ export const addSupplierPage = async (req, res) => {
     const dollarsDTO = DollarDTO.getDollarsToPage(dollars);
 
     return res.render('addSupplier', {
-      title: 'Agregar Proveedor',
+      title: 'AGREGAR PROVEEDOR',
       dollars: dollarsDTO,
     });
   } catch (error) {
@@ -45,7 +45,7 @@ export const editSupplierPage = async (req, res) => {
     const dollarsDTO = DollarDTO.getDollarsToPage(dollars);
 
     return res.render('editSupplier', {
-      title: 'Editar Proveedor',
+      title: 'EDITAR PROVEEDOR',
       supplier: supplierDTO,
       dollars: dollarsDTO,
     });

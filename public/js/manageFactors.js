@@ -4,7 +4,7 @@ const deleteFactor = async (e) => {
   const userConfirmed = await showModalConfirmation();
 
   if (!userConfirmed) {
-    alert('Eliminación cancelada');
+    alert('ELIMINACIÓN CANCELADA');
     return;
   }
 
@@ -16,11 +16,10 @@ const deleteFactor = async (e) => {
       },
     });
     if (response.ok) {
-      alert('Factor eliminado correctamente');
+      alert('FACTOR ELIMINADO CORRECTAMENTE');
       window.location.reload();
     } else {
-      const error = await response.json();
-      alert('Factor no eliminado');
+      alert('FACTOR NO ELIMINADO');
     }
   } catch (error) {
     alert('Error al eliminar factor');

@@ -2,13 +2,13 @@
   <div class='mx-auto bg-white p-4'>
     <button
       id='print-button'
-      class='no-print mb-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md block mx-auto'
+      class='no-print mx-auto mb-5 block rounded-md bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700'
     >
-      Imprimir Códigos
+      IMPRIMIR CÓDIGOS
     </button>
     <div class='grid grid-cols-3 gap-4'>
       {{#each products}}
-        <div class='p-4 border border-gray-300'>
+        <div class='border border-gray-300 p-4'>
           <div class='flex flex-col items-center justify-center gap-4'>
             <img src='{{this.bar_code}}' alt='Barcode' />
             <p class='text-center text-sm'>{{this.description}}</p>

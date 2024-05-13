@@ -1,17 +1,17 @@
 <div class="flex flex-col justify-center items-center min-h-screen bg-gray-100">
   <div class="max-w-lg mx-auto p-6 bg-white rounded-md shadow-md">
-    <h2 class="text-xl font-semibold mb-4">Generar Planilla con Códigos de Barras o QR</h2>
+    <h2 class="text-xl font-semibold mb-4">GENERAR PLANTILLAS CON CÓDIGOS DE BARRA O QR</h2>
 
     <form onsubmit="generateCodebars(event)">
       <div class="mb-6">
-        <label for="supplier" class="block text-gray-700 text-sm font-bold mb-2">Seleccionar Proveedor</label>
+        <label for="supplier" class="block text-gray-700 text-sm font-bold mb-2">SELECCIONAR PROVEEDOR</label>
         <select
           name="supplier"
           class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
           autocomplete="off"
           onchange="selectSupplier(event)"
         >
-          <option value="all-suppliers" {{#if (eq this.sid "all-suppliers")}}selected{{/if}}>Todos los proveedores</option>
+          <option value="all-suppliers" {{#if (eq this.sid "all-suppliers")}}selected{{/if}}>TODOS LOS PROVEEDORES</option>
           {{#each suppliers}}
           <option value="{{ this._id }}" {{#if (eq this._id ../sid) }}selected{{/if}}>{{ this.name }}</option>
           {{/each}}
@@ -19,7 +19,7 @@
       </div>
 
       <div class="mb-6">
-        <label for="item" class="block text-gray-700 text-sm font-bold mb-2">Seleccionar Rubro</label>
+        <label for="item" class="block text-gray-700 text-sm font-bold mb-2">SELECCIONAR RUBRO</label>
         <select
           name="item"
           class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
@@ -27,7 +27,7 @@
           {{#if (eq sid "all-suppliers")}}disabled{{/if}}
           onchange="selectItem(event)"
         >
-          <option value="all-items" {{#if (eq item "all-items")}}selected{{/if}}>Todos los Rubros</option>
+          <option value="all-items" {{#if (eq item "all-items")}}selected{{/if}}>TODOS LOS RUBROS</option>
           {{#each items}}
           <option value="{{ this.item }}" {{#if (eq this.item ../item) }}selected{{/if}}>{{ this.item }}</option>
           {{/each}}
@@ -35,7 +35,7 @@
       </div>
 
       <div class="mb-6">
-        <label for="sub_item" class="block text-gray-700 text-sm font-bold mb-2">Seleccionar Sub Rubro</label>
+        <label for="sub_item" class="block text-gray-700 text-sm font-bold mb-2">SELECCIONAR SUBRUBRO</label>
         <select
           name="sub_item"
           class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
@@ -43,7 +43,7 @@
           {{#if (eq item "all-items")}}disabled{{/if}}
           onchange="selectSubItem(event)"
         >
-          <option value="all-items" {{#if (eq this.sid "all-items")}}selected{{/if}}>Todos los Subrubros</option>
+          <option value="all-items" {{#if (eq this.sid "all-items")}}selected{{/if}}>TODOS LOS SUBRUBROS</option>
           {{#each sub_items}}
           <option value="{{ this.sub_item }}" {{#if (eq this.sub_item ../sub_item) }}selected{{/if}}>{{ this.sub_item }}</option>
           {{/each}}
@@ -51,10 +51,10 @@
       </div>
 
       <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2">Seleccionar tipo de código:</label>
+        <label class="block text-gray-700 text-sm font-bold mb-2">SELECCIONAR TIPO DE CÓDIGO</label>
         <div class="flex items-center">
           <input type="radio" id="barcode" name="codeType" value="code128" class="mr-2" checked />
-          <label for="barcode" class="mr-4">Código de barras</label>
+          <label for="barcode" class="mr-4">CODIGO DE BARRAS</label>
           <input type="radio" id="qr" name="codeType" value="qrcode" class="mr-2" />
           <label for="qr">QR</label>
         </div>
@@ -65,13 +65,13 @@
           href="/"
           class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
-          Atrás
+          ATRÁS
         </a>
         <button
           type="submit"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
-          Generar Planilla
+          GENERAR PLANTILLA
         </button>
       </div>
     </form>

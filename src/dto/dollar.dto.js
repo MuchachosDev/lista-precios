@@ -1,6 +1,6 @@
 export default class DollarDTO {
   constructor(dollar) {
-    this.name = dollar.name || 'UNKNOWN';
+    this.name = dollar.name.toUpperCase() || 'UNKNOWN';
     this.value = dollar.value || 0;
   }
 
