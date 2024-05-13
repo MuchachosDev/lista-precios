@@ -18,6 +18,7 @@ export const defaultCurrency = async () => {
       if (!newCurrency) {
         console.log('Currency not created');
       }
+      console.log("Currency created");
     }
   } catch (error) {
     console.log(error);
