@@ -42,17 +42,10 @@ export default class ProductDTO {
       sub_item: product.sub_item,
       presentation: product.presentation,
       iva: product.iva * 100,
-      price_list: product.price_list,
+      price_list: product.price_list.toFixed(2),
       final_price: product.final_price.toFixed(2),
       bar_code: product.bar_code,
       sku: product.sku,
-    };
-  };
-  generatePriceToProduct = (list_price) => {
-    return {
-      price: list_price || 0,
-      created_at: new Date(),
-      status: true,
     };
   };
 
