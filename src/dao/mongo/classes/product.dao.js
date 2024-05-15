@@ -56,7 +56,7 @@ export default class Product {
             { model: regex },
             { description: regex },
             { brand: regex },
-            {sku: regex},
+            { sku: regex },
           ],
         };
       });

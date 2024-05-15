@@ -1,4 +1,3 @@
-import bwipjs from 'bwip-js';
 import {
   factorService,
   productService,
@@ -20,8 +19,11 @@ export const addFile = async (req, res) => {
     if (!existSupplier) {
       return res.sendNotFound({ message: 'Proveedor no encontrado' });
     }
+
     let existProducts = 0;
     let addedProducts = 0;
+    const duplicateProducts = [];
+
     for (const product of products) {
       const exist = await productService.getProductsWithFilter({
         model: product.model,
@@ -32,8 +34,10 @@ export const addFile = async (req, res) => {
 
       if (exist.length > 0) {
         existProducts++;
+        duplicateProducts.push(product); // Añadir producto a la lista de duplicados
         continue;
       }
+
       const productAdded = await productService.addProduct({
         ...product,
         factor: existFactor._id,
@@ -47,8 +51,10 @@ export const addFile = async (req, res) => {
       }
       addedProducts++;
     }
+
     return res.sendSuccessCreated({
       message: `${addedProducts} productos agregados, ${existProducts} productos ya existen`,
+       duplicateProducts,
     });
   } catch (error) {
     return res.sendClientError(error);

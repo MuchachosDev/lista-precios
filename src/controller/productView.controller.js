@@ -105,7 +105,7 @@ export const getListProductsPage = async (req, res) => {
       brands,
       sort,
       brandSelected: brand,
-      isAdmin: req.user.role === 'MANAGER', 
+      isAdmin: req.user.role === 'MANAGER',
     });
   } catch (error) {
     return res.sendClientError(error);

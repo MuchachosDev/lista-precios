@@ -55,13 +55,82 @@ const deleteFilterBrand = (e) => {
 };
 
 const input = document.getElementById('inputSearch');
+let isInputFocused = false;
+let caretPosition = 0;
 
-const maintainFocus = () => {
-  setTimeout(() => input.focus(), 10);
-}
+input.addEventListener('focus', () => {
+  isInputFocused = true;
+});
 
-window.onload = maintainFocus;
-input.onblur = maintainFocus;
+input.addEventListener('blur', () => {
+  isInputFocused = false;
+});
+
+const updateCaretPosition = (newPosition) => {
+  caretPosition = newPosition;
+  input.setSelectionRange(caretPosition, caretPosition);
+};
+
+document.addEventListener('keydown', (event) => {
+  if (!isInputFocused) {
+    input.focus();
+    input.setSelectionRange(caretPosition, caretPosition);
+
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      input.form.submit();
+    } else if (event.key === 'Backspace') {
+      event.preventDefault();
+      const start = input.selectionStart;
+      const end = input.selectionEnd;
+      if (start !== end) {
+        input.setRangeText('', start, end, 'end');
+      } else if (start > 0) {
+        input.setRangeText('', start - 1, start, 'end');
+      }
+      updateCaretPosition(input.selectionStart);
+    } else if (event.key === 'Delete') {
+      event.preventDefault();
+      const start = input.selectionStart;
+      const end = input.selectionEnd;
+      if (start !== end) {
+        input.setRangeText('', start, end, 'end');
+      } else if (start < input.value.length) {
+        input.setRangeText('', start, start + 1, 'end');
+      }
+      updateCaretPosition(input.selectionStart);
+    } else if (
+      event.key === 'ArrowLeft' ||
+      event.key === 'ArrowRight' ||
+      event.key === 'ArrowUp' ||
+      event.key === 'ArrowDown' ||
+      event.key === 'Home' ||
+      event.key === 'End' ||
+      event.key === 'PageUp' ||
+      event.key === 'PageDown' ||
+      event.key === 'Tab' ||
+      event.key === 'AltGraph'
+    ) {
+      // Permitir el funcionamiento habitual de las teclas de navegación
+    } else if (event.ctrlKey || event.metaKey) {
+      // Permitir combinaciones de teclas como Ctrl+C, Ctrl+V, etc.
+    } else {
+      event.preventDefault();
+      const start = input.selectionStart;
+      const end = input.selectionEnd;
+      input.setRangeText(event.key, start, end, 'end');
+      updateCaretPosition(input.selectionStart + 1);
+    }
+  }
+});
+
+input.addEventListener('click', () => {
+  isInputFocused = true;
+});
+
+input.addEventListener('input', () => {
+  caretPosition = input.selectionStart;
+});
 
 const copyDetail = async (e) => {
   e.preventDefault();
@@ -103,3 +172,30 @@ const closeToast = () => {
 };
 
 closeToast();
+
+const tooltips = document.querySelectorAll('.tooltip');
+const descriptions = document.querySelectorAll('td > span:not(.tooltip)');
+
+descriptions.forEach((description, index) => {
+  const tooltip = tooltips[index];
+  const td = description.parentNode;
+
+  td.addEventListener('mouseover', (e) => {
+    if (description.offsetWidth < description.scrollWidth) {
+      tooltip.classList.remove('hidden');
+    }
+  });
+
+  td.addEventListener('mousemove', (e) => {
+    const x = e.clientX;
+    const y = e.clientY;
+    if (description.offsetWidth < description.scrollWidth) {
+      tooltip.style.left = `${x + 20}px`;
+      tooltip.style.top = `${y + 20}px`;
+    }
+  });
+
+  td.addEventListener('mouseout', () => {
+    tooltip.classList.add('hidden');
+  });
+});

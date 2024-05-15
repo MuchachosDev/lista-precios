@@ -4,7 +4,7 @@ export default class FactorDTO {
     this.supplier = supplier;
     this.name = name.toUpperCase() || 'GENERAL';
     this.created_at = this.created_at || new Date();
-    this.updated_at = this.updated_at|| new Date();
+    this.updated_at = this.updated_at || new Date();
   }
   static getFactorToPage = (factor) => {
     return {

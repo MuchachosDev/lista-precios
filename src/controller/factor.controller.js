@@ -15,11 +15,7 @@ export const addFactor = async (req, res) => {
     if (!sup) return res.sendNotFound('Supplier not found');
 
     const response = await factorService.addFactor(
-      new FactorDTO(
-        parseTextToNumber(value.trim()),
-        sup[0]._id,
-        name.trim()
-      )
+      new FactorDTO(parseTextToNumber(value.trim()), sup[0]._id, name.trim())
     );
 
     if (!response) return res.sendClientError('Factor not added');

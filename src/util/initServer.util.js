@@ -13,12 +13,15 @@ export const defaultCurrency = async () => {
     const currencys = await currencyService.getCurrencys();
     if (currencys.length === 0) {
       const newCurrency = await currencyService.addCurrency(
-        new CurrencyDTO({ name: envConfig.DEFAULT_CURRENCY_NAME, value: envConfig.DEFAULT_CURRENCY })
+        new CurrencyDTO({
+          name: envConfig.DEFAULT_CURRENCY_NAME,
+          value: envConfig.DEFAULT_CURRENCY,
+        })
       );
       if (!newCurrency) {
         console.log('Currency not created');
       }
-      console.log("Currency created");
+      console.log('Currency created');
     }
   } catch (error) {
     console.log(error);

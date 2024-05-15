@@ -7,6 +7,7 @@ const sendDocument = async (e) => {
     document.getElementById('loadingScreen').classList.add('hidden');
     return;
   }
+  
   const factor = e.target.factor.value;
   const formData = new FormData();
   formData.append('factor', factor.substring(0, factor.indexOf('-')));
@@ -18,9 +19,22 @@ const sendDocument = async (e) => {
       method: 'POST',
       body: formData,
     });
+    
     if (response.ok) {
       const { payload } = await response.json();
       alert(payload.message);
+
+      if (payload.duplicateProducts && payload.duplicateProducts.length > 0) {
+        const blob = new Blob([JSON.stringify(payload.duplicateProducts, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'duplicate_products.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+
       window.location.href = '/upload-document';
     } else {
       alert('ARCHIVO NO SUBIDO');

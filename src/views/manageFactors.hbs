@@ -1,101 +1,53 @@
 <div class='container mx-auto px-4 py-8'>
-  <h1 class='mb-6 text-2xl font-semibold text-gray-800'>ADMINISTRACIÓN DE
-    FACTORES DE MULTIPLICACIÓN</h1>
+  <h1 class='mb-6 text-2xl font-semibold text-gray-800'>ADMINISTRACIÓN DE FACTORES DE MULTIPLICACIÓN</h1>
 
   <div class='mb-4 flex items-center justify-between'>
-    <a
-      href='/'
-      class='rounded-lg bg-green-500 px-4 py-2 font-semibold text-white shadow transition duration-300 hover:bg-green-600'
-    >INICIO</a>
-    <a
-      href='/add-factor'
-      class='rounded bg-blue-500 px-4 py-2 font-semibold text-white transition duration-300 hover:bg-blue-700'
-    >AGREGAR NUEVO FACTOR</a>
+    <a href='/' class='rounded-lg bg-green-500 px-4 py-2 font-semibold text-white shadow transition duration-300 hover:bg-green-600'>INICIO</a>
+    <a href='/add-factor' class='rounded bg-blue-500 px-4 py-2 font-semibold text-white transition duration-300 hover:bg-blue-700'>AGREGAR NUEVO FACTOR</a>
   </div>
 
   <div class='overflow-hidden rounded-md bg-white shadow-md'>
     <table class='w-full table-auto'>
       <thead class='bg-blue-500 text-white'>
         <tr>
-          <th
-            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
-          >FACTOR</th>
-          <th
-            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
-          >NOMBRE</th>
-          <th
-            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
-          >PROVEEDOR</th>
-          <th
-            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
-          >CREACIÓN</th>
-          <th
-            class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'
-          >ULTIMA MODIFICACIÓN</th>
-          <th
-            class='border-b border-gray-200 px-4 py-3 text-right text-sm font-semibold uppercase'
-          >ACCIONES</th>
+          <th class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'>FACTOR</th>
+          <th class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'>NOMBRE</th>
+          <th class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'>PROVEEDOR</th>
+          <th class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'>CREACIÓN</th>
+          <th class='border-b border-gray-200 px-4 py-3 text-left text-sm font-semibold uppercase'>ULTIMA MODIFICACIÓN</th>
+          <th class='border-b border-gray-200 px-4 py-3 text-right text-sm font-semibold uppercase'>ACCIONES</th>
         </tr>
       </thead>
       <tbody class='bg-gray-100'>
         {{#each factors}}
-          <tr class='transition duration-300 hover:bg-gray-200'>
-            <td
-              class='border-b border-gray-200 px-4 py-3 text-left'
-            >{{this.value}}</td>
-            <td
-              class='border-b border-gray-200 px-4 py-3 text-left'
-            >{{this.name}}</td>
-            <td
-              class='border-b border-gray-200 px-4 py-3 text-left'
-            >{{this.supplier}}</td>
-            <td
-              class='border-b border-gray-200 px-4 py-3 text-left'
-            >{{formatDate this.created_at}}</td>
-            <td
-              class='border-b border-gray-200 px-4 py-3 text-left'
-            >{{formatDate this.updated_at}}</td>
-            <td
-              class='flex justify-end gap-2 border-b border-gray-200 px-4 py-3 text-right'
-            >
-              <a
-                href='/edit-factor/{{this._id}}'
-                class='rounded-md bg-blue-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-blue-700'
-              >EDITAR</a>
-              <button
-                class='rounded-md bg-red-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-red-700'
-                onclick='deleteFactor(event)'
-                data-factor-id='{{this._id}}'
-              >ELIMINAR</button>
-            </td>
-          </tr>
+        <tr class='transition duration-300 hover:bg-gray-200'>
+          <td class='border-b border-gray-200 px-4 py-3 text-left'>{{this.value}}</td>
+          <td class='border-b border-gray-200 px-4 py-3 text-left'>{{this.name}}</td>
+          <td class='border-b border-gray-200 px-4 py-3 text-left'>{{this.supplier}}</td>
+          <td class='border-b border-gray-200 px-4 py-3 text-left'>{{formatDate this.created_at}}</td>
+          <td class='border-b border-gray-200 px-4 py-3 text-left'>{{formatDate this.updated_at}}</td>
+          <td class='flex justify-end gap-2 border-b border-gray-200 px-4 py-3 text-right'>
+            <a href='/edit-factor/{{this._id}}' class='rounded-md bg-blue-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-blue-700'>EDITAR</a>
+            <button class='rounded-md bg-red-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-red-700' onclick='deleteFactor(event)' data-factor-id='{{this._id}}'>ELIMINAR</button>
+          </td>
+        </tr>
         {{/each}}
       </tbody>
     </table>
   </div>
+  <p class='mt-4 text-gray-500'>NOTA: LOS FACTORES DE MULTIPLICACIÓN NO INCLUYEN IVA.</p>
 </div>
 
-<div
-  id='confirmationModal'
-  class='fixed inset-0 z-50 flex hidden h-full w-full items-center justify-center overflow-y-auto bg-gray-600 bg-opacity-50'
->
+<div id='confirmationModal' class='fixed inset-0 z-50 flex hidden h-full w-full items-center justify-center overflow-y-auto bg-gray-600 bg-opacity-50'>
   <div class='relative mx-auto w-96 rounded-md border bg-white p-5 shadow-lg'>
     <div class='text-center'>
-      <h3 class='text-lg font-bold leading-6 text-gray-900'>CONFIRMACIÓN DE
-        ELIMINACIÓN</h3>
+      <h3 class='text-lg font-bold leading-6 text-gray-900'>CONFIRMACIÓN DE ELIMINACIÓN</h3>
       <div class='mt-2 px-7 py-3'>
-        <p class='text-sm text-gray-500'>¿ESTAS SEGURO DE QUE DESEAS ELIMINAR
-          ESTE FACTOR?</p>
+        <p class='text-sm text-gray-500'>¿ESTAS SEGURO DE QUE DESEAS ELIMINAR ESTE FACTOR?</p>
       </div>
       <div class='mt-4 flex justify-center gap-4'>
-        <button
-          id='cancelBtn'
-          class='rounded bg-gray-200 px-4 py-2 font-bold text-gray-800 transition duration-300 hover:bg-gray-300 focus:outline-none'
-        >ATRÁS</button>
-        <button
-          id='confirmBtn'
-          class='rounded bg-green-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-green-600 focus:outline-none'
-        >CONFIRMAR</button>
+        <button id='cancelBtn' class='rounded bg-gray-200 px-4 py-2 font-bold text-gray-800 transition duration-300 hover:bg-gray-300 focus:outline-none'>ATRÁS</button>
+        <button id='confirmBtn' class='rounded bg-green-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-green-600 focus:outline-none'>CONFIRMAR</button>
       </div>
     </div>
   </div>
