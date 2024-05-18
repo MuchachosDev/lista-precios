@@ -1,0 +1,58 @@
+<div class='flex h-[100dvh] items-center justify-center bg-gray-100'>
+  <div class='w-full max-w-md rounded-lg bg-white p-8 shadow-lg'>
+    <h1 class='mb-6 text-center text-2xl font-semibold text-gray-800'>AGREGAR
+      MONEDA EXTRANJERA</h1>
+
+    <form
+      onsubmit='createCurrency(event)'
+      class='mb-4 rounded bg-white px-8 pb-8 pt-6'
+    >
+      <div class='mb-4'>
+        <label
+          for='currencyName'
+          class='mb-2 block text-sm font-bold text-gray-700'
+        >NOMBRE DE LA MONEDA</label>
+        <input
+          type='text'
+          name='currencyName'
+          class='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
+          required
+          autocomplete='off'
+        />
+      </div>
+
+      <div class='mb-4'>
+        <label
+          for='currencyValue'
+          class='mb-2 block text-sm font-bold text-gray-700'
+        >VALOR DE LA MONEDA ($)</label>
+        <input
+          type='number'
+          name='currencyValue'
+          step='0.01'
+          value='1'
+          class='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
+          required
+          autocomplete='off'
+        />
+      </div>
+
+      <div class='flex items-center justify-between'>
+        <a
+          href='/'
+          class='focus:shadow-outline rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700 focus:outline-none'
+        >
+          ATRÁS
+        </a>
+        <button
+          type='submit'
+          class='focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none'
+        >
+          AGREGAR
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src='/js/addCurrency.js'></script>

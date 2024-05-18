@@ -54,7 +54,7 @@ export const addFile = async (req, res) => {
 
     return res.sendSuccessCreated({
       message: `${addedProducts} productos agregados, ${existProducts} productos ya existen`,
-       duplicateProducts,
+      duplicateProducts,
     });
   } catch (error) {
     return res.sendClientError(error);

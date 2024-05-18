@@ -27,3 +27,13 @@ export const editCurrencyPage = async (req, res) => {
     return res.sendClientError(error);
   }
 };
+
+export const addCurrencyPage = async (req, res) => {
+  try {
+    return res.render('addCurrency', {
+      title: 'AGREGAR MONEDA',
+    });
+  } catch (error) {
+    return res.sendClientError(error);
+  }
+};

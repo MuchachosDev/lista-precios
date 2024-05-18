@@ -147,10 +147,16 @@ const editProduct = async (e) => {
       document.getElementById('textNotification').innerHTML =
         'PRODUCTO ACTUALIZADO CORRECTAMENTE';
       showToast();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } else {
       document.getElementById('textNotification').innerHTML =
         'PRODUCTO NO ACTUALIZADO';
       showToast();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     }
   } catch (error) {
     alert('ERROR AL ACTUALIZAR PRODUCTO', error);

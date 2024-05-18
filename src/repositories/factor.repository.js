@@ -9,6 +9,13 @@ export default class FactorRepository {
       return error;
     }
   };
+  getFactorByName = async (name) => {
+    try {
+      return await this.dao.getByName(name);
+    } catch (error) {
+      return error;
+    }
+  };
   getFactorById = async (fid) => {
     try {
       return await this.dao.getById(fid);

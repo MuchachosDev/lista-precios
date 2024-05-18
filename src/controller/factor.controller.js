@@ -10,6 +10,13 @@ export const addFactor = async (req, res) => {
   try {
     const { value, supplier, name } = req.body;
 
+    const existFactor = await factorService.getFactorByName(
+      name.toUpperCase().trim()
+    );
+
+    if (existFactor)
+      return res.sendUnauthorized({ message: 'Factor already exists' });
+
     const sup = await supplierService.getSupplierById(supplier);
 
     if (!sup) return res.sendNotFound('Supplier not found');
@@ -29,6 +36,14 @@ export const editFactor = async (req, res) => {
   try {
     const { fid } = req.params;
     const { value, sid, name } = req.body;
+
+      const existFactor = await factorService.getFactorByName(name)
+
+    if (existFactor && existFactor._id.toString() !== fid && existFactor.name === name){
+      return res.sendUnauthorized({
+        message: 'Exist a factor with that name or value',
+      });
+    }
 
     const factorDTO = new FactorDTO(
       parseTextToNumber(value.trim()),

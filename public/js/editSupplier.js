@@ -28,6 +28,9 @@ const editSupplier = async (e) => {
       document.getElementById('textNotification').innerHTML =
         'PROVEEDOR NO ACTUALIZADO';
       showToast();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     }
   } catch (error) {
     alert('ERROR AL ACTUALIZAR PRODUCTO', error);

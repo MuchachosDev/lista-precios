@@ -27,6 +27,10 @@ const editFactor = async (e) => {
     } else {
       document.getElementById('textNotification').innerHTML =
         'FACTOR NO ACTUALIZADO';
+        showToast();
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
     }
   } catch (error) {
     alert('ERROR AL ACTUALIZAR FACTOR', error);

@@ -6,7 +6,7 @@ const editCurrency = async (e) => {
   const did = e.target.getAttribute('data-dolar-id');
   try {
     const response = await fetch(`/api/currencys/${did}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -21,8 +21,11 @@ const editCurrency = async (e) => {
       }, 2000);
     } else {
       document.getElementById('textNotification').innerHTML =
-        'MONEDA NO ACTUALIZADO';
+        'MONEDA NO ACTUALIZADA';
       showToast();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     }
   } catch (error) {
     alert('ERROR AL ACTUALIZAR MONEDA', error);

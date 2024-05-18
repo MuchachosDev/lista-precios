@@ -8,6 +8,13 @@ export default class Factor {
       return error;
     }
   };
+  getByName = async (name) => {
+    try {
+      return await factorModel.findOne({ name });
+    } catch (error) {
+      return error;
+    }
+  };
   getById = async (fid) => {
     try {
       return await factorModel.findOne({ _id: fid });
