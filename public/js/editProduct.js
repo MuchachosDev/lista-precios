@@ -114,6 +114,7 @@ const editProduct = async (e) => {
   const item = e.target.item.value;
   const sub_item = e.target.sub_item.value;
   const factor = e.target.factor.value;
+  document.getElementById('loadingScreen').classList.remove('hidden');
 
   const data = {
     model,
@@ -135,32 +136,36 @@ const editProduct = async (e) => {
   if (!userConfirmation) {
     return;
   }
-  try {
-    const response = await fetch(`/api/products/${pid}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    if (response.ok) {
-      document.getElementById('textNotification').innerHTML =
-        'PRODUCTO ACTUALIZADO CORRECTAMENTE';
-      showToast();
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    } else {
-      document.getElementById('textNotification').innerHTML =
-        'PRODUCTO NO ACTUALIZADO';
-      showToast();
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+  setTimeout(async () => {
+    try {
+      const response = await fetch(`/api/products/${pid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        document.getElementById('textNotification').innerHTML =
+          'PRODUCTO ACTUALIZADO CORRECTAMENTE';
+        showToast();
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      } else {
+        document.getElementById('textNotification').innerHTML =
+          'PRODUCTO NO ACTUALIZADO';
+        showToast();
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }
+    } catch (error) {
+      alert('ERROR AL ACTUALIZAR PRODUCTO', error);
+    } finally {
+      document.getElementById('loadingScreen').classList.add('hidden');
     }
-  } catch (error) {
-    alert('ERROR AL ACTUALIZAR PRODUCTO', error);
-  }
+  }, 2000);
 };
 
 const handleFinalPrice = (e) => {

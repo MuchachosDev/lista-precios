@@ -13,14 +13,14 @@ export const changeCurrency = async (req, res) => {
     ) {
       return res.sendClientError({
         message: 'Exist a currency with that name',
-    });
-  }
+      });
+    }
     const currency = await currencyService.updateCurrency(did, { value, name });
 
     if (!currency) {
-      return res.sendClientError({ message: 'Currency not updated'});
+      return res.sendClientError({ message: 'Currency not updated' });
     }
-    return res.sendSuccess({ message: 'Currency updated successfully'});
+    return res.sendSuccess({ message: 'Currency updated successfully' });
   } catch (error) {
     return res.sendClientError({ message: error.message });
   }

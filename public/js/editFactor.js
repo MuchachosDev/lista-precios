@@ -4,37 +4,42 @@ const editFactor = async (e) => {
   const name = e.target.name.value;
   const value = e.target.value.value;
   const fid = e.target.getAttribute('data-factor-id');
-  try {
-    const response = await fetch(`/api/factors/${fid}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        value,
-        name,
-        sid,
-      }),
-    });
+  document.getElementById('loadingScreen').classList.remove('hidden');
+  setTimeout(async () => {
+    try {
+      const response = await fetch(`/api/factors/${fid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          value,
+          name,
+          sid,
+        }),
+      });
 
-    if (response.ok) {
-      document.getElementById('textNotification').innerHTML =
-        'FACTOR ACTUALIZADO CORRECTAMENTE';
-      showToast();
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    } else {
-      document.getElementById('textNotification').innerHTML =
-        'FACTOR NO ACTUALIZADO';
+      if (response.ok) {
+        document.getElementById('textNotification').innerHTML =
+          'FACTOR ACTUALIZADO CORRECTAMENTE';
         showToast();
         setTimeout(() => {
           window.location.reload();
         }, 2000);
+      } else {
+        document.getElementById('textNotification').innerHTML =
+          'FACTOR NO ACTUALIZADO';
+        showToast();
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }
+    } catch (error) {
+      alert('ERROR AL ACTUALIZAR FACTOR', error);
+    } finally {
+      document.getElementById('loadingScreen').classList.add('hidden');
     }
-  } catch (error) {
-    alert('ERROR AL ACTUALIZAR FACTOR', error);
-  }
+  }, 2000);
 };
 
 const showToast = () => {

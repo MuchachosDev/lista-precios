@@ -37,9 +37,13 @@ export const editFactor = async (req, res) => {
     const { fid } = req.params;
     const { value, sid, name } = req.body;
 
-      const existFactor = await factorService.getFactorByName(name)
+    const existFactor = await factorService.getFactorById(fid);
 
-    if (existFactor && existFactor._id.toString() !== fid && existFactor.name === name){
+    if (
+      existFactor &&
+      existFactor._id.toString() !== fid &&
+      existFactor.name === name
+    ) {
       return res.sendUnauthorized({
         message: 'Exist a factor with that name or value',
       });

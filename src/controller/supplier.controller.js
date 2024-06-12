@@ -35,7 +35,11 @@ export const editSupplier = async (req, res) => {
   try {
     const exist = await supplierService.getSupplierByName(name);
 
-    if (exist && exist.name === name.toUpperCase().trim() && exist._id.toString() !== sid)
+    if (
+      exist &&
+      exist.name === name.toUpperCase().trim() &&
+      exist._id.toString() !== sid
+    )
       return res.sendClientError('Supplier already exists');
     let response;
 

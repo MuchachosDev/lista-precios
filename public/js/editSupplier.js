@@ -4,37 +4,42 @@ const editSupplier = async (e) => {
   const sid = e.target.getAttribute('data-supplier-id');
   const currency = e.target.currency.value;
   const enableCurrencySelect = e.target.enableCurrencySelect.checked;
-  try {
-    const response = await fetch(`/api/suppliers/${sid}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        currency,
-        enableCurrencySelect,
-      }),
-    });
+  document.getElementById('loadingScreen').classList.remove('hidden');
+  setTimeout(async () => {
+    try {
+      const response = await fetch(`/api/suppliers/${sid}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          currency,
+          enableCurrencySelect,
+        }),
+      });
 
-    if (response.ok) {
-      document.getElementById('textNotification').innerHTML =
-        'PROVEEDOR ACTUALIZADO CORRECTAMENTE';
-      showToast();
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
-    } else {
-      document.getElementById('textNotification').innerHTML =
-        'PROVEEDOR NO ACTUALIZADO';
-      showToast();
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      if (response.ok) {
+        document.getElementById('textNotification').innerHTML =
+          'PROVEEDOR ACTUALIZADO CORRECTAMENTE';
+        showToast();
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      } else {
+        document.getElementById('textNotification').innerHTML =
+          'PROVEEDOR NO ACTUALIZADO';
+        showToast();
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }
+    } catch (error) {
+      alert('ERROR AL ACTUALIZAR PRODUCTO', error);
+    } finally {
+      document.getElementById('loadingScreen').classList.add('hidden');
     }
-  } catch (error) {
-    alert('ERROR AL ACTUALIZAR PRODUCTO', error);
-  }
+  }, 2000);
 };
 
 const showToast = () => {

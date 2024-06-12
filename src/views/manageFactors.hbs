@@ -58,15 +58,15 @@
             <td
               class='flex justify-end gap-2 border-b border-gray-200 px-4 py-3 text-right'
             >
-              <a
-                href='/edit-factor/{{this._id}}'
-                class='rounded-md bg-blue-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-blue-700'
-              >EDITAR</a>
               <button
                 class='rounded-md bg-red-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-red-700'
                 onclick='deleteFactor(event)'
                 data-factor-id='{{this._id}}'
               >ELIMINAR</button>
+              <a
+                href='/edit-factor/{{this._id}}'
+                class='rounded-md bg-blue-500 px-4 py-2 font-bold text-white transition duration-300 hover:bg-blue-700'
+              >EDITAR</a>
             </td>
           </tr>
         {{/each}}

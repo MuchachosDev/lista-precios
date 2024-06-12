@@ -27,6 +27,7 @@ const selectSubItem = (e) => {
 
 const updatePrice = async (e) => {
   e.preventDefault();
+  document.getElementById('loadingScreen').classList.remove('hidden');
 
   const userConfirmed = await showModalConfirmation();
 
@@ -39,30 +40,33 @@ const updatePrice = async (e) => {
   const { search } = window.location;
   const percentage = e.target.percentage.value;
   const adjustment_type = e.target.adjustment_type.value;
+  setTimeout(async () => {
+    try {
+      const response = await fetch(`/api/products${search}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ percentage, adjustment_type }),
+      });
 
-  try {
-    const response = await fetch(`/api/products${search}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ percentage, adjustment_type }),
-    });
-
-    if (response.ok) {
+      if (response.ok) {
+        document.getElementById('textNotification').innerText =
+          'PRECIOS ACTUALIZADOS CORRECTAMENTE';
+        showToast();
+      } else {
+        document.getElementById('textNotification').innerText =
+          'PRECIO NO ACTUALIZADOS';
+        showToast();
+      }
+    } catch (error) {
       document.getElementById('textNotification').innerText =
-        'PRECIOS ACTUALIZADOS CORRECTAMENTE';
+        'ERROR AL ACTUALIZAR PRECIOS';
       showToast();
-    } else {
-      document.getElementById('textNotification').innerText =
-        'PRECIO NO ACTUALIZADOS';
-      showToast();
+    } finally {
+      document.getElementById('loadingScreen').classList.add('hidden');
     }
-  } catch (error) {
-    document.getElementById('textNotification').innerText =
-      'ERROR AL ACTUALIZAR PRECIOS';
-    showToast();
-  }
+  }, 2000);
 };
 
 const showModalConfirmation = () => {
