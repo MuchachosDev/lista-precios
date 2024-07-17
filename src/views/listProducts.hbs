@@ -1,16 +1,16 @@
-<div class="w-full mx-auto p-4 h-[100dvh] flex flex-col bg-gray-100">
-  <header class="bg-white shadow-md rounded-md p-4 mb-4">
+<div class="w-full mx-auto p-2 h-[100dvh] flex flex-col bg-gray-100">
+  <header class="bg-white shadow-md rounded-md p-2 mb-2">
     <div class="flex justify-between items-center">
       <h1 class="text-lg 2xl:text-2xl font-semibold text-gray-800">LISTA DE PRODUCTOS</h1>
       <a href="/api/users/logout"
-        class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 text-base 2xl:text-xl">CERRAR
+        class="bg-red-500 hover:bg-red-600 text-white font-semibold p-2 rounded-md transition duration-300 text-base">CERRAR
         SESIÓN</a>
     </div>
   </header>
 
-  <div class="flex flex-col md:flex-row gap-4">
-    <div class="hidden bg-white shadow-md rounded-md p-4">
-      <h2 class="text-lg font-semibold mb-4 text-gray-800">FILTRAR POR MARCA</h2>
+  <div class="flex flex-col md:flex-row gap-2">
+    <div class="hidden bg-white shadow-md rounded-md p-2">
+      <h2 class="text-lg font-semibold mb-2 text-gray-800">FILTRAR POR MARCA</h2>
       <form onsubmit="{{#if brandSelected}}deleteFilterBrand(event){{else}}filterBrand(event){{/if}}">
         {{#if brandSelected}}
         <div class="inline-flex items-center bg-blue-500 text-white text-sm font-medium rounded-full px-3 py-1 mb-2">
@@ -26,32 +26,32 @@
         </div>
         {{/each}}
         <button type="submit"
-          class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md mt-4 w-full transition duration-300">APLICAR
+          class="bg-blue-500 hover:bg-blue-600 text-white font-semibold p-2 rounded-md mt-2 w-full transition duration-300">APLICAR
           FILTROS</button>
         {{/if}}
       </form>
     </div>
 
-    <div class="w-full bg-white shadow-md rounded-md p-4 flex-grow">
-      <div class="mb-4">
-  <div class="flex flex-col md:flex-row items-center gap-4 bg-gray-100 py-2 px-4 rounded-md">
+    <div class="w-full bg-white shadow-md rounded-md p-2 flex-grow">
+      <div class="mb-2">
+  <div class="flex flex-col md:flex-row items-center gap-2 bg-gray-100 p-2 rounded-md">
     {{#if isAdmin}}
-    <a href="/" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md shadow transition duration-300">INICIO</a>
+    <a href="/" class="bg-green-500 hover:bg-green-600 text-white font-semibold p-2 rounded-md shadow transition duration-300">INICIO</a>
     {{/if}}
-    <form onsubmit="searchProduct(event)" class="flex items-center w-full m-0 gap-4">
+    <form onsubmit="searchProduct(event)" class="flex items-center w-full m-0 gap-2">
       <input type="text" id="inputSearch" name="filter" placeholder="BUSCAR PRODUCTO" autocomplete="off" class="flex-grow px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base 2xl:text-lg" />
-      <button type="submit" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-r-md transition duration-300 text-base 2xl:text-xl">BUSCAR</button>
+      <button type="submit" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-r-md transition duration-300 text-base">BUSCAR</button>
     </form>
   </div>
 </div>
 
-<div class="flex justify-between items-center mb-4">
-  <p class="text-base 2xl:text-xl font-semibold text-gray-700">
+<div class="flex justify-between items-center mb-2">
+  <p class="text-base font-semibold text-gray-700">
     CANTIDAD DE PRODUCTOS: <span class="text-blue-500">{{totalDocs}}</span>
   </p>
 
   <div class="flex items-center">
-    <p class="text-base 2xl:text-xl font-semibold text-gray-700 mr-2">ORDENAR POR:</p>
+    <p class="text-base font-semibold text-gray-700 mr-2">ORDENAR POR:</p>
     <select name="sort" class="border border-gray-300 text-gray-700 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm 2xl:text-lg" onchange="sortPrice(event)" autocomplete="off">
       <option value="">POR DEFECTO</option>
       <option value="1" {{#if (eq sort 1)}}selected{{/if}}>PRECIO ASCENDENTE</option>
@@ -158,7 +158,7 @@
         </table>
       </div>
 
-      <div class="flex justify-between items-center mt-4 gap-4">
+      <div class="flex justify-between items-center mt-2 gap-2">
   <div class="flex items-center">
     <label for="pageSize" class="text-sm text-gray-700 mr-2 font-bold">PRODUCTOS POR PÁGINA:</label>
     <select id="pageSize" class="border border-gray-300 rounded-md px-2 py-1 bg-white" onchange="limitChange(event)">
@@ -168,14 +168,14 @@
     </select>
   </div>
 
-  <div class="mt-4 flex justify-center items-center gap-2">
+  <div class="mt-2 flex justify-center items-center gap-2">
     {{#if hasPrevPage}}
     <a href="{{prevPage}}"
-      class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow transition duration-300">Anterior</a>
+      class="bg-blue-500 hover:bg-blue-600 text-white font-semibold p-2 rounded-md shadow transition duration-300">Anterior</a>
     {{/if}}
     {{#if hasNextPage}}
     <a href="{{nextPage}}"
-      class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow transition duration-300">Siguiente</a>
+      class="bg-blue-500 hover:bg-blue-600 text-white font-semibold p-2 rounded-md shadow transition duration-300">Siguiente</a>
     {{/if}}
   </div>
 
@@ -188,7 +188,7 @@
 <div id="toast" class="hidden fixed bottom-5 left-5 z-50 max-w-sm mx-auto overflow-hidden rounded-lg shadow-md"
   role="alert">
   <div class="bg-white rounded-lg shadow-xs overflow-hidden">
-    <div class="p-4 flex items-center">
+    <div class="p-2 flex items-center">
       <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg bg-blue-100 text-blue-500">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
