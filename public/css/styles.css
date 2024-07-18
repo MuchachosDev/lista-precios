@@ -690,6 +690,11 @@ video {
   margin-right: auto;
 }
 
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .mb-10 {
   margin-bottom: 2.5rem;
 }
@@ -806,6 +811,10 @@ video {
   height: 100%;
 }
 
+.h-\[55dvh\] {
+  height: 55dvh;
+}
+
 .w-12 {
   width: 3rem;
 }
@@ -870,6 +879,10 @@ video {
   flex-grow: 1;
 }
 
+.grow {
+  flex-grow: 1;
+}
+
 .table-auto {
   table-layout: auto;
 }
@@ -890,6 +903,18 @@ video {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+}
+
+.grid-flow-row {
+  grid-auto-flow: row;
+}
+
+.grid-flow-col {
+  grid-auto-flow: column;
+}
+
+.grid-flow-col-dense {
+  grid-auto-flow: column dense;
 }
 
 .grid-cols-1 {
@@ -1359,6 +1384,14 @@ video {
 
 .leading-tight {
   line-height: 1.25;
+}
+
+.leading-4 {
+  line-height: 1rem;
+}
+
+.leading-3 {
+  line-height: .75rem;
 }
 
 .tracking-wide {
@@ -1887,6 +1920,10 @@ td:hover .tooltip {
     height: 62.5dvh;
   }
 
+  .\32xl\:h-\[65dvh\] {
+    height: 65dvh;
+  }
+
   .\32xl\:max-w-2xl {
     max-width: 42rem;
   }
@@ -1898,11 +1935,6 @@ td:hover .tooltip {
 
   .\32xl\:text-lg {
     font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-
-  .\32xl\:text-xl {
-    font-size: 1.25rem;
     line-height: 1.75rem;
   }
 }

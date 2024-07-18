@@ -16,7 +16,7 @@ const createSupplier = async (e) => {
       });
       if (response.ok) {
         alert('PROVEEDOR CREADO CORRECTAMENTE');
-          window.location.href = '/manage-suppliers';
+        window.location.href = '/manage-suppliers';
       } else {
         alert('PROVEEDOR NO CREADO');
       }

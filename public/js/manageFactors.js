@@ -1,12 +1,12 @@
 const deleteFactor = async (e) => {
   const fid = e.target.getAttribute('data-factor-id');
-  
+
   const userConfirmed = await showModalConfirmation();
-  
+
   if (!userConfirmed) {
     alert('ELIMINACIÓN CANCELADA');
     return;
-    }
+  }
   document.getElementById('loadingScreen').classList.remove('hidden');
   setTimeout(async () => {
     try {

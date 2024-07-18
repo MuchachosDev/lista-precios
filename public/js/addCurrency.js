@@ -15,7 +15,7 @@ const createCurrency = async (e) => {
       });
       if (response.ok) {
         alert('MONEDA EXTRANJERA CREADA CORRECTAMENTE');
-          window.location.href = '/manage-currencys';
+        window.location.href = '/manage-currencys';
       } else {
         alert('MONEDA EXTRANJERA NO CREADA');
       }

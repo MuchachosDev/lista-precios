@@ -27,19 +27,19 @@ const selectSubItem = (e) => {
 
 const updatePrice = async (e) => {
   e.preventDefault();
-  
+
   const userConfirmed = await showModalConfirmation();
-  
+
   if (!userConfirmed) {
     document.getElementById('textNotification').innerText =
-    'ACTUALIZACIÓN DE PRECIOS CANCELADA';
+      'ACTUALIZACIÓN DE PRECIOS CANCELADA';
     showToast();
     return;
-    }
-    const { search } = window.location;
-    const percentage = e.target.percentage.value;
-    const adjustment_type = e.target.adjustment_type.value;
-    document.getElementById('loadingScreen').classList.remove('hidden');
+  }
+  const { search } = window.location;
+  const percentage = e.target.percentage.value;
+  const adjustment_type = e.target.adjustment_type.value;
+  document.getElementById('loadingScreen').classList.remove('hidden');
   setTimeout(async () => {
     try {
       const response = await fetch(`/api/products${search}`, {

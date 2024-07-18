@@ -15,7 +15,7 @@ const createFactor = async (e) => {
       });
       if (response.ok) {
         alert('FACTOR CREADO CORRECTAMENTE');
-          window.location.href = '/manage-factors';
+        window.location.href = '/manage-factors';
       } else {
         alert('FACTOR NO CREADO');
       }

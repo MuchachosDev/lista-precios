@@ -8,7 +8,7 @@
     </div>
   </header>
 
-  <div class="flex flex-col md:flex-row gap-2">
+  <div class="flex flex-col md:flex-row gap-2 grow">
     <div class="hidden bg-white shadow-md rounded-md p-2">
       <h2 class="text-lg font-semibold mb-2 text-gray-800">FILTRAR POR MARCA</h2>
       <form onsubmit="{{#if brandSelected}}deleteFilterBrand(event){{else}}filterBrand(event){{/if}}">
@@ -32,77 +32,73 @@
       </form>
     </div>
 
-    <div class="w-full bg-white shadow-md rounded-md p-2 flex-grow">
-      <div class="mb-2">
-  <div class="flex flex-col md:flex-row items-center gap-2 bg-gray-100 p-2 rounded-md">
-    {{#if isAdmin}}
-    <a href="/" class="bg-green-500 hover:bg-green-600 text-white font-semibold p-2 rounded-md shadow transition duration-300">INICIO</a>
-    {{/if}}
-    <form onsubmit="searchProduct(event)" class="flex items-center w-full m-0 gap-2">
-      <input type="text" id="inputSearch" name="filter" placeholder="BUSCAR PRODUCTO" autocomplete="off" class="flex-grow px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base 2xl:text-lg" />
-      <button type="submit" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-r-md transition duration-300 text-base">BUSCAR</button>
-    </form>
-  </div>
-</div>
-
-<div class="flex justify-between items-center mb-2">
-  <p class="text-base font-semibold text-gray-700">
-    CANTIDAD DE PRODUCTOS: <span class="text-blue-500">{{totalDocs}}</span>
-  </p>
-
-  <div class="flex items-center">
-    <p class="text-base font-semibold text-gray-700 mr-2">ORDENAR POR:</p>
-    <select name="sort" class="border border-gray-300 text-gray-700 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm 2xl:text-lg" onchange="sortPrice(event)" autocomplete="off">
-      <option value="">POR DEFECTO</option>
-      <option value="1" {{#if (eq sort 1)}}selected{{/if}}>PRECIO ASCENDENTE</option>
-      <option value="-1" {{#if (eq sort -1)}}selected{{/if}}>PRECIO DESCENDENTE</option>
-    </select>
-  </div>
-</div>
-
-
-      <div class="overflow-y-auto h-[50dvh] 2xl:h-[62.5dvh]">
+    <div class="w-full bg-white shadow-md rounded-md p-2 flex flex-col gap-2 flex-grow">
+      <div>
+        <div class="flex flex-col md:flex-row items-center gap-2 bg-gray-100 p-2 rounded-md">
+          {{#if isAdmin}}
+          <a href="/"
+            class="bg-green-500 hover:bg-green-600 text-white font-semibold p-2 rounded-md shadow transition duration-300">INICIO</a>
+          {{/if}}
+          <form onsubmit="searchProduct(event)" class="flex items-center w-full m-0 gap-2">
+            <input type="text" id="inputSearch" name="filter" placeholder="BUSCAR PRODUCTO" autocomplete="off"
+              class="flex-grow px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base 2xl:text-lg" />
+            <button type="submit"
+              class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-r-md transition duration-300 text-base">BUSCAR</button>
+          </form>
+        </div>
+      </div>
+      <div class="flex justify-between items-center ">
+        <p class="text-base font-semibold text-gray-700">
+          CANTIDAD DE PRODUCTOS: <span class="text-blue-500">{{totalDocs}}</span>
+        </p>
+        <div class="flex items-center">
+          <p class="text-base font-semibold text-gray-700 mr-2">ORDENAR POR:</p>
+          <select name="sort"
+            class="border border-gray-300 text-gray-700 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            onchange="sortPrice(event)" autocomplete="off">
+            <option value="">POR DEFECTO</option>
+            <option value="1" {{#if (eq sort 1)}}selected{{/if}}>PRECIO ASCENDENTE</option>
+            <option value="-1" {{#if (eq sort -1)}}selected{{/if}}>PRECIO DESCENDENTE</option>
+          </select>
+        </div>
+      </div>
+      <div class="overflow-y-auto h-[55dvh] 2xl:h-[65dvh]">
         <table class="w-full min-w-full border-collapse bg-white text-sm table-auto">
-          <thead class="sticky top-0 z-10 bg-white">
+          <thead class="sticky top-0 z-10 bg-white border-b border-gray-200">
             <tr class="bg-blue-500 text-white">
               {{#if isAdmin}}
-              <th class="p-2 uppercase font-bold text-sm border-b border-gray-200 text-start max-w-xs truncate ...">
+              <th class="p-2 uppercase font-bold text-sm text-start max-w-xs truncate ...">
               </th>
               {{/if}}
-              <th
-                class="p-2 uppercase font-bold text-sm border-b border-gray-200 text-start max-w-xs truncate ... hidden 2xl:table-cell">
+              <th class="p-2 uppercase font-bold text-sm text-start max-w-xs truncate ... hidden 2xl:table-cell">
                 CODIGO INTERNO
               </th>
-              <th class="p-2 uppercase font-bold text-sm border-b border-gray-200 text-start max-w-xs truncate ...">
+              <th class="p-2 uppercase font-bold text-sm text-start max-w-xs truncate ...">
                 MODELO
               </th>
               <th
-                class="p-2 uppercase font-bold text-sm border-b border-gray-200 text-start max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl truncate ...">
+                class="p-2 uppercase font-bold text-sm text-start max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl truncate ...">
                 DESCRIPCIÓN
               </th>
-              <th class="p-2 uppercase font-bold text-sm border-b border-gray-200 text-start max-w-xs truncate ...">
+              <th class="p-2 uppercase font-bold text-sm text-start max-w-xs truncate ...">
                 MARCA
               </th>
-              <th
-                class="p-2 uppercase font-bold text-sm border-b border-gray-200 text-start max-w-xs truncate ... hidden 2xl:table-cell">
+              <th class="p-2 uppercase font-bold text-sm text-start max-w-xs truncate ... hidden 2xl:table-cell">
                 PROVEEDOR
               </th>
-              <th
-                class="p-2 uppercase font-bold text-sm border-b border-gray-200 text-start max-w-xs truncate ... hidden 2xl:table-cell">
+              <th class="p-2 uppercase font-bold text-sm text-start max-w-xs truncate ... hidden 2xl:table-cell">
                 RUBRO
               </th>
-              <th
-                class="p-2 uppercase font-bold text-sm border-b border-gray-200 text-start max-w-xs truncate ... hidden 2xl:table-cell">
+              <th class="p-2 uppercase font-bold text-sm text-start max-w-xs truncate ... hidden 2xl:table-cell">
                 SUBRUBRO
               </th>
-              <th class="p-2 uppercase font-bold text-sm border-b border-gray-200 text-start max-w-xs truncate ...">
+              <th class="p-2 uppercase font-bold text-sm text-start max-w-xs truncate ...">
                 PRESENTACIÓN
               </th>
-              <th
-                class="p-2 uppercase font-bold text-sm border-b border-gray-200 text-start max-w-xs truncate ...">
+              <th class="p-2 uppercase font-bold text-sm text-start max-w-xs truncate ...">
                 IVA
               </th>
-              <th class="p-2 uppercase font-bold text-sm border-b border-gray-200 text-start max-w-xs truncate ...">
+              <th class="p-2 uppercase font-bold text-sm text-start max-w-xs truncate ...">
                 ** PRECIO FINAL
               </th>
             </tr>
@@ -110,8 +106,8 @@
           <tbody class="text-gray-700">
             {{#each products}}
             {{#if ../isAdmin}}
-            <tr class="hover:bg-gray-100 transition duration-300">
-              <td class="py-2 px-3 border-b border-gray-200 max-w-xs truncate ...">
+            <tr class="hover:bg-gray-100 transition duration-300 border-b border-gray-200">
+              <td class="py-2 px-3 max-w-xs truncate ...">
                 <a href="/edit-product/{{this._id}}" class="text-blue-500 hover:text-blue-600 transition duration-300">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path
@@ -120,67 +116,69 @@
                 </a>
               </td>
               {{/if}}
-              <td class="p-2 border-b border-gray-200 max-w-xs truncate ... hidden 2xl:table-cell">
+              <td class="p-2 max-w-xs truncate ... hidden 2xl:table-cell font-semibold">
                 {{this.internal_id}}</td>
-              <td class="p-2 border-b border-gray-200 max-w-xs truncate ...">{{this.model}}</td>
-              <td id="{{this._id}}"
-                class="p-2 border-b border-gray-200 flex flex-row items-center gap-2 cursor-pointer z-10 truncate ..."
-                onclick='copyDetail(event)' data-product-model="{{this.model}}"
+              <td class="p-2 max-w-xs truncate ... font-semibold">{{this.model}}</td>
+              <td id="{{this._id}}" onclick='copyDetail(event)' data-product-model="{{this.model}}"
                 data-product-description="{{this.description}}" data-product-brand="{{this.brand}}"
                 data-product-presentation="{{this.presentation}}">
-                <div class="flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 text-gray-400 hover:text-blue-500 transition duration-300 z-0" viewBox="0 0 20 20"
-                    fill="currentColor">
-                    <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                    <path
-                      d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                  </svg>
+                <div class="p-2 flex flex-row items-center gap-2 cursor-pointer truncate ... font-semibold">
+                  <div>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 text-gray-400 hover:text-blue-500 transition duration-300 z-0" viewBox="0 0 20 20"
+                      fill="currentColor">
+                      <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                      <path
+                        d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                    </svg>
+                  </div>
+                  <span class="max-w-xs lg:w-full truncate ...">{{this.description}}</span>
+                  <span class="tooltip hidden">{{this.description}}</span>
                 </div>
-                <span class="max-w-xs lg:w-full truncate ...">{{this.description}}</span>
-                <span class="tooltip hidden">{{this.description}}</span>
+
               </td>
-              <td class="p-2 border-b border-gray-200 max-w-xs truncate ...">{{this.brand}}</td>
-              <td class="p-2 border-b border-gray-200 max-w-xs truncate ... hidden 2xl:table-cell">
+              <td class="p-2 max-w-xs truncate ... font-semibold">{{this.brand}}</td>
+              <td class="p-2 max-w-xs truncate ... hidden 2xl:table-cell font-semibold">
                 {{this.supplier}}</td>
-              <td class="p-2 border-b border-gray-200 max-w-xs truncate ... hidden 2xl:table-cell">{{this.item}}
+              <td class="p-2 max-w-xs truncate ... hidden 2xl:table-cell font-semibold">
+                {{this.item}}
               </td>
-              <td class="p-2 border-b border-gray-200 max-w-xs truncate ... hidden 2xl:table-cell">
+              <td class="p-2 max-w-xs truncate ... hidden 2xl:table-cell font-semibold">
                 {{this.sub_item}}</td>
-              <td class="p-2 border-b border-gray-200 max-w-xs truncate ...">{{this.presentation}}</td>
-              <td class="p-2 border-b border-gray-200 max-w-xs truncate ...">{{this.iva}}
+              <td class="p-2 max-w-xs truncate ... font-semibold">{{this.presentation}}</td>
+              <td class="p-2 max-w-xs truncate ... font-semibold">{{this.iva}}
               </td>
-              <td class="p-2 border-b border-gray-200 bg-amber-100 text-center font-bold max-w-xs truncate ...">
+              <td class="p-2 bg-amber-100 text-center font-bold max-w-xs truncate ... text-lg">
                 ${{this.final_price}}</td>
             </tr>
             {{/each}}
           </tbody>
         </table>
       </div>
+      <div class="flex justify-between items-center gap-2">
+        <div class="flex items-center">
+          <label for="pageSize" class="text-sm text-gray-700 mr-2 font-bold">PRODUCTOS POR PÁGINA:</label>
+          <select id="pageSize" class="border border-gray-300 rounded-md px-2 py-1 bg-white"
+            onchange="limitChange(event)">
+            <option value="12" {{#if (eq limit "12" )}}selected{{/if}}>12</option>
+            <option value="24" {{#if (eq limit "24" )}}selected{{/if}}>24</option>
+            <option value="36" {{#if (eq limit "36" )}}selected{{/if}}>36</option>
+          </select>
+        </div>
 
-      <div class="flex justify-between items-center mt-2 gap-2">
-  <div class="flex items-center">
-    <label for="pageSize" class="text-sm text-gray-700 mr-2 font-bold">PRODUCTOS POR PÁGINA:</label>
-    <select id="pageSize" class="border border-gray-300 rounded-md px-2 py-1 bg-white" onchange="limitChange(event)">
-      <option value="12" {{#if (eq limit "12" )}}selected{{/if}}>12</option>
-      <option value="24" {{#if (eq limit "24" )}}selected{{/if}}>24</option>
-      <option value="36" {{#if (eq limit "36" )}}selected{{/if}}>36</option>
-    </select>
-  </div>
+        <div class="mt-2 flex justify-center items-center gap-2">
+          {{#if hasPrevPage}}
+          <a href="{{prevPage}}"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold p-2 rounded-md shadow transition duration-300">Anterior</a>
+          {{/if}}
+          {{#if hasNextPage}}
+          <a href="{{nextPage}}"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold p-2 rounded-md shadow transition duration-300">Siguiente</a>
+          {{/if}}
+        </div>
 
-  <div class="mt-2 flex justify-center items-center gap-2">
-    {{#if hasPrevPage}}
-    <a href="{{prevPage}}"
-      class="bg-blue-500 hover:bg-blue-600 text-white font-semibold p-2 rounded-md shadow transition duration-300">Anterior</a>
-    {{/if}}
-    {{#if hasNextPage}}
-    <a href="{{nextPage}}"
-      class="bg-blue-500 hover:bg-blue-600 text-white font-semibold p-2 rounded-md shadow transition duration-300">Siguiente</a>
-    {{/if}}
-  </div>
-
-  <small class="text-gray-700 font-semibold">** IVA INCLUIDO</small>
-</div>
+        <small class="text-gray-700 font-semibold">** IVA INCLUIDO</small>
+      </div>
 
     </div>
   </div>

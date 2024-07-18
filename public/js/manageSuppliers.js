@@ -1,12 +1,12 @@
 const deleteSupplier = async (e) => {
   const sid = e.target.getAttribute('data-supplier-id');
-  
+
   const userConfirmed = await showModalConfirmation();
-  
+
   if (!userConfirmed) {
     alert('ELIMINACIÓN CANCELADA');
     return;
-    }
+  }
   document.getElementById('loadingScreen').classList.remove('hidden');
   setTimeout(async () => {
     try {
