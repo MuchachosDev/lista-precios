@@ -1,13 +1,14 @@
-import bcrypt from 'bcrypt';
+import pkg from 'bcryptjs';
+const { hashSync, compareSync, genSaltSync } = pkg;
 
 // Crea un hash de una contraseña
 const createHash = (password) => {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+  return hashSync(password, genSaltSync(10));
 };
 
 // Compara una contraseña con un hash
 const compareHash = (password, hash) => {
-  return bcrypt.compareSync(password, hash);
+  return compareSync(password, hash);
 };
 
 export { createHash, compareHash };

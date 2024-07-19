@@ -14,7 +14,7 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "bwip-js": "^4.3.2",
     "commander": "^11.1.0",
     "cookie-parser": "^1.4.6",
