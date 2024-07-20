@@ -153,7 +153,7 @@ export default class Product {
       return {
         docs: await productModel.aggregate(aggregationPipeline),
         totalDocs: totalResults.length,
-        hasNextPage: (await productModel.countDocuments()) > page * limit,
+        hasNextPage: (await productModel.countDocuments()) > (page * limit),
         hasPrevPage: page > 1,
         nextPage: page + 1,
         prevPage: page - 1,
