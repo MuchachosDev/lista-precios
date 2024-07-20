@@ -174,9 +174,8 @@ const closeToast = () => {
 closeToast();
 
 const tooltips = document.querySelectorAll('.tooltip');
-const descriptions = document.querySelectorAll('td > span:not(.tooltip)');
 
-descriptions.forEach((description, index) => {
+tooltips.forEach((description, index) => {
   const tooltip = tooltips[index];
   const td = description.parentNode;
 
