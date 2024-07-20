@@ -177,7 +177,7 @@ const tooltips = document.querySelectorAll('.tooltip');
 
 tooltips.forEach((description, index) => {
   const tooltip = tooltips[index];
-  const td = description.parentNode;
+  const td = description.closest('td');
 
   td.addEventListener('mouseover', (e) => {
     if (description.offsetWidth < description.scrollWidth) {
