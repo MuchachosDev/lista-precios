@@ -150,10 +150,14 @@ export default class Product {
           $limit: limit,
         }
       );
+
+      const products = await productModel.aggregate(aggregationPipeline);
+      
+      const hasNextPage = (await productModel.countDocuments()) > (page * limit) 
       return {
-        docs: await productModel.aggregate(aggregationPipeline),
+        docs: products,
         totalDocs: totalResults.length,
-        hasNextPage: (await productModel.countDocuments()) > (page * limit),
+        hasNextPage: products.length === limit && hasNextPage,
         hasPrevPage: page > 1,
         nextPage: page + 1,
         prevPage: page - 1,
