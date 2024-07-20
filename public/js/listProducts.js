@@ -175,20 +175,20 @@ closeToast();
 
 const tooltips = document.querySelectorAll('.tooltip');
 
-tooltips.forEach((description, index) => {
-  const tooltip = tooltips[index];
-  const td = description.closest('td');
+tooltips.forEach(tooltip => {
+  const td = tooltip.closest('td');
 
   td.addEventListener('mouseover', (e) => {
+    const description = tooltip.previousElementSibling;
     if (description.offsetWidth < description.scrollWidth) {
       tooltip.classList.remove('hidden');
     }
   });
 
   td.addEventListener('mousemove', (e) => {
-    const x = e.clientX;
-    const y = e.clientY;
-    if (description.offsetWidth < description.scrollWidth) {
+    if (!tooltip.classList.contains('hidden')) {
+      const x = e.clientX;
+      const y = e.clientY;
       tooltip.style.left = `${x + 20}px`;
       tooltip.style.top = `${y + 20}px`;
     }
