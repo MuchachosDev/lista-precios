@@ -175,7 +175,7 @@ closeToast();
 
 const tooltips = document.querySelectorAll('.tooltip');
 
-tooltips.forEach(tooltip => {
+tooltips.forEach((tooltip) => {
   const td = tooltip.closest('td');
 
   td.addEventListener('mouseover', (e) => {
