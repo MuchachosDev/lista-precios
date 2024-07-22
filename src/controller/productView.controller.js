@@ -291,6 +291,7 @@ export const getEditProductPage = async (req, res) => {
       items: itemsDTO,
       sub_items: subItemsDTO,
       sid: sid ?? product.supplier._id.toString(),
+      fid: product.factor._id.toString(),
     });
   } catch (error) {
     return res.sendClientError(error);
