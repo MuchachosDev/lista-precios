@@ -181,7 +181,7 @@ tooltips.forEach((tooltip) => {
   td.addEventListener('mouseover', (e) => {
 
     const description = tooltip.previousElementSibling;
-    if (td.offsetWidth < description.scrollWidth) {
+    if (description.clientWidth < description.scrollWidth) {
       tooltip.classList.remove('hidden');
     }
   });
