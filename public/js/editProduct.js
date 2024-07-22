@@ -114,7 +114,6 @@ const editProduct = async (e) => {
   const item = e.target.item.value;
   const sub_item = e.target.sub_item.value;
   const factor = e.target.factor.value;
-  document.getElementById('loadingScreen').classList.remove('hidden');
 
   const data = {
     model,
@@ -136,6 +135,9 @@ const editProduct = async (e) => {
   if (!userConfirmation) {
     return;
   }
+
+  document.getElementById('loadingScreen').classList.remove('hidden');
+
   setTimeout(async () => {
     try {
       const response = await fetch(`/api/products/${pid}`, {
