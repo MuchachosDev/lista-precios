@@ -2,7 +2,6 @@ let previewSupplier;
 
 document.addEventListener('DOMContentLoaded', () => {
   previewSupplier = document.getElementById('supplier').value;
-  console.log(previewSupplier);
 });
 
 const showModalConfirmation = () => {
@@ -23,7 +22,6 @@ const showModalConfirmation = () => {
 };
 const selectSupplier = async (e) => {
   e.preventDefault();
-  console.log(e.target);
   const { search, pathname } = window.location;
   const supplier = e.target.value;
   const searchParams = new URLSearchParams(search);

@@ -179,13 +179,16 @@ tooltips.forEach((tooltip) => {
   const td = tooltip.closest('td');
 
   td.addEventListener('mouseover', (e) => {
+
     const description = tooltip.previousElementSibling;
-    if (description.offsetWidth < description.scrollWidth) {
+    if (td.offsetWidth < description.scrollWidth) {
       tooltip.classList.remove('hidden');
     }
   });
 
+
   td.addEventListener('mousemove', (e) => {
+
     if (!tooltip.classList.contains('hidden')) {
       const x = e.clientX;
       const y = e.clientY;
