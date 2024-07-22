@@ -106,7 +106,7 @@
           <tbody class="text-gray-700">
             {{#each products}}
             <tr class="hover:bg-gray-100 transition duration-300 border-b border-gray-200">
-            {{#if ../isAdmin}}
+              {{#if ../isAdmin}}
               <td class="py-2 px-3 max-w-xs truncate ...">
                 <a href="/edit-product/{{this._id}}" class="text-blue-500 hover:text-blue-600 transition duration-300">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -143,8 +143,10 @@
               <td class="p-2 max-w-xs truncate ... hidden 2xl:table-cell font-semibold">
                 {{this.item}}
               </td>
-              <td class="p-2 max-w-xs truncate ... hidden 2xl:table-cell font-semibold">
-                {{this.sub_item}}</td>
+              <td class="p-2 max-w-xs truncate ... hidden 2xl:table-cell font-semibold"><span
+                  class="max-w-xs sm:w-full truncate ...">{{this.sub_item}}</span>
+                <span class="tooltip hidden">{{this.sub_item}}</span>
+              </td>
               <td class="p-2 max-w-xs truncate ... font-semibold">{{this.presentation}}</td>
               <td class="p-2 max-w-xs truncate ... font-semibold">{{this.iva}}
               </td>
