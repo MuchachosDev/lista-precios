@@ -46,6 +46,7 @@ export default class ProductDTO {
       final_price: product.final_price.toFixed(2),
       bar_code: product.bar_code,
       sku: product.sku,
+      factor: product.factor
     };
   };
 
