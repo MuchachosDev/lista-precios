@@ -116,9 +116,14 @@
                 </a>
               </td>
               {{/if}}
-              <td class="p-2 max-w-xs truncate ... hidden 2xl:table-cell font-semibold">
-                {{this.internal_id}}</td>
-              <td class="p-2 max-w-xs truncate ... font-semibold">{{this.model}}</td>
+              <td class="p-2 max-w-60 truncate ... hidden 2xl:table-cell font-semibold"><span
+                  class="block max-w-60 truncate ...">{{this.internal_id}}</span>
+                <span class="tooltip hidden">{{this.internal_id}}</span>
+              </td>
+              <td class="p-2 max-w-60 truncate ... font-semibold"><span
+                  class="block max-w-60 truncate ...">{{this.model}}</span>
+                <span class="tooltip hidden">{{this.model}}</span>
+              </td>
               <td id="{{this._id}}" onclick='copyDetail(event)' data-product-model="{{this.model}}"
                 data-product-description="{{this.description}}" data-product-brand="{{this.brand}}"
                 data-product-presentation="{{this.presentation}}">
@@ -132,25 +137,36 @@
                         d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
                     </svg>
                   </div>
-                  <span class="block max-w-xs lg:w-full truncate ...">{{this.description}}</span>
+                  <span class="max-w-xs lg:w-full truncate ...">{{this.description}}</span>
                   <span class="tooltip hidden">{{this.description}}</span>
                 </div>
 
               </td>
-              <td class="p-2 max-w-xs truncate ... font-semibold">{{this.brand}}</td>
-              <td class="p-2 max-w-xs truncate ... hidden 2xl:table-cell font-semibold">
-                {{this.supplier}}</td>
-              <td class="p-2 max-w-xs truncate ... hidden 2xl:table-cell font-semibold">
-                {{this.item}}
+              <td class="p-2 max-w-60 truncate ... font-semibold"><span
+                  class="block max-w-60 truncate ...">{{this.brand}}</span>
+                <span class="tooltip hidden">{{this.brand}}</span>
               </td>
-              <td class="p-2 max-w-40 truncate ... hidden 2xl:table-cell font-semibold"><span
-                  class="block max-w-40 truncate ...">{{this.sub_item}}</span>
+              <td class="p-2 max-w-60 truncate ... hidden 2xl:table-cell font-semibold"><span
+                  class="block max-w-60 truncate ...">{{this.supplier}}</span>
+                <span class="tooltip hidden">{{this.supplier}}</span>
+              </td>
+              <td class="p-2 max-w-60 truncate ... hidden 2xl:table-cell font-semibold"><span
+                  class="block max-w-60 truncate ...">{{this.item}}</span>
+                <span class="tooltip hidden">{{this.item}}</span>
+              </td>
+              <td class="p-2 max-w-60 truncate ... hidden 2xl:table-cell font-semibold"><span
+                  class="block max-w-60 truncate ...">{{this.sub_item}}</span>
                 <span class="tooltip hidden">{{this.sub_item}}</span>
               </td>
-              <td class="p-2 max-w-xs truncate ... font-semibold">{{this.presentation}}</td>
-              <td class="p-2 max-w-xs truncate ... font-semibold">{{this.iva}}
+              <td class="p-2 max-w-60 truncate ... font-semibold"><span
+                  class="block max-w-60 truncate ...">{{this.presentation}}</span>
+                <span class="tooltip hidden">{{this.presentation}}</span>
               </td>
-              <td class="p-2 bg-amber-100 text-center font-bold max-w-xs truncate ... text-lg">
+              <td class="p-2 max-w-60 truncate ... font-semibold"><span
+                  class="block max-w-60 truncate ...">{{this.iva}}</span>
+                <span class="tooltip hidden">{{this.iva}}</span>
+              </td>
+              <td class="p-2 bg-amber-100 text-center font-bold max-w-60 truncate ... text-lg">
                 ${{this.final_price}}</td>
             </tr>
             {{/each}}
