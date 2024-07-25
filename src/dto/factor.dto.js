@@ -2,7 +2,7 @@ export default class FactorDTO {
   constructor(value, supplier, name) {
     this.value = value;
     this.supplier = supplier;
-    this.name = name.toUpperCase() || 'GENERAL';
+    this.name = name.toUpperCase().trim() || 'GENERAL';
     this.created_at = this.created_at || new Date();
     this.updated_at = this.updated_at || new Date();
   }

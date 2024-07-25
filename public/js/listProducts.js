@@ -109,9 +109,11 @@ document.addEventListener('keydown', (event) => {
       event.key === 'PageUp' ||
       event.key === 'PageDown' ||
       event.key === 'Tab' ||
-      event.key === 'AltGraph'
+      event.key === 'AltGraph' ||
+      event.key === 'CapsLock'
     ) {
       // Permitir el funcionamiento habitual de las teclas de navegación
+      void 0;
     } else if (event.ctrlKey || event.metaKey) {
       // Permitir combinaciones de teclas como Ctrl+C, Ctrl+V, etc.
     } else {
@@ -179,16 +181,13 @@ tooltips.forEach((tooltip) => {
   const td = tooltip.closest('td');
 
   td.addEventListener('mouseover', (e) => {
-
     const description = tooltip.previousElementSibling;
     if (description.clientWidth < description.scrollWidth) {
       tooltip.classList.remove('hidden');
     }
   });
 
-
   td.addEventListener('mousemove', (e) => {
-
     if (!tooltip.classList.contains('hidden')) {
       const x = e.clientX;
       const y = e.clientY;

@@ -10,20 +10,24 @@ export const addFactor = async (req, res) => {
   try {
     const { value, supplier, name } = req.body;
 
-    const existFactor = await factorService.getFactorByName(
-      name.toUpperCase().trim()
+    const existSupplier = await supplierService.getSupplierById(supplier);
+    if (!existSupplier) return res.sendNotFound('Supplier not found');
+
+    const factorDTO = new FactorDTO(
+      parseTextToNumber(value.trim()),
+      existSupplier[0]._id,
+      name
+    );
+    const factors = await factorService.getFactorsBySupplier(supplier);
+
+    const existFactor = factors.find(
+      (factor) => factor.name === factorDTO.name
     );
 
-    if (existFactor)
+    if (existFactor.length > 0)
       return res.sendUnauthorized({ message: 'Factor already exists' });
 
-    const sup = await supplierService.getSupplierById(supplier);
-
-    if (!sup) return res.sendNotFound('Supplier not found');
-
-    const response = await factorService.addFactor(
-      new FactorDTO(parseTextToNumber(value.trim()), sup[0]._id, name.trim())
-    );
+    const response = await factorService.addFactor(factorDTO);
 
     if (!response) return res.sendClientError('Factor not added');
     return res.sendSuccessCreated({ message: 'Factor added successfully' });
